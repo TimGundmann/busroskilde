@@ -1,6 +1,6 @@
 node {
    stage('Preparation') { 
-      git 'https://github.com/TimGundmann/kirurgiskklinik.com.git'
+      git 'https://github.com/TimGundmann/busroskilde.git'
    }
    stage("version update") {
    }
