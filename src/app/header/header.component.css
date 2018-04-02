@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 150px;
+    align-items: center;
+}
+
+.header span {
+    background-image: url('/assets/Logo.png');
+    background-repeat: no-repeat;
+    width: 197px;
+    height: 67px;
+}
