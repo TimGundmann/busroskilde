@@ -11,7 +11,7 @@ node {
       sh "export DISPLAY=:1"
       sh "ng test --watch false"
      }
-     sh "ng build --prod -bh /bus"
+     sh "ng build --prod -d /bus"
    }
    stage('Results') {
    }
