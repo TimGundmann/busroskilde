@@ -1,5 +1,5 @@
 node {
-   stage('Preparation') { 
+   stage('Preparation') {b
       git 'https://github.com/TimGundmann/busroskilde.git'
    }
    stage("version update") {
@@ -11,7 +11,7 @@ node {
       sh "export DISPLAY=:1"
       sh "ng test --watch false"
      }
-     sh "ng build --prod -aot"
+     sh "ng build --prod -bh ."
    }
    stage('Results') {
    }
