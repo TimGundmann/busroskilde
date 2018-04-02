@@ -1,5 +1,5 @@
 node {
-   stage('Preparation') {b
+   stage('Preparation') {
       git 'https://github.com/TimGundmann/busroskilde.git'
    }
    stage("version update") {
