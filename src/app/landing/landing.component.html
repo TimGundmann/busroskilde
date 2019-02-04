@@ -1,0 +1,61 @@
+<div class="page-header" data-parallax="true" style="background-image: url('./assets/img/daniel-olahh.jpg');">
+    <div class="filter"></div>
+    <div class="container">
+        <div class="motto text-center">
+            <h1>Bus Roskilde</h1>
+            <h3>Siden er lavet for ansatte hos Arriva Roskilde A/S.</h3>
+            <h3>Sidens indhold vedkommer kun disse og derfor er det kun ansatte
+                på dette anlæg som kan få adgang til sidens indhold.</h3>
+            <br />
+            <button type="button" (click)="scrollToAignUp(signup)" class="btn btn-outline-neutral btn-round">Ny bruger</button>
+            <button type="button" class="btn btn-outline-neutral btn-round">Log ind</button>
+        </div>
+    </div>
+</div>
+<div class="main" #signup>
+    <div class="section text-center">
+        <app-signup></app-signup>
+    </div>
+
+
+    <div class="section section-dark text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mr-auto ml-auto">
+                    <h2 class="text-center title">Kontakt</h2>
+                    <form class="contact-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="whiteText">Navn</label>
+                                <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="nc-icon nc-single-02"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Navn" (focus)="focus=true"
+                                        (blur)="focus=false">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="whiteText">Email</label>
+                                <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="nc-icon nc-email-85"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Email" (focus)="focus1=true"
+                                        (blur)="focus1=false">
+                                </div>
+                            </div>
+                        </div>
+                        <label class="whiteText">Besked</label>
+                        <textarea class="form-control" rows="4" placeholder="Din besked til os..."></textarea>
+                        <div class="row">
+                            <div class="col-md-4 mr-auto ml-auto">
+                                <button class="btn btn-danger btn-lg btn-fill">Send besked</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
