@@ -14,7 +14,7 @@ pipeline {
 
         stage('Build') {
             steps{   
-                sh 'ng build --prod -d /bus'
+                sh 'ng build --prod --base-href /bus'
             }
         }
         stage('Deploy') {
