@@ -6,7 +6,7 @@
                 <h5 class="description">Når du opretter dig som bruger skal du oplyse nogle ting og der vil g ca. 1-2
                     dage før din konto vil være aktiv dette er fordi vi lige skal se om du er ansat hos det ovennævnte
                     anlæg.</h5>
-                <h5 class="description">Derfor skal du være meget omhyggelig med at udfylde blanketten njagtigt så vi
+                <h5 class="description">Derfor skal du være meget omhyggelig med at udfylde blanketten nøjagtigt så vi
                     ikke er i tvivl om hvem du er.</h5>
             </div>
         </div>
@@ -33,18 +33,6 @@
                             </span>
                         </div>
                         <input type="text" class="form-control" placeholder="Navn" (focus)="focus=true" (blur)="focus=false">
-                    </div>
-
-                    <label>Fødselsdato</label>
-
-                    <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
-                        <div class="input-group-append">
-                            <span class="glyphicon glyphicon-calendar input-group-text">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker"
-                            (click)="d.toggle()" (focus)="focus=true" (blur)="focus=false" />
                     </div>
 
                     <label>Email</label>
