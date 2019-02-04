@@ -4,5 +4,5 @@ services:
     restart: "always"
     build: .
     ports:
-     - "8888:80"
+     - "9898:80"
     image: busroskilde
