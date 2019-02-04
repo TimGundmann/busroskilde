@@ -8,9 +8,7 @@ pipeline {
         stage('Prepare') {
             steps{
                git 'https://github.com/TimGundmann/busroskilde.git'
-               sh 'rm -rf node_module' 
                sh 'npm install'
-               sh 'npm rebuild node-sass'
             }                
         }
 
