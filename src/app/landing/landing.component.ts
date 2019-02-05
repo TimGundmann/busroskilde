@@ -1,21 +1,21 @@
+import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from 'app/services';
 
 @Component({
-    selector: 'app-landing',
-    templateUrl: './landing.component.html',
-    styleUrls: ['./landing.component.scss']
+  selector: 'app-landing',
+  templateUrl: './landing.component.html',
+  styleUrls: ['./landing.component.scss']
 })
 
 export class LandingComponent implements OnInit {
-  focus: any;
-  focus1: any;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   scrollToAignUp(element) {
-    element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+    element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
   }
 
 }

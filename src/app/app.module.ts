@@ -1,3 +1,6 @@
+import { NotificationComponent } from './shared/notification/notification.component';
+import { LandingModule } from './landing/landing.module';
+import { environment } from './../environments/environment';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -7,30 +10,42 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { SignupComponent } from './signup/signup.component';
-import { LandingComponent } from './landing/landing.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
 import { HomeModule } from './home/home.module';
+import { JwtModule } from '@auth0/angular-jwt';
+
+const authTokenName = environment.authTokenName;
+
+export function tokenGetter() {
+  return localStorage.getItem(authTokenName);
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent,
-    LandingComponent,
     ProfileComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    NotificationComponent,
   ],
   imports: [
+    LandingModule,
     BrowserModule,
     NgbModule.forRoot(),
     FormsModule,
     RouterModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['gundmann.dk'],
+      }
+    })
+
   ],
   providers: [
     {
