@@ -3,7 +3,8 @@
     <div class="container">
         <div class="motto text-center">
             <h1>Bus Roskilde</h1>
-            <h3>Siden er lavet for ansatte hos <a href="https://umove.dk/forside/umove-roskilde.aspx" target="_blank">Umove Roskilde</a></h3>
+            <h3>Siden er lavet for ansatte hos <a href="https://umove.dk/forside/umove-roskilde.aspx" target="_blank">Umove
+                    Roskilde</a></h3>
             <h3>Sidens indhold vedkommer kun disse og derfor er det kun ansatte
                 på dette anlæg som kan få adgang til sidens indhold.</h3>
             <br />
@@ -12,18 +13,12 @@
         </div>
     </div>
 </div>
-<div class="main" #signup>
-    <div class="section text-center">
-        <app-signup></app-signup>
+<div class="main">
+    <div class="section text-center" #contact>
+        <app-message></app-message>
     </div>
 
-    <div class="section section-dark text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 mr-auto ml-auto">
-                    <app-message></app-message>
-                </div>
-            </div>
-        </div>
+    <div class="section section-dark text-center section-image section-login" style="background-image: url('./assets/img/stationen.jpg');" #signup>
+        <app-signup></app-signup>
     </div>
 </div>
