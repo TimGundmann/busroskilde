@@ -29,17 +29,11 @@ export class MessageComponent implements OnInit {
       .subscribe(r => {
         if (r) {
           this.notifications.info('Beskeden er sendt!');
-          this.clear();
+          this.mailForm.reset();
         } else {
           this.notifications.error('Fejl ved afsendelse af beskeden!');
         }
       });
-  }
-
-  private clear() {
-    this.mailForm.get('name').setValue('');
-    this.mailForm.get('from').setValue('');
-    this.mailForm.get('content').setValue('');
   }
 
 }

@@ -37,7 +37,7 @@ export class UserService {
   }
 
   public signUp(user: User): Observable<boolean> {
-    return this.httpClient.post(`${this.serviceHost}signon`, user)
+    return this.httpClient.post(`${this.serviceHost}bussignup`, user)
       .pipe(
         map(resp => true),
         catchError(error => {

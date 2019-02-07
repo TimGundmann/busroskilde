@@ -12,7 +12,7 @@
     <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
         <div class="card card-register">
             <h3 class="title">Velkommen</h3>
-            <form class="register-form">
+            <form class="register-form" [formGroup]="signUpForm" (ngSubmit)="register()">
                 <label>Chaufførnummer</label>
                 <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus===true}">
                     <div class="input-group-prepend">
@@ -20,7 +20,13 @@
                             <i class="nc-icon nc-bus-front-12"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Chaufførnummer" (focus)="focus=true" (blur)="focus=false">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Chaufførnummer" 
+                        (focus)="focus=true" 
+                        (blur)="focus=false"
+                        formControlName="number">
                 </div>
 
                 <label>Navn</label>
@@ -30,36 +36,60 @@
                             <i class="nc-icon nc-single-02"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Navn" (focus)="focus=true" (blur)="focus=false">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Navn" 
+                        (focus)="focus1=true" 
+                        (blur)="focus1=false"
+                        formControlName="name">
                 </div>
 
                 <label>Email</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
+                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus2===true}">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="nc-icon nc-email-85"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Email" (focus)="focus=true" (blur)="focus=false">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Email" 
+                        (focus)="focus2=true" 
+                        (blur)="focus2=false"
+                        formControlName="email">
                 </div>
 
                 <label>Password</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus===true}">
+                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus3===true}">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="nc-icon nc-key-25"></i>
                         </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" (focus)="focus1=true" (blur)="focus1=false">
+                    <input 
+                        type="password" 
+                        class="form-control" 
+                        placeholder="Password" 
+                        (focus)="focus3=true" 
+                        (blur)="focus3=false"
+                        formControlName="password1">
                 </div>
                 <label>Gentag password</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
+                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus4===true}">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="nc-icon nc-key-25"></i>
                         </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" (focus)="focus1=true" (blur)="focus1=false">
+                    <input 
+                        type="password" 
+                        class="form-control" 
+                        placeholder="Password" 
+                        (focus)="focus4=true" 
+                        (blur)="focus4=false"
+                        formControlName="password2">
                 </div>
                 <button class="btn btn-danger btn-block btn-round">Register</button>
             </form>
