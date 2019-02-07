@@ -25,7 +25,7 @@ export class MessageComponent implements OnInit {
 
   sendMail() {
     this.userService.sendContactMail(
-      `Fra: ${this.mailForm.get('name')} ${this.mailForm.get('from')}, Indhold: ${this.mailForm.get('content')}`)
+      `Fra: ${this.mailForm.get('name').value} ${this.mailForm.get('from').value}, Indhold: ${this.mailForm.get('content').value}`)
       .subscribe(r => {
         if (r) {
           this.notifications.info('Beskeden er sendt!');
