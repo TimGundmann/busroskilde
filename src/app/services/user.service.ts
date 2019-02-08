@@ -1,3 +1,4 @@
+import { ErrorDetails, RequestResult } from '../domain/error-details';
 import { AuthService } from './auth.service';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -16,57 +17,45 @@ export class UserService {
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
-  public currentUserInfo(): Observable<User> {
+  public currentUserInfo(): Observable<User | ErrorDetails> {
     return this.httpClient.get<User>(`${this.serviceHost}current`);
   }
 
-  public signIn(email: string, password: string): Observable<boolean> {
+  public signIn(email: string, password: string): Observable<RequestResult> {
     return this.httpClient.post(`${this.serviceHost}login`,
       `{ "username": "${email}", "password": "${password}" }`, { observe: 'response' })
       .pipe(
         map(resp => {
           this.authService.setToken(resp.headers.get(this.authHeaderName));
-          return true;
+          return new RequestResult();
         }),
         catchError(error => {
           console.log(error);
-          return of(false);
+          return of(new RequestResult(error));
         }
         )
       );
   }
 
-  public signUp(user: User): Observable<boolean> {
-    return this.httpClient.post(`${this.serviceHost}bussignup`, user)
-      .pipe(
-        map(resp => true),
-        catchError(error => {
-          console.log(error);
-          return of(false);
-        }
-        )
-      );
+  public signUp(user: User): Observable<RequestResult> {
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}bussignup`, user));
   }
 
-  public activat(token: string): Observable<boolean> {
-    return this.httpClient.post(`${this.serviceHost}activate`, token)
-      .pipe(
-        map(resp => true),
-        catchError(error => {
-          console.log(error);
-          return of(false);
-        }
-        )
-      );
+  public activat(token: string): Observable<RequestResult> {
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}activate`, token));
   }
 
-  public sendContactMail(content: string): Observable<boolean> {
-    return this.httpClient.post(`${this.serviceHost}contactMail`, content)
+  public sendContactMail(content: string): Observable<RequestResult> {
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}contactMail`, content));
+  }
+
+  handleResponce(requestObservble: Observable<Object>): Observable<RequestResult> {
+    return requestObservble
       .pipe(
-        map(resp => true),
+        map(_resp => new RequestResult()),
         catchError(error => {
           console.log(error);
-          return of(false);
+          return of(new RequestResult(error.error));
         }
         )
       );

@@ -1,15 +1,17 @@
+import { ErrorDetails } from '../../domain/error-details';
 import { UserService } from './../../services/user.service';
 import { User } from './../../domain/user';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'app/services';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',
     styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
     focus;
     focus1;
@@ -25,7 +27,7 @@ export class SignupComponent implements OnInit {
         password2: new FormControl('', [Validators.required]),
     });
 
-    constructor(private userService: UserService, private notifications: NotificationService) { }
+    constructor(private userService: UserService, private notifications: NotificationService, private spinner: NgxSpinnerService) { }
 
     get number(): string {
         return this.signUpForm.get('number').value;
@@ -43,17 +45,17 @@ export class SignupComponent implements OnInit {
         return this.signUpForm.get('password1').value;
     }
 
-    ngOnInit() { }
-
     register() {
         if (this.validatePassword()) {
+            this.spinner.show();
             this.userService.signUp(this.getUser()).subscribe(r => {
-                if (r) {
+                if (r.okResult) {
                     this.notifications.info('Du er nu oprettet og en email er sendt til administratoren!');
                     this.signUpForm.reset();
                 } else {
-                    this.notifications.error('Der opstod en fejl prøv igen senere!');
+                    this.notifications.error(`Der opstod en fejl: ${r.errorDetails.message}`);
                 }
+                this.spinner.hide();
             });
         } else {
             this.notifications.error('De to password er ikke ens, ret dem og prøv igen!');

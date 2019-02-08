@@ -29,22 +29,6 @@
                         formControlName="number">
                 </div>
 
-                <label>Navn</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="nc-icon nc-single-02"></i>
-                        </span>
-                    </div>
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        placeholder="Navn" 
-                        (focus)="focus1=true" 
-                        (blur)="focus1=false"
-                        formControlName="name">
-                </div>
-
                 <label>Email</label>
                 <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus2===true}">
                     <div class="input-group-prepend">
@@ -59,6 +43,22 @@
                         (focus)="focus2=true" 
                         (blur)="focus2=false"
                         formControlName="email">
+                </div>
+
+                <label>Navn</label>
+                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="nc-icon nc-single-02"></i>
+                        </span>
+                    </div>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Navn" 
+                        (focus)="focus1=true" 
+                        (blur)="focus1=false"
+                        formControlName="name">
                 </div>
 
                 <label>Password</label>

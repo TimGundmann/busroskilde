@@ -25,18 +25,19 @@
     "@angular/platform-browser": "7.2.0",
     "@angular/platform-browser-dynamic": "7.2.0",
     "@angular/router": "7.2.0",
+    "@auth0/angular-jwt": "^2.1.0",
     "@ng-bootstrap/ng-bootstrap": "4.0.2",
     "bootstrap": "4.1.2",
     "core-js": "2.4.1",
     "jquery": "3.2.1",
     "jw-bootstrap-switch-ng2": "2.0.1",
     "ng2-nouislider": "1.7.12",
+    "ngx-spinner": "^7.0.0",
     "nouislider": "9.2.0",
     "popper.js": "1.14.4",
     "rxjs": "6.2.2",
     "rxjs-compat": "6.2.2",
-    "zone.js": "0.8.26",
-    "@auth0/angular-jwt": "^2.1.0"
+    "zone.js": "0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.7.0",

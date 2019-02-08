@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { HomeModule } from './home/home.module';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -32,6 +33,7 @@ export function tokenGetter() {
     NotificationComponent,
   ],
   imports: [
+    NgxSpinnerModule,
     LandingModule,
     BrowserModule,
     NgbModule.forRoot(),
