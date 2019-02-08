@@ -8,13 +8,15 @@ import { SigninComponent } from './signin/signin.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MessageComponent } from './message/message.component';
+import { ActivateComponent } from './activate/activate.component';
 
 @NgModule({
   declarations: [
     SignupComponent,
     SigninComponent,
     LandingComponent,
-    MessageComponent
+    MessageComponent,
+    ActivateComponent
   ],
   imports: [
     ServicesModule.forRoot(),

@@ -1,3 +1,4 @@
+import { ActivateComponent } from './landing/activate/activate.component';
 import { AuthGuard } from './auth.guard';
 import { LandingModule } from './landing/landing.module';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'signin', component: SigninComponent },
   { path: 'landing', component: LandingComponent },
+  { path: 'activate/:token', component: ActivateComponent },
 ];
 
 @NgModule({
