@@ -11,7 +11,7 @@
         </div>
         <div class="navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item" *ngIf="!isDocumentation()">
+                <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="https://www.facebook.com/groups/405605066676558"
                         target="_blank">
                         <i class="fa fa-facebook-square"></i>
@@ -19,9 +19,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="Log ind" data-placement="bottom" href="#">
+                    <a class="nav-link" style="cursor: pointer;" rel="tooltip" [title]="getSignInTitle()" data-placement="bottom" (click)="signInOrOut()">
                         <i class="nc-icon nc-key-25"></i>
-                        <p class="d-lg-none">Log in</p>
+                        <p class="d-lg-none" >Log in</p>
                     </a>
                 </li>
                     <!--

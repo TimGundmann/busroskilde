@@ -12,6 +12,7 @@
     <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
         <div class="card card-register">
             <h3 class="title">Velkommen</h3>
+            <span>Alle felter er påkrævet</span>
             <form class="register-form" [formGroup]="signUpForm" (ngSubmit)="register()">
                 <label>Chaufførnummer</label>
                 <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus===true}">
@@ -91,7 +92,7 @@
                         (blur)="focus4=false"
                         formControlName="password2">
                 </div>
-                <button class="btn btn-danger btn-block btn-round">Register</button>
+                <button class="btn btn-danger btn-block btn-round" [disabled]="!signUpForm.valid" >Register</button>
             </form>
         </div>
     </div>

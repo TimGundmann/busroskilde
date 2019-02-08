@@ -26,8 +26,12 @@ export class UserService {
       `{ "username": "${email}", "password": "${password}" }`, { observe: 'response' })
       .pipe(
         map(resp => {
-          this.authService.setToken(resp.headers.get(this.authHeaderName));
-          return new RequestResult();
+          const token = resp.headers.get(this.authHeaderName);
+          if (token) {
+            this.authService.setToken(token);
+            return new RequestResult();
+          }
+          return new RequestResult(new ErrorDetails());
         }),
         catchError(error => {
           console.log(error);

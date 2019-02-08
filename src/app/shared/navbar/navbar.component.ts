@@ -1,5 +1,7 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
@@ -10,7 +12,11 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public location: Location, private element : ElementRef) {
+    constructor(
+        public location: Location,
+        private element: ElementRef,
+        private authService: AuthService,
+        private router: Router) {
         this.sidebarVisible = false;
     }
 
@@ -24,7 +30,7 @@ export class NavbarComponent implements OnInit {
         // console.log(html);
         // console.log(toggleButton, 'toggle');
 
-        setTimeout(function(){
+        setTimeout(function () {
             toggleButton.classList.add('toggled');
         }, 500);
         html.classList.add('nav-open');
@@ -48,22 +54,41 @@ export class NavbarComponent implements OnInit {
         }
     };
     isHome() {
-        var titlee = this.location.prepareExternalUrl(this.location.path());
+        const titlee = this.location.prepareExternalUrl(this.location.path());
 
-        if( titlee === '/home' ) {
+        if (titlee === '/home') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
     isDocumentation() {
-        var titlee = this.location.prepareExternalUrl(this.location.path());
-        if( titlee === '/documentation' ) {
+        const titlee = this.location.prepareExternalUrl(this.location.path());
+        if (titlee === '/documentation') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
+
+    getSignInTitle(): string {
+        if (this.authService.isAuthenticated()) {
+            return 'Log ud';
+        }
+        return 'Log ind';
+    }
+
+    signInOrOut() {
+        if (this.authService.isAuthenticated()) {
+            this.authService.signOut();
+            this.router.navigate(['/landing']);
+        } else {
+            this.router.navigate(['/signin'])
+                .catch(e => {
+                    console.log(e);
+                    this.router.navigate(['/signin']);
+                });
+        }
+    }
+
 }

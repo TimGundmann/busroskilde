@@ -1,3 +1,4 @@
+import { AddAuthHeaderInterceptor } from './add-auth-header.interceptor';
 import { NotificationComponent } from './shared/notification/notification.component';
 import { LandingModule } from './landing/landing.module';
 import { environment } from './../environments/environment';
@@ -17,6 +18,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { HomeModule } from './home/home.module';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const authTokenName = environment.authTokenName;
 
@@ -54,7 +56,11 @@ export function tokenGetter() {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-  ],
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AddAuthHeaderInterceptor,
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

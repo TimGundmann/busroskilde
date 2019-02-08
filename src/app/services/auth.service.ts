@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,11 @@ export class AuthService {
       return !this.jwtService.isTokenExpired(this.getToken());
     }
     return false;
+  }
+
+  public isAdmin(): boolean {
+    return this.getToken() && decode(this.getToken()).roles && decode(this.getToken()).roles.indexOf('ROLE_ADMIN') >= 0;
+
   }
 
   public getToken(): string {
