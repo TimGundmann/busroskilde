@@ -18,11 +18,11 @@ export class UserService {
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   public currentUserInfo(): Observable<User | ErrorDetails> {
-    return this.httpClient.get<User>(`${this.serviceHost}current`);
+    return this.httpClient.get<User>(`${this.serviceHost}users/current`);
   }
 
   public signIn(email: string, password: string): Observable<RequestResult> {
-    return this.httpClient.post(`${this.serviceHost}login`,
+    return this.httpClient.post(`${this.serviceHost}users/login`,
       `{ "username": "${email}", "password": "${password}" }`, { observe: 'response' })
       .pipe(
         map(resp => {
@@ -42,15 +42,15 @@ export class UserService {
   }
 
   public signUp(user: User): Observable<RequestResult> {
-    return this.handleResponce(this.httpClient.post(`${this.serviceHost}bussignup`, user));
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/bussignup`, user));
   }
 
   public activat(token: string): Observable<RequestResult> {
-    return this.handleResponce(this.httpClient.post(`${this.serviceHost}activate`, token));
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/activate`, token));
   }
 
   public sendContactMail(content: string): Observable<RequestResult> {
-    return this.handleResponce(this.httpClient.post(`${this.serviceHost}contactMail`, content));
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/contactMail`, content));
   }
 
   handleResponce(requestObservble: Observable<Object>): Observable<RequestResult> {

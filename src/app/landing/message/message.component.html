@@ -10,8 +10,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="nc-icon nc-single-02"></i></span>
               </div>
-              <input type="text" class="form-control" placeholder="Navn" (focus)="focus=true" (blur)="focus=false" name="name"
-                formControlName="name">
+              <input type="text" class="form-control" placeholder="Navn" (focus)="focus=true" (blur)="focus=false"
+                name="name" formControlName="name">
             </div>
           </div>
           <div class="col-md-6">
@@ -26,10 +26,12 @@
           </div>
         </div>
         <label class="whiteText">Besked</label>
-        <textarea class="form-control" rows="4" placeholder="Din besked til os..." formControlName="content" name="content"></textarea>
+        <textarea class="form-control" rows="4" placeholder="Din besked til os..." formControlName="content"
+          name="content"></textarea>
         <div class="row">
           <div class="col-md-4 mr-auto ml-auto">
-            <button type="submit" [disabled]="!mailForm.valid" class="btn btn-danger btn-lg btn-fill">Send besked</button>
+            <button type="submit" [disabled]="!mailForm.valid" class="btn btn-danger btn-lg btn-fill">Send
+              besked</button>
           </div>
         </div>
       </form>

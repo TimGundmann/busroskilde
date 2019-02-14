@@ -130,7 +130,7 @@
 }
 .dropdown-menu-right{
     right: -2px !important;
-    left: auto!important;
+    left: auto !important;
 
 }
 
@@ -214,8 +214,8 @@
         top: -11px;
     }
     .dropdown .dropdown-menu-right.dropdown-menu:before{
-        right: 12px;
-        left: auto;
+        right: 12px ;
+        left: auto !important;
     }
     .navbar-nav li .dropdown-menu:after,
     #dropdown-row .dropdown .dropdown-menu:after,
@@ -233,7 +233,7 @@
     }
      .dropdown .dropdown-menu-right.dropdown-menu:after{
         right: 12px;
-        left: auto;
+        left: auto !important;
     }
     #dropdown-row .dropdown .dropdown-menu{
         left: 15px;

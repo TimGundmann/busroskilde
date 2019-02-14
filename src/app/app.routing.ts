@@ -1,5 +1,5 @@
 import { ActivateComponent } from './landing/activate/activate.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './home/auth.guard';
 import { LandingModule } from './landing/landing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
@@ -7,9 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
 import { LandingComponent } from './landing/landing.component';
-import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
 import { SigninComponent } from './landing/signin/signin.component';
 
 const routes: Routes = [

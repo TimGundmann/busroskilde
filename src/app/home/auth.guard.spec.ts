@@ -6,7 +6,7 @@ import { AuthGuard } from './auth.guard';
 
 describe('AuthGuard', () => {
 
-  class JwtHelperServiceMock {} 
+  class JwtHelperServiceMock {}
 
   beforeEach(() => {
     TestBed.configureTestingModule({

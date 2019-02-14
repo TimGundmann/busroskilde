@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Alert, NotificationService } from '../../services';
 import { Component, OnInit } from '@angular/core';
 

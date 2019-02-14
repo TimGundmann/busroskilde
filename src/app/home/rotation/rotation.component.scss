@@ -1,0 +1,49 @@
+.heading {
+    height: 100%;
+    border-radius: 12px;
+    position: relative;
+    min-height: 300px;
+    width: 60px;
+    span {
+        transform: rotate(-90deg);
+        margin-left: -32px;
+        padding: 0;
+        position: absolute;
+        top: 60px;
+    }
+    a {
+        margin: 8px !important;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #ffffff;
+        border-radius: 12px;
+        padding: 10px 12px !important;
+    }
+    i {
+        right: 0;
+    }
+    div {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.form-rotation {
+    input {
+        margin-bottom: 5px;
+    }
+}
+
+.rotation-heading {
+    display: flex;
+    justify-content: space-between;
+    .text-headline {
+        font-size: .9em;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 1.5em;
+    }
+    a {
+        padding: 10px;
+    }
+}

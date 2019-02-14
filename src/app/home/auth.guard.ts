@@ -1,8 +1,6 @@
-import { AuthService } from './services/auth.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService } from '../services/auth.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  serviceHost: 'http://localhost:8080/users/',
+  serviceHost: 'http://localhost:8080/',
   authTokenName: 'Authorization',
   authHeaderName: 'Authorization'
 };

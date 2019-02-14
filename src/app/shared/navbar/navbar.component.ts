@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
 
         this.sidebarVisible = true;
     };
+
     sidebarClose() {
         const html = document.getElementsByTagName('html')[0];
         // console.log(html);
@@ -44,6 +45,7 @@ export class NavbarComponent implements OnInit {
         this.sidebarVisible = false;
         html.classList.remove('nav-open');
     };
+
     sidebarToggle() {
         // const toggleButton = this.toggleButton;
         // const body = document.getElementsByTagName('body')[0];
@@ -53,6 +55,7 @@ export class NavbarComponent implements OnInit {
             this.sidebarClose();
         }
     };
+
     isHome() {
         const titlee = this.location.prepareExternalUrl(this.location.path());
 
@@ -62,6 +65,7 @@ export class NavbarComponent implements OnInit {
             return false;
         }
     }
+
     isDocumentation() {
         const titlee = this.location.prepareExternalUrl(this.location.path());
         if (titlee === '/documentation') {
@@ -89,6 +93,14 @@ export class NavbarComponent implements OnInit {
                     this.router.navigate(['/signin']);
                 });
         }
+    }
+
+    public isAdmin(): boolean {
+        return this.authService.isAdmin();
+    }
+
+    public isAuthenticated(): boolean {
+        return this.authService.isAuthenticated();
     }
 
 }
