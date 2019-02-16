@@ -26,15 +26,16 @@
                                 <span>{{rotation.from | date}}</span> - <span>{{rotation.to | date}}</span>
                             </span>
                             <span>
-                                <a style="cursor: pointer;" (click)="togglePdf(rotation)" title="Vis filen">
-                                    <i class="nc-icon nc-glasses-2" aria-hidden="true"></i>
+                                <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="delete(rotation)"
+                                    title="Slet turnus planen">
+                                    <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
                                 </a>
                                 <a style="cursor: pointer;" (click)="dowload(rotation)" title="Hent filen">
                                     <i class="nc-icon nc-cloud-download-93" aria-hidden="true"></i>
                                 </a>
-                                <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="delete(rotation)"
-                                    title="Slet turnus planen">
-                                    <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
+                                <a style="cursor: pointer;" (click)="togglePdf(rotation)" title="Vis filen">
+                                    <i *ngIf="!showPdf(rotation)" class="nc-icon nc-glasses-2" aria-hidden="true"></i>
+                                    <i *ngIf="showPdf(rotation)" class="nc-icon nc-simple-remove" aria-hidden="true"></i>
                                 </a>
                             </span>
                         </div>
