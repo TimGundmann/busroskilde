@@ -6,7 +6,7 @@
                 <div *ngIf="isAdmin()">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a style="cursor: pointer;" class="nav-link" (click)="toggleAdd()">
+                            <a style="cursor: pointer;" class="nav-link" (click)="toggleAdd()" title="Tilføj turnus">
                                 <i class="nc-icon nc-simple-add" aria-hidden="true"></i>
                             </a>
                         </li>
@@ -15,41 +15,7 @@
             </nav>
         </div>
         <div class="col-md-11 mr-auto ml-auto">
-            <div class="card no-transition" *ngIf="addVisible">
-                <div class="card-header">
-                    <h3>Tilføj Turnus plan</h3>
-                </div>
-                <div class="card-body">
-                    <form class="form-rotation" [formGroup]="addForm" (ngSubmit)="add()">
-                        <label>Overskrift</label>
-                        <input type="text" class="form-control" placeholder="Overskrift" (focus)="focus=true"
-                            (blur)="focus=false" name="headLine" formControlName="headLine" autofocus>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Gyldig fra</label>
-                                <input type="date" class="form-control" placeholder="Fra" (focus)="focus=true"
-                                    (blur)="focus=false" name="from" formControlName="from">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Gyldig til</label>
-                                <input type="date" class="form-control" placeholder="Til" (focus)="focus=true"
-                                    (blur)="focus=false" name="to" formControlName="to">
-                            </div>
-                        </div>
-                        <label>Fil</label>
-                        <file-upload class="form-control" formControlName="pdf">
-                            <ng-template #placeholder>
-                                <span>Træk og slip eller tryk!</span>
-                            </ng-template>
-                        </file-upload>
-                        <br />
-                        <button type="submit" [disabled]="!addForm.valid"
-                            class="btn btn-success btn-lg btn-fill">Tilføj</button>
-                        <button type="button" class="btn btn-neutral btn-lg btn-fill btn-outline-neutral"
-                            (click)="toggleAdd()">Annuller</button>
-                    </form>
-                </div>
-            </div>
+            <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()"></app-add>
             <div *ngFor="let rotation of rotations">
                 <div class="card no-transition">
                     <div class="card-body">
@@ -60,14 +26,15 @@
                                 <span>{{rotation.from | date}}</span> - <span>{{rotation.to | date}}</span>
                             </span>
                             <span>
-                                <a style="cursor: pointer;" (click)="togglePdf(rotation)">
+                                <a style="cursor: pointer;" (click)="togglePdf(rotation)" title="Vis filen">
                                     <i class="nc-icon nc-glasses-2" aria-hidden="true"></i>
                                 </a>
-                                <a style="cursor: pointer;" (click)="dowload(rotation)">
+                                <a style="cursor: pointer;" (click)="dowload(rotation)" title="Hent filen">
                                     <i class="nc-icon nc-cloud-download-93" aria-hidden="true"></i>
                                 </a>
-                                <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="delete(rotation)">
-                                    <i class="nc-icon nc-simple-remove" aria-hidden="true"></i>
+                                <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="delete(rotation)"
+                                    title="Slet turnus planen">
+                                    <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
                                 </a>
                             </span>
                         </div>

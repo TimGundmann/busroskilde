@@ -1,14 +1,9 @@
-import { Observable } from 'rxjs';
-import { getTestBed } from '@angular/core/testing';
 import { MessageService } from './../../services/message.service';
 import { AuthService } from './../../services/auth.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { FileUploadValidators } from '@iplab/ngx-file-upload';
 import { NotificationService } from 'app/services';
 import { Rotation } from 'app/domain/rotation';
 import saveAs from 'file-saver';
-import { ReadVarExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-rotation',
@@ -18,15 +13,6 @@ import { ReadVarExpr } from '@angular/compiler';
 export class RotationComponent implements OnInit {
 
   private pdfToggels: Map<Rotation, boolean> = new Map();
-
-  private pdf = new FormControl(null, FileUploadValidators.filesLimit(1));
-
-  addForm = new FormGroup({
-    headLine: new FormControl('', [Validators.required]),
-    from: new FormControl('', [Validators.required]),
-    to: new FormControl('', [Validators.required]),
-    pdf: this.pdf,
-  });
 
   addVisible = false;
 
@@ -43,44 +29,6 @@ export class RotationComponent implements OnInit {
         this.rotations = rotations;
         this.rotations.forEach(r => this.pdfToggels.set(r, false));
       });
-  }
-
-  get headLine(): string {
-    return this.addForm.get('headLine').value;
-  }
-
-  get from(): Date {
-    return this.addForm.get('from').value;
-  }
-
-  get to(): Date {
-    return this.addForm.get('to').value;
-  }
-
-  get file(): File {
-    return this.addForm.get('pdf').value[0];
-  }
-
-  add() {
-    const reader = new FileReader();
-    reader.readAsDataURL(this.file);
-    Observable.create(observer => {
-      reader.onloadend = () => {
-        observer.next(reader.result);
-        observer.complete();
-      };
-    }).subscribe(file => {
-      this.messageService.add(
-        { headline: this.headLine, from: this.from, to: this.to, file: file, fileType: this.file.type, fileName: this.file.name }
-      ).subscribe(r => {
-        if (r.okResult) {
-          this.ngOnInit();
-          this.toggleAdd();
-        } else {
-          this.notifications.error('Der opstod en fejl, prøv igen senere!');
-        }
-      });
-    });
   }
 
   isAdmin(): boolean {
@@ -106,13 +54,22 @@ export class RotationComponent implements OnInit {
   }
 
   delete(rotation: Rotation) {
-    this.messageService.delete(rotation).subscribe(r => {
-      if (r.okResult) {
-        this.ngOnInit();
-      } else {
-        this.notifications.error('Fejl ved sletning af plan!');
-      }
-    });
+    if (confirm('Er du sikker på at du vil slette ' + rotation.headline + ' ?')) {
+      this.messageService.delete(rotation).subscribe(r => {
+        if (r.okResult) {
+          this.ngOnInit();
+        } else {
+          this.notifications.error('Fejl ved sletning af plan!');
+        }
+      });
+    }
+  }
+
+  addChangeVisisblity() {
+    this.addVisible = !this.addVisible;
+    if (!this.addVisible) {
+      this.ngOnInit();
+    }
   }
 
   private base64ToArrayBuffer(data: any) {

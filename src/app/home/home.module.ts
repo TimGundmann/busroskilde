@@ -12,6 +12,7 @@ import { RotationComponent } from './rotation/rotation.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AddComponent } from './rotation/add/add.component';
 
 @NgModule({
     imports: [
@@ -25,7 +26,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
         BrowserAnimationsModule,
         PdfViewerModule
     ],
-    declarations: [ HomeComponent, RotationComponent, UsersComponent ],
+    declarations: [ HomeComponent, RotationComponent, UsersComponent, AddComponent ],
     exports: [ HomeComponent ],
     providers: []
 })
