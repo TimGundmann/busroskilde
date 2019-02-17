@@ -16,7 +16,7 @@ export class AddComponent {
   @Input() visisble = false;
   @Output() changeVisibility = new EventEmitter();
 
-  public pdf = new FormControl(null, FileUploadValidators.filesLimit(1));
+  public pdf = new FormControl(null, [FileUploadValidators.filesLimit(1), FileUploadValidators.accept(['.pdf'])]);
 
   addForm = new FormGroup({
     headLine: new FormControl('', [Validators.required, Validators.maxLength(200)]),

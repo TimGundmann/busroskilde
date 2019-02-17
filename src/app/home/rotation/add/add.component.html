@@ -41,7 +41,10 @@
           <span>Træk og slip eller tryk!</span>
         </ng-template>
       </file-upload>
-      <br />
+      <div *ngIf="pdf.errors">
+        Det er kun tilladt at tilføje én PDF file!
+      </div>
+      <br/>
       <button type="submit" [disabled]="!addForm.valid" class="btn btn-success btn-lg btn-fill">Tilføj</button>
       <button type="button" class="btn btn-neutral btn-lg btn-fill btn-outline-neutral"
         (click)="toggleAdd()">Annuller</button>
