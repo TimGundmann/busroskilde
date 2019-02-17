@@ -1,39 +1,39 @@
-import { MessageService } from './../../services/message.service';
+import { PlanService } from '../../services/plan.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'app/services';
-import { Rotation } from 'app/domain/rotation';
+import { Plan } from 'app/domain/plan';
 import saveAs from 'file-saver';
 
 @Component({
-  selector: 'app-rotation',
-  templateUrl: './rotation.component.html',
-  styleUrls: ['./rotation.component.scss']
+  selector: 'app-plan',
+  templateUrl: './plan.component.html',
+  styleUrls: ['./plan.component.scss']
 })
-export class RotationComponent implements OnInit {
+export class PlanComponent implements OnInit {
 
-  private pdfToggels: Map<Rotation, boolean> = new Map();
+  private pdfToggels: Map<Plan, boolean> = new Map();
 
   addVisible = false;
 
-  rotations: Rotation[] = [];
+  plans: Plan[] = [];
 
   constructor(
     private authService: AuthService,
-    private messageService: MessageService,
+    private planService: PlanService,
     private notifications: NotificationService) { }
 
   ngOnInit() {
-    this.messageService.getActiveRotations()
-      .subscribe(rotations => {
-        this.rotations = rotations;
-        this.rotations.forEach(r => this.pdfToggels.set(r, false));
+    this.planService.getActivePlans()
+      .subscribe(plans => {
+        this.plans = plans;
+        this.plans.forEach(r => this.pdfToggels.set(r, false));
       });
   }
 
-  updateFrom(rotation: Rotation, value: Date) {
-    rotation.from = value;
-    this.messageService.updateFrom(rotation.id, value)
+  updateFrom(plan: Plan, value: Date) {
+    plan.from = value;
+    this.planService.updateFrom(plan.id, value)
       .subscribe(r => {
         if (!r.okResult) {
           this.notifications.error('Fejl ved opdatering af planen, prøv igen senere!');
@@ -41,9 +41,9 @@ export class RotationComponent implements OnInit {
       });
   }
 
-  updateTo(rotation: Rotation, value: Date) {
-    rotation.to = value;
-    this.messageService.updateTo(rotation.id, value)
+  updateTo(plan: Plan, value: Date) {
+    plan.to = value;
+    this.planService.updateTo(plan.id, value)
       .subscribe(r => {
         if (!r.okResult) {
           this.notifications.error('Fejl ved opdatering af planen, prøv igen senere!');
@@ -59,23 +59,23 @@ export class RotationComponent implements OnInit {
     this.addVisible = !this.addVisible;
   }
 
-  togglePdf(rotation: Rotation) {
-    const toggle = this.pdfToggels.get(rotation);
-    this.pdfToggels.set(rotation, !toggle);
+  togglePdf(plan: Plan) {
+    const toggle = this.pdfToggels.get(plan);
+    this.pdfToggels.set(plan, !toggle);
   }
 
-  showPdf(rotation: Rotation): boolean {
-    return this.pdfToggels.get(rotation);
+  showPdf(plan: Plan): boolean {
+    return this.pdfToggels.get(plan);
   }
 
-  dowload(rotation: Rotation) {
-    const blob = new Blob([this.base64ToArrayBuffer(rotation.file.split(',')[1])], { type: rotation.fileType });
-    saveAs(blob, rotation.fileName);
+  dowload(plan: Plan) {
+    const blob = new Blob([this.base64ToArrayBuffer(plan.file.split(',')[1])], { type: plan.fileType });
+    saveAs(blob, plan.fileName);
   }
 
-  delete(rotation: Rotation) {
-    if (confirm('Er du sikker på at du vil slette ' + rotation.headline + ' ?')) {
-      this.messageService.delete(rotation).subscribe(r => {
+  delete(plan: Plan) {
+    if (confirm('Er du sikker på at du vil slette ' + plan.headline + ' ?')) {
+      this.planService.delete(plan).subscribe(r => {
         if (r.okResult) {
           this.ngOnInit();
         } else {

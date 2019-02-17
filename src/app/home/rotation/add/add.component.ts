@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MessageService } from 'app/services/message.service';
+import { PlanService } from 'app/services/plan.service';
 import { NotificationService } from 'app/services';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -25,7 +25,7 @@ export class AddComponent {
     pdf: this.pdf,
   });
 
-  constructor(private messageService: MessageService, private notifications: NotificationService, private spinner: NgxSpinnerService) { }
+  constructor(private planService: PlanService, private notifications: NotificationService, private spinner: NgxSpinnerService) { }
 
   get headLine()   {
     return <FormControl>this.addForm.get('headLine');
@@ -53,7 +53,7 @@ export class AddComponent {
         observer.complete();
       };
     }).subscribe(file => {
-      this.messageService.add(
+      this.planService.add(
         {
           headline: this.headLine.value,
           from: this.from.value,

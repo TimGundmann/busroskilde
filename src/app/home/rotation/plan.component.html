@@ -16,34 +16,34 @@
         </div>
         <div class="col-md-11 mr-auto ml-auto">
             <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()"></app-add>
-            <div *ngFor="let rotation of rotations">
+            <div *ngFor="let plan of plans">
                 <div class="card no-transition">
                     <div class="card-body">
-                        <div class="rotation-heading">
-                            <span class="text-headline">{{rotation.headline}}</span>
+                        <div class="plan-heading">
+                            <span class="text-headline">{{plan.headline}}</span>
                             <span *ngIf="!isAdmin()">
                                 <span class="text-info">Gyldighedsperiode: </span>
-                                <span>{{rotation.from | date}}</span> - <span>{{rotation.to | date}}</span>
+                                <span>{{plan.from | date}}</span> - <span>{{plan.to | date}}</span>
                             </span>
                             <span *ngIf="isAdmin()">
-                                <label class="text-info">Gyldig fra:</label><input type="date" [value]="rotation.from" (input)="updateFrom(rotation, $event.target.value)">
-                                <label class="text-info">til:</label><input type="date" [value]="rotation.to" (input)="updateTo(rotation, $event.target.value)">
+                                <label class="text-info">Gyldig fra:</label><input type="date" [value]="plan.from" (input)="updateFrom(plan, $event.target.value)">
+                                <label class="text-info">til:</label><input type="date" [value]="plan.to" (input)="updateTo(plan, $event.target.value)">
                             </span>
                             <span>
-                                <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="delete(rotation)"
+                                <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="delete(plan)"
                                     title="Slet turnus planen">
                                     <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
                                 </a>
-                                <a style="cursor: pointer;" (click)="dowload(rotation)" title="Hent filen">
+                                <a style="cursor: pointer;" (click)="dowload(plan)" title="Hent filen">
                                     <i class="nc-icon nc-cloud-download-93" aria-hidden="true"></i>
                                 </a>
-                                <a style="cursor: pointer;" (click)="togglePdf(rotation)" title="Vis filen">
-                                    <i *ngIf="!showPdf(rotation)" class="nc-icon nc-glasses-2" aria-hidden="true"></i>
-                                    <i *ngIf="showPdf(rotation)" class="nc-icon nc-simple-remove" aria-hidden="true"></i>
+                                <a style="cursor: pointer;" (click)="togglePdf(plan)" title="Vis filen">
+                                    <i *ngIf="!showPdf(plan)" class="nc-icon nc-glasses-2" aria-hidden="true"></i>
+                                    <i *ngIf="showPdf(plan)" class="nc-icon nc-simple-remove" aria-hidden="true"></i>
                                 </a>
                             </span>
                         </div>
-                        <pdf-viewer *ngIf="showPdf(rotation)" [src]="rotation.file" [render-text]="true"
+                        <pdf-viewer *ngIf="showPdf(plan)" [src]="plan.file" [render-text]="true"
                             style="display: block;"></pdf-viewer>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-export interface Rotation {
+export interface Plan {
 
     id?: string;
     headline: string;

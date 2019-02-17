@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 
 import { ComponentsModule } from '../components/components.module';
-import { RotationComponent } from './rotation/rotation.component';
+import { PlanComponent } from './rotation/plan.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
@@ -26,7 +26,7 @@ import { AddComponent } from './rotation/add/add.component';
         BrowserAnimationsModule,
         PdfViewerModule
     ],
-    declarations: [ HomeComponent, RotationComponent, UsersComponent, AddComponent ],
+    declarations: [ HomeComponent, PlanComponent, UsersComponent, AddComponent ],
     exports: [ HomeComponent ],
     providers: []
 })
