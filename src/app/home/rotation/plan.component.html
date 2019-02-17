@@ -21,15 +21,22 @@
                     <div class="card-body">
                         <div class="plan-heading">
                             <span class="text-headline">{{plan.headline}}</span>
-                            <span *ngIf="!isAdmin()">
+                            <div *ngIf="!isAdmin()">
                                 <span class="text-info">Gyldighedsperiode: </span>
                                 <span>{{plan.from | date}}</span> - <span>{{plan.to | date}}</span>
-                            </span>
-                            <span *ngIf="isAdmin()">
-                                <label class="text-info">Gyldig fra:</label><input type="date" [value]="plan.from" (input)="updateFrom(plan, $event.target.value)">
-                                <label class="text-info">til:</label><input type="date" [value]="plan.to" (input)="updateTo(plan, $event.target.value)">
-                            </span>
-                            <span>
+                            </div>
+                            <div *ngIf="isAdmin()">
+                                <div>
+                                    <label class="text-info">Gyldig fra:</label>
+                                    <input type="date" [value]="plan.from"
+                                        (input)="updateFrom(plan, $event.target.value)">
+                                </div>
+                                <div>
+                                    <label class="text-info">Gyldig til:</label>
+                                    <input type="date" [value]="plan.to" (input)="updateTo(plan, $event.target.value)">
+                                </div>
+                            </div>
+                            <div>
                                 <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="delete(plan)"
                                     title="Slet turnus planen">
                                     <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
@@ -41,7 +48,7 @@
                                     <i *ngIf="!showPdf(plan)" class="nc-icon nc-glasses-2" aria-hidden="true"></i>
                                     <i *ngIf="showPdf(plan)" class="nc-icon nc-simple-remove" aria-hidden="true"></i>
                                 </a>
-                            </span>
+                            </div>
                         </div>
                         <pdf-viewer *ngIf="showPdf(plan)" [src]="plan.file" [render-text]="true"
                             style="display: block;"></pdf-viewer>
