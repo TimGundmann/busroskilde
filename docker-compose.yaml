@@ -6,3 +6,5 @@ services:
     ports:
      - "9898:80"
     image: busroskilde
+    environment:
+      TZ: "Europe/Amsterdam"
