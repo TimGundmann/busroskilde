@@ -25,7 +25,7 @@
                                 <span class="text-info">Gyldighedsperiode: </span>
                                 <span>{{rotation.from | date}}</span> - <span>{{rotation.to | date}}</span>
                             </span>
-                            <span>
+                            <span *ngIf="isAdmin()">
                                 <label class="text-info">Gyldig fra:</label><input type="date" [value]="rotation.from" (input)="updateFrom(rotation, $event.target.value)">
                                 <label class="text-info">til:</label><input type="date" [value]="rotation.to" (input)="updateTo(rotation, $event.target.value)">
                             </span>
