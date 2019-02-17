@@ -1,5 +1,5 @@
 import { environment } from './../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Rotation } from 'app/domain/rotation';
@@ -21,6 +21,16 @@ export class MessageService {
 
   add(rotation: Rotation): Observable<RequestResult> {
     return this.handleResponce(this.httpClient.post<RequestResult>(`${this.serviceHost}messages/rotations/add`, rotation));
+  }
+
+  updateFrom(id: String, from: Date): Observable<RequestResult> {
+    return this.handleResponce(
+      this.httpClient.post<RequestResult>(`${this.serviceHost}messages/rotations/${id}/from/${from}`, null));
+  }
+
+  updateTo(id: String, to: Date): Observable<RequestResult> {
+    return this.handleResponce(
+      this.httpClient.post<RequestResult>(`${this.serviceHost}messages/rotations/${id}/to/${to}`, null));
   }
 
   delete(rotation: Rotation): Observable<RequestResult> {

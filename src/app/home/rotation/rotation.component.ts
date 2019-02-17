@@ -31,6 +31,26 @@ export class RotationComponent implements OnInit {
       });
   }
 
+  updateFrom(rotation: Rotation, value: Date) {
+    rotation.from = value;
+    this.messageService.updateFrom(rotation.id, value)
+      .subscribe(r => {
+        if (!r.okResult) {
+          this.notifications.error('Fejl ved opdatering af planen, prøv igen senere!');
+        }
+      });
+  }
+
+  updateTo(rotation: Rotation, value: Date) {
+    rotation.to = value;
+    this.messageService.updateTo(rotation.id, value)
+      .subscribe(r => {
+        if (!r.okResult) {
+          this.notifications.error('Fejl ved opdatering af planen, prøv igen senere!');
+        }
+      });
+  }
+
   isAdmin(): boolean {
     return this.authService.isAdmin();
   }

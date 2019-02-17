@@ -21,9 +21,13 @@
                     <div class="card-body">
                         <div class="rotation-heading">
                             <span class="text-headline">{{rotation.headline}}</span>
-                            <span>
+                            <span *ngIf="!isAdmin()">
                                 <span class="text-info">Gyldighedsperiode: </span>
                                 <span>{{rotation.from | date}}</span> - <span>{{rotation.to | date}}</span>
+                            </span>
+                            <span>
+                                <label class="text-info">Gyldig fra:</label><input type="date" [value]="rotation.from" (input)="updateFrom(rotation, $event.target.value)">
+                                <label class="text-info">til:</label><input type="date" [value]="rotation.to" (input)="updateTo(rotation, $event.target.value)">
                             </span>
                             <span>
                                 <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="delete(rotation)"
