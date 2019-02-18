@@ -28,11 +28,11 @@
                     <div class="card-body">
                         <div class="plan-heading">
                             <span class="text-headline">{{plan.headline}}</span>
-                            <div *ngIf="!isAdmin()">
+                            <div *ngIf="!isAdmin() && category.type === 'FROM_TO'">
                                 <span class="text-info">Gyldighedsperiode: </span>
                                 <span>{{plan.from | date}}</span> - <span>{{plan.to | date}}</span>
                             </div>
-                            <div *ngIf="isAdmin()">
+                            <div *ngIf="isAdmin() && category.type === 'FROM_TO'">
                                 <div>
                                     <label class="text-info">Gyldig fra:</label>
                                     <input type="date" [value]="plan.from"

@@ -22,8 +22,8 @@ export class AddComponent implements OnInit {
 
   addForm = new FormGroup({
     headLine: new FormControl('', [Validators.required, Validators.maxLength(200)]),
-    from: new FormControl('', [Validators.required]),
-    to: new FormControl('', [Validators.required]),
+    from: new FormControl(),
+    to: new FormControl(),
     pdf: this.pdf,
     subCatetory: new FormControl()
   });

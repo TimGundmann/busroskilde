@@ -16,6 +16,8 @@ export interface Category {
 
     name: string;
 
+    type: string;
+
     subCategories: SubCategory[];
 
 }
