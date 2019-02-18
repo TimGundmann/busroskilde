@@ -7,7 +7,7 @@
       <div class="row">
         <div [className]="category.subCategories.length > 0 ? 'col-md-6' : 'col-md-12'">
           <label>Overskrift</label>
-          <input type="text" class="form-control" placeholder="Overskrift" (focus)="focus=true" (blur)="focus=false"
+          <input type="text" class="form-control" placeholder="Overskrift" 
             name="headLine" formControlName="headLine" autofocus maxlength="200">
           <div *ngIf="headLine.invalid && (headLine.dirty || headLine.touched)" class="text-danger">
             <div *ngIf="headLine.errors.required">
@@ -17,8 +17,7 @@
         </div>
         <div class="col-md-6" *ngIf="category.subCategories.length > 0">
           <label>Dag</label>
-          <select class="form-control" placeholder="Dag" (focus)="focus=true" (blur)="focus=false" name="subCatetory"
-            formControlName="subCatetory">
+          <select class="form-control" placeholder="Dag" formControlName="subCatetory">
             <option *ngFor="let sub of category.subCategories" [ngValue]="sub">{{sub.name}}</option>
           </select>
         </div>
@@ -26,8 +25,7 @@
       <div class="row" *ngIf="category.type === 'FROM_TO'">
         <div class="col-md-6">
           <label>Gyldig fra</label>
-          <input type="date" class="form-control" placeholder="Fra" (focus)="focus=true" (blur)="focus=false"
-            name="from" formControlName="from">
+          <input type="date" class="form-control" placeholder="Fra" name="from" formControlName="from">
           <div *ngIf="from.invalid && (from.dirty || from.touched)" class="text-danger">
             <div *ngIf="from.errors.required">
               Fra datoen skal angives.
@@ -36,8 +34,7 @@
         </div>
         <div class="col-md-6">
           <label>Gyldig til</label>
-          <input type="date" class="form-control" placeholder="Til" (focus)="focus=true" (blur)="focus=false" name="to"
-            formControlName="to">
+          <input type="date" class="form-control" placeholder="Til" formControlName="to">
           <div *ngIf="to.invalid && (to.dirty || to.touched)" class="text-danger">
             <div *ngIf="to.errors.required">
               Til datoen skal angives.
