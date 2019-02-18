@@ -6,15 +6,17 @@
     height: 100%;
     border-radius: 12px;
     position: relative;
-    min-height: 300px;
+    min-height: 190px;
     width: 60px;
     span {
         transform: rotate(-90deg);
         padding: 0;
         position: absolute;
-        top: 84px;
+        top: 28px;
         width: 130px;
         height: 88px;
+        text-align: end;
+        margin: 0;    
     }
     a {
         margin: 8px !important;

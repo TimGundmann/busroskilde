@@ -7,6 +7,7 @@ import { PlanService } from 'app/services/plan.service';
 import { NotificationService } from 'app/services';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-add',
@@ -17,10 +18,12 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       state('open', style({
         height: '*',
         opacity: 1,
+        display: 'flex'
       })),
       state('closed', style({
         height: '0',
         opacity: 0,
+        display: 'none',
       })),
       transition('open => closed', [
         animate('1s')
