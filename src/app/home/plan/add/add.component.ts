@@ -6,11 +6,30 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlanService } from 'app/services/plan.service';
 import { NotificationService } from 'app/services';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  styleUrls: ['./add.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        height: '*',
+        opacity: 1,
+      })),
+      state('closed', style({
+        height: '0',
+        opacity: 0,
+      })),
+      transition('open => closed', [
+        animate('1s')
+      ]),
+      transition('closed => open', [
+        animate('0.5s')
+      ]),
+    ]),
+  ],
 })
 export class AddComponent implements OnInit {
 

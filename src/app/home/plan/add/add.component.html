@@ -1,4 +1,4 @@
-<div class="card no-transition" *ngIf="visisble">
+<div class="card no-transition"  [@openClose]="visisble ? 'open' : 'closed'">
   <div class="card-header">
     <h3>Tilføj {{category.name}}</h3>
   </div>
