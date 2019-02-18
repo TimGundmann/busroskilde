@@ -1,6 +1,6 @@
 <div class="card no-transition" *ngIf="visisble">
   <div class="card-header">
-    <h3>Tilføj Turnus plan</h3>
+    <h3>Tilføj {{category.name}}</h3>
   </div>
   <div class="card-body">
     <form class="form-rotation" [formGroup]="addForm" (ngSubmit)="add()">
