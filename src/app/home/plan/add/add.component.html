@@ -4,13 +4,23 @@
   </div>
   <div class="card-body">
     <form class="form-rotation" [formGroup]="addForm" (ngSubmit)="add()">
-      <label>Overskrift</label>
-      <input type="text" class="form-control" placeholder="Overskrift" (focus)="focus=true" (blur)="focus=false"
-        name="headLine" formControlName="headLine" autofocus maxlength="200">
-      <div *ngIf="headLine.invalid && (headLine.dirty || headLine.touched)" class="text-danger">
-
-        <div *ngIf="headLine.errors.required">
-          Overskriften skal indtastes.
+      <div class="row">
+        <div [className]="category.subCategories.length > 0 ? 'col-md-6' : 'col-md-12'">
+          <label>Overskrift</label>
+          <input type="text" class="form-control" placeholder="Overskrift" (focus)="focus=true" (blur)="focus=false"
+            name="headLine" formControlName="headLine" autofocus maxlength="200">
+          <div *ngIf="headLine.invalid && (headLine.dirty || headLine.touched)" class="text-danger">
+            <div *ngIf="headLine.errors.required">
+              Overskriften skal indtastes.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" *ngIf="category.subCategories.length > 0">
+          <label>Dag</label>
+          <select class="form-control" placeholder="Dag" (focus)="focus=true" (blur)="focus=false" name="subCatetory"
+            formControlName="subCatetory">
+            <option *ngFor="let sub of category.subCategories" [ngValue]="sub">{{sub.name}}</option>
+          </select>
         </div>
       </div>
       <div class="row">
@@ -44,7 +54,7 @@
       <div *ngIf="pdf.errors">
         Det er kun tilladt at tilføje én PDF file!
       </div>
-      <br/>
+      <br />
       <button type="submit" [disabled]="!addForm.valid" class="btn btn-success btn-lg btn-fill">Tilføj</button>
       <button type="button" class="btn btn-neutral btn-lg btn-fill btn-outline-neutral"
         (click)="toggleAdd()">Annuller</button>

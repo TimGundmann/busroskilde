@@ -1,3 +1,4 @@
+import { Category } from 'app/domain/plan';
 import { Observable } from 'rxjs';
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -11,8 +12,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
-export class AddComponent {
+export class AddComponent implements OnInit {
 
+  @Input() category: Category;
   @Input() visisble = false;
   @Output() changeVisibility = new EventEmitter();
 
@@ -23,12 +25,22 @@ export class AddComponent {
     from: new FormControl('', [Validators.required]),
     to: new FormControl('', [Validators.required]),
     pdf: this.pdf,
+    subCatetory: new FormControl()
   });
 
-  constructor(private planService: PlanService, private notifications: NotificationService, private spinner: NgxSpinnerService) { }
+  constructor(private planService: PlanService, private notifications: NotificationService, private spinner: NgxSpinnerService) {
+  }
 
-  get headLine()   {
+  ngOnInit() {
+    this.subCategory.setValue(this.category.subCategories[0]);
+  }
+
+  get headLine() {
     return <FormControl>this.addForm.get('headLine');
+  }
+
+  get subCategory() {
+    return <FormControl>this.addForm.get('subCatetory');
   }
 
   get from(): FormControl {
@@ -58,6 +70,8 @@ export class AddComponent {
           headline: this.headLine.value,
           from: this.from.value,
           to: this.to.value,
+          category: this.category,
+          subCategory: this.subCategory.value,
           file: file,
           fileType: this.file.value[0].type,
           fileName: this.file.value[0].name

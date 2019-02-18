@@ -8,11 +8,11 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 
 import { ComponentsModule } from '../components/components.module';
-import { PlanComponent } from './rotation/plan.component';
+import { PlanComponent } from './plan/plan.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { AddComponent } from './rotation/add/add.component';
+import { AddComponent } from './plan/add/add.component';
 
 @NgModule({
     imports: [

@@ -1,8 +1,8 @@
-<div class="container text-center">
+<div class="container text-center bottom-margin">
     <div class="row">
         <div class="col-md-1 mr-auto ml-auto">
-            <nav class="navbar bg-danger heading">
-                <span class="navbar-brand">Turnus planer</span>
+            <nav [className]="odd ? 'navbar bg-danger heading' : 'navbar bg-info heading'">
+                <span class="navbar-brand">{{category.name}}</span>
                 <div *ngIf="isAdmin()">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -15,8 +15,15 @@
             </nav>
         </div>
         <div class="col-md-11 mr-auto ml-auto">
-            <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()"></app-add>
-            <div *ngFor="let plan of plans">
+            <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [category]="category"></app-add>
+            <div *ngFor="let plan of plans; let index = index">
+                <div class="card no-transition" style="margin-bottom: 2px" *ngIf="plan.subCategory && isFirst(index)">
+                    <div class="card-header">
+                        <h6 style="margin-bottom: 0">
+                            {{plan.subCategory.name}}
+                        </h6>
+                    </div>
+                </div>
                 <div class="card no-transition">
                     <div class="card-body">
                         <div class="plan-heading">

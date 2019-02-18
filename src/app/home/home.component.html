@@ -3,7 +3,9 @@
         <div class="filter"></div>
         <div class="content-center">
             <div class="container top-container">
-                <app-plan></app-plan>
+                <div *ngFor="let category of categories; let odd = odd">
+                    <app-plan [category]="category" [odd]="odd"></app-plan>
+                </div>
             </div>
         </div>
     </div>

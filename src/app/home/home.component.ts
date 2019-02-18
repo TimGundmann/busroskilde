@@ -1,4 +1,6 @@
+import { PlanService } from './../services/plan.service';
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'app/domain/plan';
 
 @Component({
     selector: 'app-home',
@@ -7,15 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HomeComponent implements OnInit {
-    model = {
-        left: true,
-        middle: false,
-        right: false
-    };
 
-    focus;
-    focus1;
-    constructor() { }
+    categories: Category[];
 
-    ngOnInit() {}
+    constructor(private planService: PlanService) { }
+
+    ngOnInit() {
+        this.planService.getCategories().subscribe(categories => this.categories = categories);
+    }
 }

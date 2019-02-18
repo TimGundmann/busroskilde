@@ -2,7 +2,7 @@ import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Plan } from 'app/domain/plan';
+import { Plan, Category } from 'app/domain/plan';
 import { RequestResult } from 'app/domain/error-details';
 import { map, catchError } from 'rxjs/operators';
 
@@ -15,8 +15,12 @@ export class PlanService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getActivePlans(): Observable<Plan[]> {
-    return this.httpClient.get<Plan[]>(`${this.serviceHost}plans/active`);
+  getActivePlansByCategory(category: Category): Observable<Plan[]> {
+    return this.httpClient.get<Plan[]>(`${this.serviceHost}plans/${category.name}/active`);
+  }
+
+  getCategories(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(`${this.serviceHost}plans/categories`);
   }
 
   add(plan: Plan): Observable<RequestResult> {

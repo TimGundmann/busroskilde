@@ -1,8 +1,8 @@
 import { PlanService } from '../../services/plan.service';
 import { AuthService } from './../../services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NotificationService } from 'app/services';
-import { Plan } from 'app/domain/plan';
+import { Plan, Category } from 'app/domain/plan';
 import saveAs from 'file-saver';
 
 @Component({
@@ -11,6 +11,9 @@ import saveAs from 'file-saver';
   styleUrls: ['./plan.component.scss']
 })
 export class PlanComponent implements OnInit {
+
+  @Input() category: Category;
+  @Input() odd: boolean;
 
   private pdfToggels: Map<Plan, boolean> = new Map();
 
@@ -24,9 +27,20 @@ export class PlanComponent implements OnInit {
     private notifications: NotificationService) { }
 
   ngOnInit() {
-    this.planService.getActivePlans()
+    this.planService.getActivePlansByCategory(this.category)
       .subscribe(plans => {
         this.plans = plans;
+        this.plans.sort((p1, p2) => {
+          if (p1.subCategory && p1.subCategory) {
+            if (p1.subCategory.name > p2.subCategory.name) {
+              return 1;
+            }
+            if (p1.subCategory.name < p2.subCategory.name) {
+              return -1;
+            }
+          }
+          return 0;
+        });
         this.plans.forEach(r => this.pdfToggels.set(r, false));
       });
   }
@@ -49,6 +63,12 @@ export class PlanComponent implements OnInit {
           this.notifications.error('Fejl ved opdatering af planen, prøv igen senere!');
         }
       });
+  }
+
+  isFirst(index: number): boolean {
+    const currentSub = this.plans[index].subCategory;
+    const firstIndex = this.plans.findIndex(p => p.subCategory.name === currentSub.name);
+    return firstIndex === index;
   }
 
   isAdmin(): boolean {
