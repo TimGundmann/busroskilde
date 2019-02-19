@@ -15,7 +15,7 @@
             </nav>
         </div>
         <div class="col-md-11 mr-auto ml-auto">
-            <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [category]="category"></app-add>
+            <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [category]="category" [editPlan]="editPlan"></app-add>
             <div *ngFor="let plan of plans; let index = index">
                 <div class="card no-transition" style="margin-bottom: 1px" *ngIf="plan.subCategory && isFirst(index)">
                     <div class="card-header">
@@ -44,8 +44,11 @@
                                 </div>
                             </div>
                             <div>
+                                <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="edit(plan)" title="Rediger">
+                                    <img class="edit" src="assets/img/edit.svg">
+                                </a>
                                 <a *ngIf="isAdmin()" style="cursor: pointer;" (click)="delete(plan)"
-                                    title="Slet turnus planen">
+                                    title="Slet">
                                     <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
                                 </a>
                                 <a style="cursor: pointer;" (click)="dowload(plan)" title="Hent filen">

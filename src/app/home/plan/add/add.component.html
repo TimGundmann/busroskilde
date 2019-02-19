@@ -1,6 +1,6 @@
 <div class="card no-transition"  [@openClose]="visisble ? 'open' : 'closed'">
   <div class="card-header">
-    <h3>Tilføj {{category.name}}</h3>
+    <h3>{{action}} {{category.name}}</h3>
   </div>
   <div class="card-body">
     <form class="form-rotation" [formGroup]="addForm" (ngSubmit)="add()">
@@ -52,7 +52,7 @@
         Det er kun tilladt at tilføje én PDF file!
       </div>
       <br />
-      <button type="submit" [disabled]="!addForm.valid" class="btn btn-success btn-lg btn-fill">Tilføj</button>
+      <button type="submit" [disabled]="!addForm.valid" class="btn btn-success btn-lg btn-fill">{{action}}</button>
       <button type="button" class="btn btn-neutral btn-lg btn-fill btn-outline-neutral"
         (click)="toggleAdd()">Annuller</button>
     </form>

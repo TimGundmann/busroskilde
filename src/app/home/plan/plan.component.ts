@@ -2,7 +2,7 @@ import { PlanService } from '../../services/plan.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { NotificationService } from 'app/services';
-import { Plan, Category } from 'app/domain/plan';
+import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
 
 @Component({
@@ -20,6 +20,8 @@ export class PlanComponent implements OnInit {
   addVisible = false;
 
   plans: Plan[] = [];
+
+  editPlan: Plan;
 
   constructor(
     private authService: AuthService,
@@ -76,6 +78,9 @@ export class PlanComponent implements OnInit {
   }
 
   toggleAdd() {
+    if (!this.addVisible) {
+      this.editPlan = undefined;
+    }
     this.addVisible = !this.addVisible;
   }
 
@@ -88,9 +93,17 @@ export class PlanComponent implements OnInit {
     return this.pdfToggels.get(plan);
   }
 
+  getEditPlan(): Plan {
+    return this.editPlan;
+  }
+
   dowload(plan: Plan) {
-    const blob = new Blob([this.base64ToArrayBuffer(plan.file.split(',')[1])], { type: plan.fileType });
-    saveAs(blob, plan.fileName);
+    saveAs(fileToBlob(plan), plan.fileName);
+  }
+
+  edit(plan: Plan) {
+    this.toggleAdd();
+    this.editPlan = plan;
   }
 
   delete(plan: Plan) {
@@ -111,15 +124,5 @@ export class PlanComponent implements OnInit {
       this.ngOnInit();
     }
   }
-
-  private base64ToArrayBuffer(data: any) {
-    const binaryString = window.atob(data);
-    const binaryLen = binaryString.length;
-    const bytes = new Uint8Array(binaryLen);
-    for (let i = 0; i < binaryLen; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
-    return bytes;
-  };
 
 }

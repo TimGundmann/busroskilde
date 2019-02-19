@@ -1,4 +1,4 @@
-import { Category } from 'app/domain/plan';
+import { Category, Plan, fileToBlob } from 'app/domain/plan';
 import { Observable } from 'rxjs';
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,7 +7,6 @@ import { PlanService } from 'app/services/plan.service';
 import { NotificationService } from 'app/services';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-add',
@@ -36,11 +35,30 @@ import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
 })
 export class AddComponent implements OnInit {
 
+  private _editPlan: Plan;
+
+  @Input() set editPlan(plan: Plan) {
+    this._editPlan = plan;
+    if (this._editPlan) {
+      this.headLine.setValue(this._editPlan.headline);
+      this.from.setValue(this._editPlan.from);
+      this.to.setValue(this._editPlan.to);
+      this.file.setValue([fileToBlob(this._editPlan)]);
+      this.action = 'Rediger';
+    } else {
+      this.addForm.reset();
+      this.file.setValue([]);
+      this.action = 'Tilføj';
+    }
+  };
+
   @Input() category: Category;
   @Input() visisble = false;
   @Output() changeVisibility = new EventEmitter();
 
   public pdf = new FormControl(null, [FileUploadValidators.filesLimit(1), FileUploadValidators.accept(['.pdf'])]);
+
+  action: string;
 
   addForm = new FormGroup({
     headLine: new FormControl('', [Validators.required, Validators.maxLength(200)]),
@@ -77,6 +95,13 @@ export class AddComponent implements OnInit {
     return <FormControl>this.addForm.get('pdf');
   }
 
+  get planId(): string {
+    if (this._editPlan) {
+      return this._editPlan.id;
+    }
+    return undefined;
+  }
+
   add() {
     this.spinner.show();
     const reader = new FileReader();
@@ -89,6 +114,7 @@ export class AddComponent implements OnInit {
     }).subscribe(file => {
       this.planService.add(
         {
+          id: this.planId,
           headline: this.headLine.value,
           from: this.from.value,
           to: this.to.value,
