@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 
-import { ComponentsModule } from '../components/components.module';
 import { PlanComponent } from './plan/plan.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,7 +21,6 @@ import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
         BrowserModule,
         FormsModule,
         RouterModule,
-        ComponentsModule,
         ReactiveFormsModule,
         FileUploadModule,
         BrowserAnimationsModule,
