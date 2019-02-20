@@ -1,0 +1,50 @@
+.heading {
+    height: 100%;
+    border-radius: 12px;
+    position: relative;
+    min-height: 190px;
+    width: 60px;
+    span {
+        transform: rotate(-90deg);
+        padding: 0;
+        position: absolute;
+        top: 28px;
+        width: 130px;
+        height: 88px;
+        text-align: end;
+        margin: 0;    
+    }
+    a {
+        margin: 8px !important;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #ffffff;
+        border-radius: 12px;
+        padding: 10px 12px !important;
+    }
+    i {
+        right: 0;
+    }
+    div {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.user-heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    .text-headline {
+        font-size: .9em;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 1.5em;
+        width: 170px;
+        text-align: start;
+    }
+    >div {
+        width: 260px;
+        text-align: start;
+    }
+}

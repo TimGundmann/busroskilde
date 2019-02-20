@@ -15,6 +15,6 @@ export class HomeComponent implements OnInit {
     constructor(private planService: PlanService) { }
 
     ngOnInit() {
-        this.planService.getCategories().subscribe(categories => this.categories = categories);
+        this.planService.getCategories().subscribe(result => this.categories = result.returnValue);
     }
 }

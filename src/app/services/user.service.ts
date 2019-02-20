@@ -21,7 +21,7 @@ export class UserService {
     return this.httpClient.get<User>(`${this.serviceHost}users/current`);
   }
 
-  public signIn(email: string, password: string): Observable<RequestResult> {
+  public signIn(email: string, password: string): Observable<RequestResult<any>> {
     return this.httpClient.post(`${this.serviceHost}users/login`,
       `{ "username": "${email}", "password": "${password}" }`, { observe: 'response' })
       .pipe(
@@ -41,25 +41,33 @@ export class UserService {
       );
   }
 
-  public signUp(user: User): Observable<RequestResult> {
+  getUsers(): Observable<RequestResult<User[]>> {
+    return this.handleResponce(this.httpClient.get<User[]>(`${this.serviceHost}users/all`));
+  }
+
+  public toggleActive(user: User): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/${user.email}/active/${user.active}`, null));
+  }
+
+  public signUp(user: User): Observable<RequestResult<any>> {
     return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/bussignup`, user));
   }
 
-  public activat(token: string): Observable<RequestResult> {
+  public activat(token: string): Observable<RequestResult<any>> {
     return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/activate`, token));
   }
 
-  public sendContactMail(content: string): Observable<RequestResult> {
+  public sendContactMail(content: string): Observable<RequestResult<any>> {
     return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/contactMail`, content));
   }
 
-  handleResponce(requestObservble: Observable<Object>): Observable<RequestResult> {
+  handleResponce<T>(requestObservble: Observable<T>): Observable<RequestResult<T>> {
     return requestObservble
       .pipe(
-        map(_resp => new RequestResult()),
+        map(resp => RequestResult.okResultWith(resp)),
         catchError(error => {
           console.log(error);
-          return of(new RequestResult(error.error));
+          return of(new RequestResult<T>(error.error));
         }
         )
       );

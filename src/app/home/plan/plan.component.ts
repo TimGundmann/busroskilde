@@ -30,8 +30,8 @@ export class PlanComponent implements OnInit {
 
   ngOnInit() {
     this.planService.getActivePlansByCategory(this.category)
-      .subscribe(plans => {
-        this.plans = plans;
+      .subscribe(result => {
+        this.plans = result.returnValue;
         this.plans.sort((p1, p2) => {
           if (p1.subCategory && p1.subCategory) {
             if (p1.subCategory.name > p2.subCategory.name) {

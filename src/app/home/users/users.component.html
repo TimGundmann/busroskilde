@@ -1,3 +1,29 @@
-<p>
-  users works!
-</p>
+<div class="container text-center bottom-margin">
+  <div class="row">
+    <div class="col-md-1 mr-auto ml-auto">
+      <nav class="navbar bg-info heading">
+        <span class="navbar-brand">Bruger</span>
+      </nav>
+    </div>
+    <div class="col-md-11 mr-auto ml-auto">
+      <div *ngFor="let user of users">
+        <div class="card no-transition" style="margin-bottom: 2px">
+          <div class="card-body">
+            <div class="user-heading">
+              <span class="text-headline">{{user.name}}</span>
+              <div>
+                <span class="text-info">Chaufførnummer: </span>
+                <span>{{user.number}}</span>
+              </div>
+              <div>
+                <span class="text-info">Email: </span>
+                <span>{{user.email}}</span>
+              </div>
+              <bSwitch [switch-disabled]="!isAdmin()" [(ngModel)]="user.active" switch-on-text="Til" switch-off-text="Fra" (changeState)="changeState(user)"></bSwitch>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -15,39 +15,39 @@ export class PlanService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getActivePlansByCategory(category: Category): Observable<Plan[]> {
-    return this.httpClient.get<Plan[]>(`${this.serviceHost}plans/${category.name}/active`);
+  getActivePlansByCategory(category: Category): Observable<RequestResult<Plan[]>> {
+    return this.handleResponce(this.httpClient.get<Plan[]>(`${this.serviceHost}plans/${category.name}/active`));
   }
 
-  getCategories(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(`${this.serviceHost}plans/categories`);
+  getCategories(): Observable<RequestResult<Category[]>> {
+    return this.handleResponce(this.httpClient.get<Category[]>(`${this.serviceHost}plans/categories`));
   }
 
-  add(plan: Plan): Observable<RequestResult> {
-    return this.handleResponce(this.httpClient.post<RequestResult>(`${this.serviceHost}plans/add`, plan));
+  add(plan: Plan): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post<RequestResult<any>>(`${this.serviceHost}plans/add`, plan));
   }
 
-  updateFrom(id: String, from: Date): Observable<RequestResult> {
+  updateFrom(id: String, from: Date): Observable<RequestResult<any>> {
     return this.handleResponce(
-      this.httpClient.post<RequestResult>(`${this.serviceHost}plans/${id}/from/${from}`, null));
+      this.httpClient.post<RequestResult<void>>(`${this.serviceHost}plans/${id}/from/${from}`, null));
   }
 
-  updateTo(id: String, to: Date): Observable<RequestResult> {
+  updateTo(id: String, to: Date): Observable<RequestResult<any>> {
     return this.handleResponce(
-      this.httpClient.post<RequestResult>(`${this.serviceHost}plans/${id}/to/${to}`, null));
+      this.httpClient.post<RequestResult<void>>(`${this.serviceHost}plans/${id}/to/${to}`, null));
   }
 
-  delete(plan: Plan): Observable<RequestResult> {
-    return this.handleResponce(this.httpClient.post<RequestResult>(`${this.serviceHost}plans/delete`, plan.id));
+  delete(plan: Plan): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post<RequestResult<void>>(`${this.serviceHost}plans/delete`, plan.id));
   }
 
-  handleResponce(requestObservble: Observable<Object>): Observable<RequestResult> {
+  handleResponce<T>(requestObservble: Observable<T>): Observable<RequestResult<T>> {
     return requestObservble
       .pipe(
-        map(_resp => new RequestResult()),
+        map(resp => RequestResult.okResultWith(resp)),
         catchError(error => {
           console.log(error);
-          return of(new RequestResult(error.error));
+          return of(new RequestResult<T>(error.error));
         }
         )
       );
