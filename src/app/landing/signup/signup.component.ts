@@ -29,20 +29,24 @@ export class SignupComponent {
 
     constructor(private userService: UserService, private notifications: NotificationService, private spinner: NgxSpinnerService) { }
 
-    get number(): string {
-        return this.signUpForm.get('number').value;
+    get number(): any {
+        return this.signUpForm.get('number');
     }
 
-    get name(): string {
-        return this.signUpForm.get('name').value;
+    get name(): any {
+        return this.signUpForm.get('name');
     }
 
-    get email(): string {
-        return this.signUpForm.get('email').value;
+    get email(): any {
+        return this.signUpForm.get('email');
     }
 
-    get password(): string {
-        return this.signUpForm.get('password1').value;
+    get password(): any {
+        return this.signUpForm.get('password1');
+    }
+
+    hasError(control): boolean {
+        return control.invalid && (control.dirty || control.touched) && control.errors.required
     }
 
     register() {
@@ -63,11 +67,11 @@ export class SignupComponent {
     }
 
     private getUser(): User {
-        return { number: this.number, email: this.email, name: this.name, password: this.password };
+        return { number: this.number.value, email: this.email.value, name: this.name.value, password: this.password.value };
     }
 
     private validatePassword(): boolean {
-        return this.password === this.signUpForm.get('password2').value;
+        return this.password.value === this.signUpForm.get('password2').value;
     }
 
 }

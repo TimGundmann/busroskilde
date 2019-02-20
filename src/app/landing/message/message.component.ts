@@ -8,7 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent {
 
   focus: any
   focus1: any
@@ -21,11 +21,24 @@ export class MessageComponent implements OnInit {
 
   constructor(private userService: UserService, private notifications: NotificationService, private spinner: NgxSpinnerService) { }
 
-  ngOnInit() {
+  get name(): any {
+    return this.mailForm.get('name');
+  }
+
+  get from(): any {
+    return this.mailForm.get('from');
+  }
+
+  get content(): any {
+    return this.mailForm.get('content');
+  }
+
+  hasError(control): boolean {
+    return control.invalid && (control.dirty || control.touched) && control.errors.required
   }
 
   sendMail() {
-    this.spinner.show();
+    this.spinner.show()
     this.userService.sendContactMail(
       `Fra: ${this.mailForm.get('name').value} ${this.mailForm.get('from').value}, Indhold: ${this.mailForm.get('content').value}`)
       .subscribe(r => {

@@ -4,7 +4,7 @@
       <h2 class="text-center title">Kontakt</h2>
       <form class="contact-form" [formGroup]="mailForm" (ngSubmit)="sendMail()">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 form-group" [class.has-danger]="hasError(name)">
             <label class="whiteText">Navn</label>
             <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
               <div class="input-group-prepend">
@@ -12,9 +12,12 @@
               </div>
               <input type="text" class="form-control" placeholder="Navn" (focus)="focus=true" (blur)="focus=false"
                 name="name" formControlName="name">
+              <div *ngIf="hasError(name)" class="form-control-feedback">
+                Navnet skal angives.
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 form-group" [class.has-danger]="hasError(from)">
             <label class="whiteText">Email</label>
             <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
               <div class="input-group-prepend">
@@ -22,12 +25,20 @@
               </div>
               <input type="text" class="form-control" placeholder="Email" (focus)="focus1=true" (blur)="focus1=false"
                 formControlName="from" name="from">
+              <div *ngIf="hasError(from)" class="form-control-feedback">
+                Emailen skal angives.
+              </div>
             </div>
           </div>
         </div>
-        <label class="whiteText">Besked</label>
-        <textarea class="form-control" rows="4" placeholder="Din besked til os..." formControlName="content"
-          name="content"></textarea>
+        <div class="col-md-12 form-group" [class.has-danger]="hasError(content)">
+          <label class="whiteText">Besked</label>
+          <textarea class="form-control" rows="4" placeholder="Din besked til os..." formControlName="content"
+            name="content"></textarea>
+          <div *ngIf="hasError(content)" class="form-control-feedback">
+            Der skal være en besked.
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-4 mr-auto ml-auto">
             <button type="submit" [disabled]="!mailForm.valid" class="btn btn-danger btn-lg btn-fill">Send
