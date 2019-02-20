@@ -20,6 +20,8 @@ export interface Category {
 
     subCategories: SubCategory[];
 
+    alterRoles: string[];
+
 }
 
 export interface SubCategory {

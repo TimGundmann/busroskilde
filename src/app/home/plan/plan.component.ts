@@ -73,8 +73,8 @@ export class PlanComponent implements OnInit {
     return firstIndex === index;
   }
 
-  isAdmin(): boolean {
-    return this.authService.isAdmin();
+  canAlter(): boolean {
+    return this.authService.hasRoles(this.category.alterRoles);
   }
 
   toggleAdd() {

@@ -20,8 +20,11 @@ export class AuthService {
   }
 
   public isAdmin(): boolean {
-    return this.getToken() && decode(this.getToken()).roles && decode(this.getToken()).roles.indexOf('ROLE_ADMIN') >= 0;
+    return this.hasRole('ROLE_ADMIN');
+  }
 
+  public hasRoles(roles: string[]) {
+    return roles.filter(role => this.hasRole(role)).length > 0;
   }
 
   public getToken(): string {
@@ -34,6 +37,10 @@ export class AuthService {
 
   public signOut(): void {
     localStorage.removeItem(this.authTokenName);
+  }
+
+  public hasRole(role: string) {
+    return this.getToken() && decode(this.getToken()).roles && decode(this.getToken()).roles.indexOf(role) >= 0;
   }
 
 }
