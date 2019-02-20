@@ -1,4 +1,4 @@
-<div class="card no-transition"  [@openClose]="visisble ? 'open' : 'closed'">
+<div class="card no-transition" [@openClose]="visisble ? 'open' : 'closed'">
   <div class="card-header">
     <h3>{{action}} {{category.name}}</h3>
   </div>
@@ -6,50 +6,49 @@
     <form class="form-rotation" [formGroup]="addForm" (ngSubmit)="add()">
       <div class="row">
         <div [className]="category.subCategories.length > 0 ? 'col-md-6' : 'col-md-12'">
-          <label>Overskrift</label>
-          <input type="text" class="form-control" placeholder="Overskrift" 
-            name="headLine" formControlName="headLine" autofocus maxlength="200">
-          <div *ngIf="headLine.invalid && (headLine.dirty || headLine.touched)" class="text-danger">
-            <div *ngIf="headLine.errors.required">
+          <div class="form-group" [class.has-danger]="hasError(headLine)">
+            <label>Overskrift</label>
+            <input type="text" class="form-control" placeholder="Overskrift" name="headLine" formControlName="headLine"
+              autofocus maxlength="200">
+            <div *ngIf="hasError(headLine)" class="form-control-feedback">
               Overskriften skal indtastes.
             </div>
           </div>
         </div>
-        <div class="col-md-6" *ngIf="category.subCategories.length > 0">
+        <div class="col-md-6 form-group" *ngIf="category.subCategories.length > 0">
           <label>Dag</label>
           <select class="form-control" placeholder="Dag" formControlName="subCatetory">
             <option *ngFor="let sub of category.subCategories" [ngValue]="sub">{{sub.name}}</option>
           </select>
         </div>
       </div>
-      <div class="row" *ngIf="category.type === 'FROM_TO'">
-        <div class="col-md-6">
+      <div class="row" *ngIf="dateEnabled()">
+        <div class="col-md-6 form-group" [class.has-danger]="hasError(from)">
           <label>Gyldig fra</label>
-          <input type="date" class="form-control" placeholder="Fra" name="from" formControlName="from">
-          <div *ngIf="from.invalid && (from.dirty || from.touched)" class="text-danger">
-            <div *ngIf="from.errors.required">
-              Fra datoen skal angives.
-            </div>
+          <input type="date" class="form-control" placeholder="Fra" name="from" formControlName="from" useValueAsDate>
+          <div *ngIf="hasError(from)"
+            class="form-control-feedback">
+            Fra datoen skal angives.
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 form-group" [class.has-danger]="hasError(to)">
           <label>Gyldig til</label>
-          <input type="date" class="form-control" placeholder="Til" formControlName="to">
-          <div *ngIf="to.invalid && (to.dirty || to.touched)" class="text-danger">
-            <div *ngIf="to.errors.required">
-              Til datoen skal angives.
-            </div>
+          <input type="date" class="form-control" placeholder="Til" formControlName="to" useValueAsDate>
+          <div *ngIf="hasError(to)" class="form-control-feedback">
+            Til datoen skal angives.
           </div>
         </div>
       </div>
-      <label>Fil</label>
-      <file-upload class="form-control" formControlName="pdf" formControlName="pdf">
-        <ng-template let-isFileDragDropAvailable="isFileDragDropAvailable" #placeholder>
-          <span>Træk og slip eller tryk!</span>
-        </ng-template>
-      </file-upload>
-      <div *ngIf="pdf.errors">
-        Det er kun tilladt at tilføje én PDF file!
+      <div class="form-group" [class.has-danger]="pdf.errors">
+        <label>Fil</label>
+        <file-upload class="form-control" formControlName="pdf" formControlName="pdf">
+          <ng-template let-isFileDragDropAvailable="isFileDragDropAvailable" #placeholder>
+            <span>Træk og slip eller tryk!</span>
+          </ng-template>
+        </file-upload>
+        <div *ngIf="pdf.errors" class="form-control-feedback">
+          Det er kun tilladt at tilføje én PDF file!
+        </div>
       </div>
       <br />
       <button type="submit" [disabled]="!addForm.valid" class="btn btn-success btn-lg btn-fill">{{action}}</button>

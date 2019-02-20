@@ -1,5 +1,5 @@
 import { Category, Plan, fileToBlob } from 'app/domain/plan';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -73,6 +73,10 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     this.subCategory.setValue(this.category.subCategories[0]);
+    if (this.dateEnabled()) {
+      this.addForm.get('from').setValidators([Validators.required]);
+      this.addForm.get('to').setValidators([Validators.required]);
+    }
   }
 
   get headLine() {
@@ -100,6 +104,10 @@ export class AddComponent implements OnInit {
       return this._editPlan.id;
     }
     return undefined;
+  }
+
+  dateEnabled(): boolean {
+    return this.category.type === 'FROM_TO';
   }
 
   add() {
@@ -141,4 +149,11 @@ export class AddComponent implements OnInit {
     this.changeVisibility.emit('' + this.visisble);
   }
 
+  hasError(control): boolean {
+    return control.invalid && (control.dirty || control.touched) && control.errors.required
+  }
+
+  hasDateError(control): boolean {
+    return control.invalid && (control.dirty || control.touched) && !control.value;
+  }
 }
