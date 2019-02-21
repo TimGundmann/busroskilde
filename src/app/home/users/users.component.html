@@ -12,14 +12,17 @@
             <div class="user-heading">
               <span class="text-headline">{{user.name}}</span>
               <div>
-                <span class="text-info">Chaufførnummer: </span>
-                <span>{{user.number}}</span>
+                <div>
+                  <span class="text-info">Chaufførnummer: </span>
+                  <span>{{user.number}}</span>
+                </div>
+                <div>
+                  <span class="text-info">Email: </span>
+                  <span>{{user.email}}</span>
+                </div>
               </div>
-              <div>
-                <span class="text-info">Email: </span>
-                <span>{{user.email}}</span>
-              </div>
-              <bSwitch [switch-disabled]="!isAdmin()" [(ngModel)]="user.active" switch-on-text="Til" switch-off-text="Fra" (changeState)="changeState(user)"></bSwitch>
+              <bSwitch [switch-disabled]="!isAdmin()" [(ngModel)]="user.active" switch-on-text="Til"
+                switch-off-text="Fra" (changeState)="changeState(user)"></bSwitch>
             </div>
           </div>
         </div>
