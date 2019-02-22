@@ -1,3 +1,15 @@
 .dropdown-fix:before .dropdown-fix:after {
     left: 0px !important;
 }
+
+.no-padding {
+    padding: 0;
+}
+
+.nav-content {
+    align-items: center;
+    a {
+        font-size: 10px !important;
+        padding: 5px !important;
+    }
+}

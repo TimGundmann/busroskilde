@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  serviceHost: 'https://www.gundmann.dk/',
+  serviceHostUser: 'https://www.gundmann.dk/users',
+  serviceHostPlan: 'https://www.gundmann.dk/plans',
   authTokenName: 'Authorization',
   authHeaderName: 'Authorization'
 };

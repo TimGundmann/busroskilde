@@ -11,34 +11,34 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class PlanService {
 
-  serviceHost = environment.serviceHost;
+  serviceHost = environment.serviceHostPlan;
 
   constructor(private httpClient: HttpClient) { }
 
   getActivePlansByCategory(category: Category): Observable<RequestResult<Plan[]>> {
-    return this.handleResponce(this.httpClient.get<Plan[]>(`${this.serviceHost}plans/${category.name}/active`));
+    return this.handleResponce(this.httpClient.get<Plan[]>(`${this.serviceHost}/${category.name}/active`));
   }
 
   getCategories(): Observable<RequestResult<Category[]>> {
-    return this.handleResponce(this.httpClient.get<Category[]>(`${this.serviceHost}plans/categories`));
+    return this.handleResponce(this.httpClient.get<Category[]>(`${this.serviceHost}/categories`));
   }
 
   add(plan: Plan): Observable<RequestResult<any>> {
-    return this.handleResponce(this.httpClient.post<RequestResult<any>>(`${this.serviceHost}plans/add`, plan));
+    return this.handleResponce(this.httpClient.post<RequestResult<any>>(`${this.serviceHost}/add`, plan));
   }
 
   updateFrom(id: String, from: Date): Observable<RequestResult<any>> {
     return this.handleResponce(
-      this.httpClient.post<RequestResult<void>>(`${this.serviceHost}plans/${id}/from/${from}`, null));
+      this.httpClient.post<RequestResult<void>>(`${this.serviceHost}/${id}/from/${from}`, null));
   }
 
   updateTo(id: String, to: Date): Observable<RequestResult<any>> {
     return this.handleResponce(
-      this.httpClient.post<RequestResult<void>>(`${this.serviceHost}plans/${id}/to/${to}`, null));
+      this.httpClient.post<RequestResult<void>>(`${this.serviceHost}/${id}/to/${to}`, null));
   }
 
   delete(plan: Plan): Observable<RequestResult<any>> {
-    return this.handleResponce(this.httpClient.post<RequestResult<void>>(`${this.serviceHost}plans/delete`, plan.id));
+    return this.handleResponce(this.httpClient.post<RequestResult<void>>(`${this.serviceHost}/delete`, plan.id));
   }
 
   handleResponce<T>(requestObservble: Observable<T>): Observable<RequestResult<T>> {

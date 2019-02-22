@@ -3,10 +3,13 @@
         <div class="filter"></div>
         <div class="content-center">
             <div class="container top-container">
-                <div *ngFor="let category of categories; let odd = odd">
+                <div *ngFor="let category of categories; let odd = odd"
+                    [id]="category.name.replace(' ', '').replace('.', '')">
                     <app-plan [category]="category" [odd]="odd"></app-plan>
                 </div>
-                <app-users></app-users>
+                <div id="users">
+                    <app-users></app-users>
+                </div>
             </div>
         </div>
     </div>

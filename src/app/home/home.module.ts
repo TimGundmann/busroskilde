@@ -28,8 +28,15 @@ import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
         NouisliderModule,
         JwBootstrapSwitchNg2Module
     ],
-    declarations: [ HomeComponent, PlanComponent, UsersComponent, AddComponent ],
-    exports: [ HomeComponent ],
+    declarations: [
+        HomeComponent,
+        PlanComponent,
+        UsersComponent,
+        AddComponent
+    ],
+    exports: [
+        HomeComponent
+    ],
     providers: []
 })
 export class HomeModule { }

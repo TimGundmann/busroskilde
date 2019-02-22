@@ -11,7 +11,19 @@
             </button>
         </div>
         <div class="navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto nav-content">
+                <ng-container *ngIf="isHome()">
+                    <li class="nav-item">
+                        <a [routerLink]="['./home']" fragment="news" class="nav-link no-padding">Nyheder</a>
+                    </li>
+                    <li class="nav-item" *ngFor="let category of categories">
+                        <a [routerLink]="['./home']" [fragment]="category.name.replace(' ', '').replace('.', '')"
+                            class="nav-link no-padding">{{category.name}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['./home']" fragment="users" class="nav-link no-padding">Bruger</a>
+                    </li>
+                </ng-container>
                 <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="Facebook" data-placement="bottom"
                         href="https://www.facebook.com/groups/405605066676558" target="_blank">
@@ -32,31 +44,6 @@
                         <p class="d-lg-none">Hjem</p>
                     </a>
                 </li>
-<!--                <li class="nav-item" *ngIf="!isDocumentation()">
-                    <a class="nav-link" rel="tooltip" title="Follow us on Instagram" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank">
-                        <i class="fa fa-instagram"></i>
-                        <p class="d-lg-none">Instagram</p>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="!isDocumentation()">
-                    <a class="nav-link" rel="tooltip" title="Star on GitHub" data-placement="bottom" href="https://www.github.com/CreativeTimOfficial/paper-kit-2-angular" target="_blank">
-                        <i class="fa fa-github"></i>
-                        <p class="d-lg-none">GitHub</p>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="!isDocumentation()">
-                    <a href="http://pk2-angular.creative-tim.com/documentation/tutorial" class="nav-link" target="_blank"><i class="nc-icon nc-book-bookmark"></i> Documentation</a>
-                </li>
-                <li class="nav-item" *ngIf="isHome()">
-                    <a href="https://www.creative-tim.com/product/paper-kit-2-pro-angular?ref=pk2-angular-free-local" target="_blank" class="btn btn-danger btn-round">Upgrade to Pro</a>
-                </li>
-                <li class="nav-item" *ngIf="!isHome()">
-                    <a [routerLink]="['/home']" *ngIf="!isDocumentation()" class="nav-link"><i class="nc-icon nc-layout-11"></i>Components</a>
-                    <a [routerLink]="['/home']" *ngIf="isDocumentation()" class="nav-link">Back to Kit</a>
-                </li>
-                <li class="nav-item" *ngIf="isDocumentation()">
-                    <a href="https://github.com/creativetimofficial/paper-kit-2-angular/issues?ref=pk2-free-local" target="_blank" class="nav-link">Have an issue</a>
-                </li> -->
             </ul>
         </div>
     </div>

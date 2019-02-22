@@ -1,3 +1,5 @@
+import { Category } from './../../domain/plan';
+import { PlanService } from 'app/services/plan.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -9,6 +11,9 @@ import { Router } from '@angular/router';
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
+    categories: Category[];
+
     private toggleButton: any;
     private sidebarVisible: boolean;
 
@@ -16,19 +21,20 @@ export class NavbarComponent implements OnInit {
         public location: Location,
         private element: ElementRef,
         private authService: AuthService,
-        private router: Router) {
+        private router: Router,
+        private planService: PlanService) {
         this.sidebarVisible = false;
     }
 
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
+        this.planService.getCategories()
+            .subscribe(result => this.categories = result.returnValue);
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];
-        // console.log(html);
-        // console.log(toggleButton, 'toggle');
 
         setTimeout(function () {
             toggleButton.classList.add('toggled');
@@ -57,7 +63,7 @@ export class NavbarComponent implements OnInit {
     };
 
     isHome() {
-        return this.location.prepareExternalUrl(this.location.path()) === '#/home';
+        return this.location.path(false).indexOf('home') > 0;
     }
 
     isDocumentation() {

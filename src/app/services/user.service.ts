@@ -12,17 +12,17 @@ import { User } from '../domain/user';
 })
 export class UserService {
 
-  serviceHost = environment.serviceHost;
+  serviceHost = environment.serviceHostUser;
   authHeaderName = environment.authHeaderName;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   public currentUserInfo(): Observable<User | ErrorDetails> {
-    return this.httpClient.get<User>(`${this.serviceHost}users/current`);
+    return this.httpClient.get<User>(`${this.serviceHost}/current`);
   }
 
   public signIn(email: string, password: string): Observable<RequestResult<any>> {
-    return this.httpClient.post(`${this.serviceHost}users/login`,
+    return this.httpClient.post(`${this.serviceHost}/login`,
       `{ "username": "${email}", "password": "${password}" }`, { observe: 'response' })
       .pipe(
         map(resp => {
@@ -42,23 +42,23 @@ export class UserService {
   }
 
   getUsers(): Observable<RequestResult<User[]>> {
-    return this.handleResponce(this.httpClient.get<User[]>(`${this.serviceHost}users/all`));
+    return this.handleResponce(this.httpClient.get<User[]>(`${this.serviceHost}/all`));
   }
 
   public toggleActive(user: User): Observable<RequestResult<any>> {
-    return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/${user.email}/active/${user.active}`, null));
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}/${user.email}/active/${user.active}`, null));
   }
 
   public signUp(user: User): Observable<RequestResult<any>> {
-    return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/bussignup`, user));
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}/bussignup`, user));
   }
 
   public activat(token: string): Observable<RequestResult<any>> {
-    return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/activate`, token));
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}/activate`, token));
   }
 
   public sendContactMail(content: string): Observable<RequestResult<any>> {
-    return this.handleResponce(this.httpClient.post(`${this.serviceHost}users/contactMail`, content));
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}/contactMail`, content));
   }
 
   handleResponce<T>(requestObservble: Observable<T>): Observable<RequestResult<T>> {

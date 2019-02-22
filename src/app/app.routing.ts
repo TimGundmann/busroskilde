@@ -23,7 +23,11 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     LandingModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      scrollOffset: [0, 90]
+    })
   ],
   exports: [
   ],

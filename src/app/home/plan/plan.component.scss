@@ -76,6 +76,7 @@
     >div {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
     }
 }
 
@@ -125,6 +126,11 @@ pdf-viewer {
     label {
         margin-bottom: 0;
         margin-top: 5px;
+    }
+
+    .edit {
+        height: 12px;
+        width: 12px;
     }
     
 }
