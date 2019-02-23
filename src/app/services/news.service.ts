@@ -16,7 +16,7 @@ export class NewsService {
   constructor(private httpClient: HttpClient) { }
 
   get(): Observable<RequestResult<News[]>> {
-    return this.handleResponce(this.httpClient.get<News[]>(`${this.serviceHost}`));
+    return this.handleResponce(this.httpClient.get<News[]>(`${this.serviceHost}/all`));
   }
 
   set(news: News): Observable<RequestResult<any>> {
