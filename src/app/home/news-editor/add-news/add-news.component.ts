@@ -41,7 +41,7 @@ export class AddNewsComponent {
   @Input() set editNews(news: News) {
     this._editNews = news;
     if (this._editNews) {
-      this.headLine.setValue(this._editNews.headline);
+      this.headline.setValue(this._editNews.headline);
       this.editor.setValue(this._editNews.content);
       this.action = 'Rediger';
     } else {
@@ -55,7 +55,7 @@ export class AddNewsComponent {
   editorData: string;
 
   addNewsForm = new FormGroup({
-    headLine: new FormControl('', [Validators.required, Validators.maxLength(200)]),
+    headline: new FormControl('', [Validators.required, Validators.maxLength(200)]),
     editor: new FormControl('')
   });
 
@@ -70,8 +70,8 @@ export class AddNewsComponent {
 
   constructor(private newsService: NewsService, private notificationService: NotificationService) { }
 
-  get headLine() {
-    return <FormControl>this.addNewsForm.get('headLine');
+  get headline() {
+    return <FormControl>this.addNewsForm.get('headline');
   }
 
   get editor() {
@@ -80,10 +80,10 @@ export class AddNewsComponent {
 
   submit() {
     if (this._editNews) {
-      this._editNews.headline = this.headLine.value;
+      this._editNews.headline = this.headline.value;
       this._editNews.content = this.editor.value;
     } else {
-      this._editNews = { id: null, headline: this.headLine.value, content: this.editor.value, timestamp: new Date() };
+      this._editNews = { id: null, headline: this.headline.value, content: this.editor.value, timestamp: new Date() };
     }
     this.newsService.set(this._editNews)
       .subscribe(result => {

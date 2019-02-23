@@ -6,11 +6,11 @@
     <form class="form-rotation" [formGroup]="addNewsForm" (ngSubmit)="submit()">
       <div class="row">
         <div class="col-md-12">
-          <div class="form-group" [class.has-danger]="hasError(headLine)">
+          <div class="form-group" [class.has-danger]="hasError(headline)">
             <label>Overskrift</label>
-            <input type="text" class="form-control" placeholder="Overskrift" name="headLine" formControlName="headLine"
+            <input type="text" class="form-control" placeholder="Overskrift" name="headline" formControlName="headline"
               autofocus maxlength="200">
-            <div *ngIf="hasError(headLine)" class="form-control-feedback">
+            <div *ngIf="hasError(headline)" class="form-control-feedback">
               Overskriften skal indtastes.
             </div>
           </div>
