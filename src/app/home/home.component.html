@@ -3,6 +3,9 @@
         <div class="filter"></div>
         <div class="content-center">
             <div class="container top-container">
+                <div id="news">
+                    <app-news-editor></app-news-editor>
+                </div>
                 <div *ngFor="let category of categories; let odd = odd"
                     [id]="category.name.replace(' ', '').replace('.', '')">
                     <app-plan [category]="category" [odd]="odd"></app-plan>

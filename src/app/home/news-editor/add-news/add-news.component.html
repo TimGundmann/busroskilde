@@ -1,0 +1,31 @@
+<div class="card no-transition" [@openClose]="visisble ? 'open' : 'closed'">
+  <div class="card-header">
+    <h3>{{action}} nyhed</h3>
+  </div>
+  <div class="card-body">
+    <form class="form-rotation" [formGroup]="addNewsForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group" [class.has-danger]="hasError(headLine)">
+            <label>Overskrift</label>
+            <input type="text" class="form-control" placeholder="Overskrift" name="headLine" formControlName="headLine"
+              autofocus maxlength="200">
+            <div *ngIf="hasError(headLine)" class="form-control-feedback">
+              Overskriften skal indtastes.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Nyhed</label>
+          <angular-editor formControlName="editor" [config]="editorConfig"></angular-editor>
+        </div>
+      </div>
+      <br />
+      <button type="submit" [disabled]="!addNewsForm.valid" class="btn btn-success btn-lg btn-fill">{{action}}</button>
+      <button type="button" class="btn btn-neutral btn-lg btn-fill btn-outline-neutral"
+        (click)="toggleAdd()">Annuller</button>
+    </form>
+  </div>
+</div>

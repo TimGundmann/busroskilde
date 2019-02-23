@@ -1,0 +1,123 @@
+.bottom-margin {
+    margin-bottom: 40px;
+}
+
+.heading {
+    height: 100%;
+    border-radius: 12px;
+    position: relative;
+    min-height: 190px;
+    width: 60px;
+    span {
+        transform: rotate(-90deg);
+        padding: 0;
+        position: absolute;
+        top: 28px;
+        width: 130px;
+        height: 88px;
+        text-align: end;
+        margin: 0;    
+    }
+    a {
+        margin: 8px !important;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #ffffff;
+        border-radius: 12px;
+        padding: 10px 12px !important;
+    }
+    i {
+        right: 0;
+    }
+    div {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.news-heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    .text-headline {
+        font-size: .9em;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 1.5em;
+        width: 170px;
+        text-align: center;
+    }
+    >div {
+        display: flex;
+        flex-direction: row;    
+        flex-wrap: wrap;
+        div {
+            width: 260px;
+            text-align: start;
+        }
+    }
+    a {
+        margin: 2px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #000000;
+        border-radius: 8px;
+        padding: 8px 8px 4px!important;    
+    }
+}
+
+.edit {
+    height: 16px;
+    width: 16px;
+    vertical-align: initial;   
+}
+
+.content {
+    display: block !important;
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+    .heading {
+        height: auto;
+        border-radius: 12px;
+        min-height: 0; 
+        width: 100%;
+        height: 63px;
+        margin-bottom: 5px;
+        span {
+            transform: rotate(0deg);
+            margin-left: 10px;
+            padding: 0;
+            position: unset;
+            top: 60px;
+            width: auto;
+            height: auto;
+        }
+        div {
+            right: 16px;
+        }
+    }
+
+    .news-heading {
+        .text-headline {
+            min-width: auto;
+            min-width: 66px;
+        }
+        >div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            div {
+                width: auto;
+                text-align: center;
+            }
+        }
+    }
+
+    label {
+        margin-bottom: 0;
+        margin-top: 5px;
+    }
+    
+}

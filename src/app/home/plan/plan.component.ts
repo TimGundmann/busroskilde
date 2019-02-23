@@ -17,11 +17,10 @@ export class PlanComponent implements OnInit {
 
   private pdfToggels: Map<Plan, boolean> = new Map();
 
-  addVisible = false;
-
   plans: Plan[] = [];
 
   editPlan: Plan;
+  addVisible = false;
 
   constructor(
     private authService: AuthService,

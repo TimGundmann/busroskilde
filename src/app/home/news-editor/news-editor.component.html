@@ -1,0 +1,41 @@
+<div class="container text-center bottom-margin">
+    <div class="row">
+        <div class="col-md-1 mr-auto ml-auto">
+            <nav class="navbar bg-info heading">
+                <span class="navbar-brand">Nyhedder</span>
+                <div *ngIf="canAlter()">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a style="cursor: pointer;" class="nav-link" (click)="toggleAdd()" title="Tilføj turnus">
+                                <i class="nc-icon nc-simple-add" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-11 mr-auto ml-auto">
+            <app-add-news [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [editNews]="editNews">
+            </app-add-news>
+            <div *ngFor="let new of news">
+                <div class="card no-transition" style="margin-bottom: 2px">
+                    <div class="card-heading"><h6 style="margin-bottom: 0">{{new.headline}}</h6></div>
+                    <div class="card-body">
+                        <div class="news-heading">
+                            <div class="content" [innerHTML]="new.content | safeHtml"></div>
+                            
+                            <div>
+                                <a *ngIf="canAlter()" style="cursor: pointer;" (click)="edit(new)" title="Rediger">
+                                    <img class="edit" src="assets/img/edit.svg">
+                                </a>
+                                <a *ngIf="canAlter()" style="cursor: pointer;" (click)="delete(new)" title="Slet">
+                                    <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
