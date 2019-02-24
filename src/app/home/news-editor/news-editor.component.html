@@ -19,7 +19,10 @@
             </app-add-news>
             <div *ngFor="let new of news">
                 <div class="card no-transition" style="margin-bottom: 2px">
-                    <div class="card-heading"><h6 style="margin-bottom: 0">{{new.headline}}</h6></div>
+                    <div class="card-heading">
+                        <h6 style="margin-bottom: 0">{{new.headline}}</h6>
+                        <small>{{new.timestamp | date}}</small>
+                    </div>
                     <div class="card-body">
                         <div class="news-heading">
                             <div class="content" [innerHTML]="new.content | safeHtml"></div>
