@@ -1,9 +1,12 @@
+import { map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { PlanService } from '../../services/plan.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { NotificationService } from 'app/services';
 import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-plan',
@@ -12,38 +15,29 @@ import saveAs from 'file-saver';
 })
 export class PlanComponent implements OnInit {
 
-  @Input() category: Category;
+  category: Category;
+
   @Input() odd: boolean;
 
   private pdfToggels: Map<Plan, boolean> = new Map();
 
   plans: Plan[] = [];
-
   editPlan: Plan;
   addVisible = false;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private planService: PlanService,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService) {
+    this.activatedRoute.data
+      .subscribe(data => {
+        this.category = data.category;
+        this.refreshPlans();
+      });
+  }
 
   ngOnInit() {
-    this.planService.getActivePlansByCategory(this.category)
-      .subscribe(result => {
-        this.plans = result.returnValue;
-        this.plans.sort((p1, p2) => {
-          if (p1.subCategory && p1.subCategory) {
-            if (p1.subCategory.name > p2.subCategory.name) {
-              return 1;
-            }
-            if (p1.subCategory.name < p2.subCategory.name) {
-              return -1;
-            }
-          }
-          return 0;
-        });
-        this.plans.forEach(r => this.pdfToggels.set(r, false));
-      });
   }
 
   updateFrom(plan: Plan, value: Date) {
@@ -67,13 +61,16 @@ export class PlanComponent implements OnInit {
   }
 
   isFirst(index: number): boolean {
-    const currentSub = this.plans[index].subCategory;
-    const firstIndex = this.plans.findIndex(p => p.subCategory.name === currentSub.name);
-    return firstIndex === index;
+    if (this.plans && this.plans.length > 0) {
+      const currentSub = this.plans[index].subCategory;
+      const firstIndex = this.plans.findIndex(p => p.subCategory.name === currentSub.name);
+      return firstIndex === index;
+    }
+    return false;
   }
 
   canAlter(): boolean {
-    return this.authService.hasRoles(this.category.alterRoles);
+    return this.category && this.authService.hasRoles(this.category.alterRoles);
   }
 
   toggleAdd() {
@@ -109,7 +106,7 @@ export class PlanComponent implements OnInit {
     if (confirm('Er du sikker på at du vil slette ' + plan.headline + ' ?')) {
       this.planService.delete(plan).subscribe(r => {
         if (r.okResult) {
-          this.ngOnInit();
+          this.refreshPlans();
         } else {
           this.notifications.error('Fejl ved sletning af plan!');
         }
@@ -120,8 +117,27 @@ export class PlanComponent implements OnInit {
   addChangeVisisblity() {
     this.addVisible = !this.addVisible;
     if (!this.addVisible) {
-      this.ngOnInit();
+      this.refreshPlans();
     }
+  }
+
+  private refreshPlans() {
+    this.planService.getActivePlansByCategory(this.category)
+      .subscribe(result => {
+        this.plans = result.returnValue;
+        this.plans.sort((p1, p2) => {
+          if (p1.subCategory && p1.subCategory) {
+            if (p1.subCategory.name > p2.subCategory.name) {
+              return 1;
+            }
+            if (p1.subCategory.name < p2.subCategory.name) {
+              return -1;
+            }
+          }
+          return 0;
+        });
+        this.plans.forEach(r => this.pdfToggels.set(r, false));
+      });
   }
 
 }

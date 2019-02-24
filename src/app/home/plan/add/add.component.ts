@@ -72,10 +72,12 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subCategory.setValue(this.category.subCategories[0]);
-    if (this.dateEnabled()) {
-      this.addForm.get('from').setValidators([Validators.required]);
-      this.addForm.get('to').setValidators([Validators.required]);
+    if (this.category) {
+      this.subCategory.setValue(this.category.subCategories[0]);
+      if (this.dateEnabled()) {
+        this.addForm.get('from').setValidators([Validators.required]);
+        this.addForm.get('to').setValidators([Validators.required]);
+      }
     }
   }
 

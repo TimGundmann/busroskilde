@@ -19,6 +19,10 @@ export class PlanService {
     return this.handleResponce(this.httpClient.get<Plan[]>(`${this.serviceHost}/${category.name}/active`));
   }
 
+  getCategory(name: string): Observable<RequestResult<Category>> {
+    return this.handleResponce(this.httpClient.get<Category>(`${this.serviceHost}/categories/${name}`));
+  }
+
   getCategories(): Observable<RequestResult<Category[]>> {
     return this.handleResponce(this.httpClient.get<Category[]>(`${this.serviceHost}/categories`));
   }
