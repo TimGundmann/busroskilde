@@ -16,6 +16,7 @@ export class NotificationComponent implements OnInit {
     ngOnInit() {
         this.notifications.getAlert().subscribe(alert => {
             if (alert) {
+                this.alerts = [];
                 this.alerts.push(alert);
             } else {
                 this.alerts = [];
