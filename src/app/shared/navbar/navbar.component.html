@@ -43,6 +43,12 @@
                         <p class="d-lg-none">Hjem</p>
                     </a>
                 </li>
+                <li class="nav-item" *ngIf="isAuthenticated()">
+                    <a class="nav-link" rel="tooltip" title="Profile" data-placement="bottom" routerLink="/profile">
+                        <i class="nc-icon nc-single-02"></i>
+                        <p class="d-lg-none">Profile</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

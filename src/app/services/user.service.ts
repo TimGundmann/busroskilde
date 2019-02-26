@@ -17,8 +17,12 @@ export class UserService {
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
-  public currentUserInfo(): Observable<User | ErrorDetails> {
-    return this.httpClient.get<User>(`${this.serviceHost}/current`);
+  public currentUserInfo(): Observable<RequestResult<User>> {
+    return this.handleResponce(this.httpClient.get<User>(`${this.serviceHost}/current`));
+  }
+
+  public delete(user: User): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/delete`, user));
   }
 
   public signIn(email: string, password: string): Observable<RequestResult<any>> {
@@ -55,6 +59,10 @@ export class UserService {
 
   public activat(token: string): Observable<RequestResult<any>> {
     return this.handleResponce(this.httpClient.post(`${this.serviceHost}/activate`, token));
+  }
+
+  public update(user: User): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post(`${this.serviceHost}/update`, user));
   }
 
   public sendContactMail(content: string): Observable<RequestResult<any>> {

@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h2>Tilpas billedet</h2>
+</div>
+<image-cropper 
+  [imageChangedEvent]="imageChangedEvent" 
+  (imageCropped)="imageCropped($event)"
+  [maintainAspectRatio]="true" 
+  [aspectRatio]="4 / 4" 
+  [resizeToWidth]="125" 
+  format="png">
+</image-cropper>
+<div class="modal-footer crop">
+  <button type="button" class="btn btn-success btn-lg btn-fill" (click)="save()">Ok</button>
+  <button type="button" class="btn btn-neutral btn-lg btn-fill btn-outline-neutral" (click)="cancel()">Annuller</button>
+</div>

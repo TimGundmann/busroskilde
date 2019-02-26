@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './profile/profile.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -20,6 +19,7 @@ import { HomeModule } from './home/home.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeDa from '@angular/common/locales/da';
+import { SvgDefsComponent } from './shared/svg-defs/svg-defs.component';
 
 registerLocaleData(localeDa, 'da');
 
@@ -32,10 +32,10 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent,
     NavbarComponent,
     FooterComponent,
     NotificationComponent,
+    SvgDefsComponent,
   ],
   imports: [
     NgxSpinnerModule,

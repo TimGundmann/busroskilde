@@ -22,10 +22,13 @@ export class RequestResult<T> {
         return this.errorDetails === null;
     }
 
+    get errorResult(): boolean {
+        return this.errorDetails !== null;
+    }
+
     get returnValue(): T {
         return this._result;
     }
 
-
-
 }
+

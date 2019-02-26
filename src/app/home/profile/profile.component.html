@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <div class="section profile-content">
+        <div class="container">
+            <div class="owner">
+                <div class="avatar">
+                    <a (click)="fileInput.click()">
+                        <input type="file" style="display: none;" accept="image/*" #fileInput
+                            (change)="setPicture($event)" />
+                        <img *ngIf="user.picture" [src]="user.picture" class="img-circle img-no-padding img-responsive">
+                        <div class="img-circle img-no-padding img-responsive camara" *ngIf="!user.picture">
+                            <app-svg name="camara"></app-svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="name profile">
+                    <h4 class="title">{{user.name}}<br /></h4>
+                    <label class="box">Chaufførnummer</label>
+                    <h6 class="description">{{user.number}}</h6>
+                    <label class="box">Email</label>
+                    <h6 class="description">{{user.email}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="center">
+                <button type="button" class="btn btn-success btn-lg btn-fill" (click)="confirmDelete()">Slet mig</button>
+            </div>
+        </div>
+    </div>
+</div>

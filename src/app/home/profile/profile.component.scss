@@ -1,0 +1,77 @@
+.profile {
+
+    margin-bottom: 50px;
+    .title {
+        color: #333 !important;
+    }
+
+    .description {
+        color: #9a9a9a;
+        display: inline;
+    }
+
+    label {
+        margin: 0;
+    }
+    .edit {
+        display: none;
+        cursor: pointer;
+    }
+    .description:hover + .edit {
+        display: inline;
+    }
+    .editclick {
+        position: relative;
+    }
+    .box {
+        display: block;
+    }
+
+}
+
+.avatar {
+    img, i {
+        margin-top: -65px;
+        font-size: 50px;
+    }
+
+    .camara {
+        background-color: #9A9A9A;
+        width: 90px;
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .camara svg {
+        width: 60px;
+        height: 60px;
+        padding-bottom: 5px;
+    }
+
+    .camara svg path {
+        color: white !important;
+    }
+
+}
+
+.bottom {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    cursor: pointer;
+}
+
+.profile-content {
+    border-radius: 12px;
+}
+
