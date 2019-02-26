@@ -46,17 +46,19 @@ export class NewsEditorComponent implements OnInit {
   }
 
   delete(news: News) {
-    this.spinner.show();
-    this.newsService.delete(news)
-      .subscribe(result => {
-        if (result.okResult) {
-          this.notificationService.info('Nyheden er slettet!');
-          this.ngOnInit();
-        } else {
-          this.notificationService.error('Fejl ved sletning af nyheden!');
-        }
-        this.spinner.hide();
-      });
+    if (confirm('Er du sikker på at du vil slette ' + news.headline + ' ?')) {
+      this.spinner.show();
+      this.newsService.delete(news)
+        .subscribe(result => {
+          if (result.okResult) {
+            this.notificationService.info('Nyheden er slettet!');
+            this.ngOnInit();
+          } else {
+            this.notificationService.error('Fejl ved sletning af nyheden!');
+          }
+          this.spinner.hide();
+        });
+    }
   }
 
   edit(news: News) {

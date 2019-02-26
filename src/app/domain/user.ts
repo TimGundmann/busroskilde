@@ -6,5 +6,6 @@ export interface User {
     password?: string;
     active?: boolean;
     picture?: string;
+    roles?: string[];
 
 }
