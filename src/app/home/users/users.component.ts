@@ -55,7 +55,7 @@ export class UsersComponent implements OnInit {
     if (user.picture) {
       return user.picture;
     }
-    return '/assets/img/emptyphoto.jpg';
+    return './assets/img/emptyphoto.jpg';
   }
 
   changeRole(user: User, event: any) {
