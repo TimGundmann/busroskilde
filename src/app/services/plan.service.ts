@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Plan, Category } from 'app/domain/plan';
 import { RequestResult } from 'app/domain/error-details';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +48,7 @@ export class PlanService {
   handleResponce<T>(requestObservble: Observable<T>): Observable<RequestResult<T>> {
     return requestObservble
       .pipe(
+        retry(2),
         map(resp => RequestResult.okResultWith(resp)),
         catchError(error => {
           console.log(error);

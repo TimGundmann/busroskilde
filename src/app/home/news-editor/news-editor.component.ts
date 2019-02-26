@@ -23,8 +23,17 @@ export class NewsEditorComponent implements OnInit {
     private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.newsService.get()
-      .subscribe(result => this.news = result.returnValue);
+      .subscribe(result => {
+        if (result.okResult) {
+          this.news = result.returnValue;
+        } else {
+          this.notificationService.error('Fejl ved hentning af nyheder, prøv at genopfriske siden!');
+        }
+        this.spinner.hide();
+        this.addEmptyNewsIfNonExists();
+      });
   }
 
   canAlter(): boolean {
@@ -64,6 +73,12 @@ export class NewsEditorComponent implements OnInit {
   edit(news: News) {
     this.toggleAdd();
     this.editNews = news;
+  }
+
+  private addEmptyNewsIfNonExists() {
+    if (!this.news || this.news.length === 0) {
+      this.news = [ { headline: 'Ingen nyheder', content: '' }];
+    }
   }
 
 }

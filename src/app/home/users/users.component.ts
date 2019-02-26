@@ -59,7 +59,11 @@ export class UsersComponent implements OnInit {
   }
 
   changeRole(user: User, event: any) {
-    user.roles = [this.options[event.target.selectedIndex].role];
+    if (event.target.selectedIndex > 0) {
+      user.roles = [this.options[event.target.selectedIndex].role];
+    } else {
+      user.roles = [];
+    }
     this.userService.update(user)
       .subscribe(result => {
         if (result.errorResult) {

@@ -1,8 +1,8 @@
 export interface News {
 
-    id: string;
+    id?: string;
     headline: string;
-    content: string;
-    timestamp: Date;
+    content?: string;
+    timestamp?: Date;
 
 }

@@ -4,6 +4,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import { NotificationService } from 'app/services';
 
 @Component({
     selector: 'app-navbar',
@@ -22,7 +23,8 @@ export class NavbarComponent implements OnInit {
         private element: ElementRef,
         private authService: AuthService,
         private router: Router,
-        private planService: PlanService) {
+        private planService: PlanService,
+        private notifcations: NotificationService) {
         this.sidebarVisible = false;
     }
 
@@ -30,7 +32,13 @@ export class NavbarComponent implements OnInit {
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
         this.planService.getCategories()
-            .subscribe(result => this.categories = result.returnValue);
+            .subscribe(result => {
+                if (result.okResult) {
+                    this.categories = result.returnValue;
+                } else {
+                    this.notifcations.error('Fejl ved hentning af menuen, prøv at genopfriske siden!');
+                }
+            });
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
@@ -46,15 +54,12 @@ export class NavbarComponent implements OnInit {
 
     sidebarClose() {
         const html = document.getElementsByTagName('html')[0];
-        // console.log(html);
         this.toggleButton.classList.remove('toggled');
         this.sidebarVisible = false;
         html.classList.remove('nav-open');
     };
 
     sidebarToggle() {
-        // const toggleButton = this.toggleButton;
-        // const body = document.getElementsByTagName('body')[0];
         if (this.sidebarVisible === false) {
             this.sidebarOpen();
         } else {
