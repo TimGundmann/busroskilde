@@ -6,10 +6,7 @@
                     <a (click)="fileInput.click()">
                         <input type="file" style="display: none;" accept="image/*" #fileInput
                             (change)="setPicture($event)" />
-                        <img *ngIf="user.picture" [src]="user.picture" class="img-circle img-no-padding img-responsive">
-                        <div class="img-circle img-no-padding img-responsive camara" *ngIf="!user.picture">
-                            <app-svg name="camara"></app-svg>
-                        </div>
+                        <img [src]="getPicture()" class="img-circle img-no-padding img-responsive">
                     </a>
                 </div>
                 <div class="name profile">

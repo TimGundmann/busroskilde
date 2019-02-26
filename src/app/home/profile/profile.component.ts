@@ -59,6 +59,13 @@ export class ProfileComponent implements OnInit {
         modalRef.componentInstance.user = this.user;
     }
 
+    getPicture(): string {
+        if (this.user.picture) {
+            return this.user.picture;
+        }
+        return '/assets/img/emptyphoto.jpg';
+    }
+
 }
 
 @Component({

@@ -26,4 +26,11 @@ export class UsersComponent implements OnInit {
     return this.authService.isAdmin();
   }
 
+  getPicture(user: User): string {
+    if (user.picture) {
+      return user.picture;
+    }
+    return '/assets/img/emptyphoto.jpg';
+  }
+
 }

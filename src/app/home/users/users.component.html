@@ -10,8 +10,11 @@
         <div class="card no-transition" style="margin-bottom: 2px">
           <div class="card-body">
             <div class="user-heading">
-              <span class="text-headline">{{user.name}}</span>
               <div>
+                <img [src]="getPicture(user)">
+                <span class="text-headline">{{user.name}}</span>
+              </div>
+              <div class="user-info">
                 <div>
                   <span class="text-info">Chaufførnummer: </span>
                   <span>{{user.number}}</span>
@@ -20,9 +23,11 @@
                   <span class="text-info">Email: </span>
                   <span>{{user.email}}</span>
                 </div>
+                <div>
+                  <bSwitch [switch-disabled]="!isAdmin()" [(ngModel)]="user.active" switch-on-text="Til"
+                    switch-off-text="Fra" (changeState)="changeState(user)"></bSwitch>
+                </div>
               </div>
-              <bSwitch [switch-disabled]="!isAdmin()" [(ngModel)]="user.active" switch-on-text="Til"
-                switch-off-text="Fra" (changeState)="changeState(user)"></bSwitch>
             </div>
           </div>
         </div>
