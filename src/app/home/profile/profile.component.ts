@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
         if (this.user.picture) {
             return this.user.picture;
         }
-        return '/assets/img/emptyphoto.jpg';
+        return './assets/img/emptyphoto.jpg';
     }
 
 }
