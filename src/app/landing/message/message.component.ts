@@ -19,7 +19,10 @@ export class MessageComponent {
     content: new FormControl('', [Validators.required]),
   });
 
-  constructor(private userService: UserService, private notifications: NotificationService, private spinner: NgxSpinnerService) { }
+  constructor(
+    private userService: UserService,
+    private notifications: NotificationService,
+    private spinner: NgxSpinnerService) { }
 
   get name(): any {
     return this.mailForm.get('name');

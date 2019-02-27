@@ -1,16 +1,41 @@
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileComponent } from './profile.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { tokenGetter } from 'app/app.module';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
   let fixture: ComponentFixture<ProfileComponent>;
 
+  class MockHttpClient {
+    get() {
+      return of();
+    }
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent ]
+      declarations: [
+        ProfileComponent
+      ],
+      providers: [
+        { provide: HttpClient, useClass: MockHttpClient },
+      ],
+      imports: [
+        RouterTestingModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['gundmann.dk'],
+          }
+        }),
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

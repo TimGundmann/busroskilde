@@ -27,7 +27,10 @@ export class SignupComponent {
         password2: new FormControl('', [Validators.required]),
     });
 
-    constructor(private userService: UserService, private notifications: NotificationService, private spinner: NgxSpinnerService) { }
+    constructor(
+        private userService: UserService,
+        private notifications: NotificationService,
+        private spinner: NgxSpinnerService) { }
 
     get number(): any {
         return this.signUpForm.get('number');

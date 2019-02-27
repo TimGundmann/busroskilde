@@ -2,6 +2,7 @@ import { AuthService } from './services/auth.service';
 import { TestBed } from '@angular/core/testing';
 
 import { AddAuthHeaderInterceptor } from './add-auth-header.interceptor';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AddAuthHeaderService', () => {
 
@@ -10,10 +11,13 @@ describe('AddAuthHeaderService', () => {
       return true;
     }
   }
-  
+
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [ 
-      { provide: AuthService, useClass: AuthServiceMock } 
+    imports: [
+      RouterTestingModule
+    ],
+    providers: [
+      { provide: AuthService, useClass: AuthServiceMock }
     ],
   }));
 

@@ -1,8 +1,8 @@
 import { Category } from './../../domain/plan';
 import { PlanService } from 'app/services/plan.service';
 import { AuthService } from './../../services/auth.service';
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { NotificationService } from 'app/services';
 
@@ -13,24 +13,21 @@ import { NotificationService } from 'app/services';
 })
 export class NavbarComponent implements OnInit {
 
+    @ViewChild('navbarToggler') toggleButton: ElementRef;
+
     categories: Category[];
 
-    private toggleButton: any;
-    private sidebarVisible: boolean;
+    private sidebarVisible = false;
 
     constructor(
         public location: Location,
-        private element: ElementRef,
-        private authService: AuthService,
         private router: Router,
+        private authService: AuthService,
         private planService: PlanService,
         private notifcations: NotificationService) {
-        this.sidebarVisible = false;
     }
 
     ngOnInit() {
-        const navbar: HTMLElement = this.element.nativeElement;
-        this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
         this.planService.getCategories()
             .subscribe(result => {
                 if (result.okResult) {
@@ -40,12 +37,12 @@ export class NavbarComponent implements OnInit {
                 }
             });
     }
+
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];
-
         setTimeout(function () {
-            toggleButton.classList.add('toggled');
+            toggleButton.nativeElement.classList.add('toggled');
         }, 500);
         html.classList.add('nav-open');
 
@@ -54,7 +51,7 @@ export class NavbarComponent implements OnInit {
 
     sidebarClose() {
         const html = document.getElementsByTagName('html')[0];
-        this.toggleButton.classList.remove('toggled');
+        this.toggleButton.nativeElement.classList.remove('toggled');
         this.sidebarVisible = false;
         html.classList.remove('nav-open');
     };
@@ -69,15 +66,6 @@ export class NavbarComponent implements OnInit {
 
     isHome() {
         return this.location.path(false).indexOf('home') > 0;
-    }
-
-    isDocumentation() {
-        const titlee = this.location.prepareExternalUrl(this.location.path());
-        if (titlee === '/documentation') {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     getSignInTitle(): string {

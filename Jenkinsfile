@@ -11,6 +11,16 @@ pipeline {
                sh 'npm install'
             }                
         }
+        
+        stage('Test') {
+            steps{
+                wrap([$class: 'Xvfb', displayName: 1]) {
+                    sh "ps -aux | grep Xvfb"
+                    sh "export DISPLAY=:1"
+                    sh "ng test --watch false"
+                }
+            }                
+        }
 
         stage('Build') {
             steps{   

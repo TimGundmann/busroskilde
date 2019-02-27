@@ -1,13 +1,47 @@
+import { HttpClient } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { SvgDefsComponent } from './shared/svg-defs/svg-defs.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NotificationComponent } from './shared/notification/notification.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { tokenGetter } from './app.module';
+import { of } from 'rxjs';
 
 describe('AppComponent', () => {
+
+  class MockHttpClient {
+    get() {
+      return of();
+    }
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        NavbarComponent,
+        FooterComponent,
+        SvgDefsComponent,
+        NotificationComponent
       ],
+      imports: [
+        NgxSpinnerModule,
+        RouterTestingModule,
+        NgbModule.forRoot(),
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['gundmann.dk'],
+          }
+        }),
+      ],
+      providers: [{ provide: HttpClient, useClass: MockHttpClient }]
     }).compileComponents();
   }));
 
@@ -17,16 +51,4 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!!');
-  }));
 });
