@@ -7,6 +7,7 @@ import { NotificationService } from 'app/services';
 import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
 import { Observable, of } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-plan',
@@ -29,6 +30,7 @@ export class PlanComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private planService: PlanService,
+    private spinner: NgxSpinnerService,
     private notifications: NotificationService) {
     this.activatedRoute.data
       .subscribe(data => {
@@ -122,6 +124,7 @@ export class PlanComponent implements OnInit {
   }
 
   private refreshPlans() {
+    this.spinner.show();
     this.planService.getActivePlansByCategory(this.category)
       .subscribe(result => {
         this.plans = result.returnValue;
@@ -137,6 +140,7 @@ export class PlanComponent implements OnInit {
           return 0;
         });
         this.plans.forEach(r => this.pdfToggels.set(r, false));
+        this.spinner.hide();
       });
   }
 
