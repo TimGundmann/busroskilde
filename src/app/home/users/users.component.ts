@@ -76,10 +76,10 @@ export class UsersComponent implements OnInit {
     if (!user.roles) {
       return 0;
     }
-    if (user.roles.indexOf('SUPER') > -1) {
+    if (user.roles.indexOf(this.options[1].role) > -1) {
       return 1
     }
-    if (user.roles.indexOf('ADMIN') > -1) {
+    if (user.roles.indexOf(this.options[2].role) > -1) {
       return 2
     }
     return 0;
