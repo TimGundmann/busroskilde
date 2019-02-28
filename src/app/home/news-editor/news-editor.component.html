@@ -18,7 +18,7 @@
             <app-add-news [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [editNews]="editNews">
             </app-add-news>
             <div *ngFor="let new of news">
-                <div class="card no-transition" style="margin-bottom: 2px">
+                <div class="card no-transition" style="margin-bottom: 2px; opacity: 0.95;">
                     <div class="card-heading">
                         <h6 style="margin-bottom: 0; margin-top: 10px;">{{new.headline}}</h6>
                         <small>{{new.timestamp | date}}</small>

@@ -17,14 +17,14 @@
         <div class="col-md-11 mr-auto ml-auto">
             <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [category]="category" [editPlan]="editPlan"></app-add>
             <div *ngFor="let plan of plans; let index = index">
-                <div class="card no-transition" style="margin-bottom: 1px" *ngIf="plan.subCategory && isFirst(index)">
+                <div class="card no-transition" style="margin-bottom: 1px; opacity: 0.95;" *ngIf="plan.subCategory && isFirst(index)">
                     <div class="card-header">
                         <h6 style="margin-bottom: 0">
                             {{plan.subCategory.name}}
                         </h6>
                     </div>
                 </div>
-                <div class="card no-transition" style="margin-bottom: 2px">
+                <div class="card no-transition" style="margin-bottom: 2px; opacity: 0.95;">
                     <div class="card-body">
                         <div class="plan-heading">
                             <span class="text-headline">{{plan.headline}}</span>
