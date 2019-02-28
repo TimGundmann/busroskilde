@@ -43,7 +43,7 @@ describe('LandingComponent', () => {
         { provide: HttpClient, useClass: MockHttpClient },
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -55,4 +55,5 @@ describe('LandingComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
 });

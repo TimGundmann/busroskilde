@@ -1,6 +1,7 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationService } from 'app/services';
 
 @Component({
   selector: 'app-activate',
@@ -9,18 +10,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ActivateComponent implements OnInit {
 
-  message = 'Brugeren er aktiveret!';
-
-  constructor(private userService: UserService, private route: ActivatedRoute) { }
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.params
       .subscribe(params => {
         this.userService.activat(params['token'])
           .subscribe(r => {
-            if (!r.okResult) {
-              this.message = 'Fejl ved aktivering af brugeren!';
+            if (r.okResult) {
+              this.notifications.success('Brugeren er aktiveret!', true);
+            } else {
+              this.notifications.error('Fejl ved aktivering af brugeren!', true);
             }
+            this.router.navigate(['home', 'users']);
           });
    });
   }

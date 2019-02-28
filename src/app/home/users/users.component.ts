@@ -76,7 +76,7 @@ export class UsersComponent implements OnInit {
     if (!user.roles) {
       return 0;
     }
-    if (user.roles.indexOf('SUBER') > -1) {
+    if (user.roles.indexOf('SUPER') > -1) {
       return 1
     }
     if (user.roles.indexOf('ADMIN') > -1) {
