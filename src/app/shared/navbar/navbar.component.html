@@ -12,7 +12,7 @@
         </div>
         <div class="navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ml-auto nav-content">
-                <ng-container *ngIf="isHome()">
+                <ng-container *ngIf="isAuthenticated() && isHome()">
                     <li class="nav-item">
                         <a [routerLink]="['./home/news']" class="nav-link no-padding">Nyheder</a>
                     </li>
@@ -37,7 +37,7 @@
                         <p class="d-lg-none">{{getSignInTitle()}}</p>
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="isAuthenticated() &&! isHome()">
+                <li class="nav-item" *ngIf="isAuthenticated() && !isHome()">
                     <a class="nav-link" rel="tooltip" title="Hjem" data-placement="bottom" routerLink="/home">
                         <i class="nc-icon nc-bus-front-12"></i>
                         <p class="d-lg-none">Hjem</p>
