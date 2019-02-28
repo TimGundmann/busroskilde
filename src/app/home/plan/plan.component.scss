@@ -78,6 +78,9 @@
         flex-direction: row;
         flex-wrap: wrap;
     }
+    label {
+        min-width: 100px;
+    }
 }
 
 pdf-viewer {
