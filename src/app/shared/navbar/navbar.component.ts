@@ -3,7 +3,7 @@ import { PlanService } from 'app/services/plan.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { NotificationService } from 'app/services';
 
 @Component({
@@ -25,17 +25,26 @@ export class NavbarComponent implements OnInit {
         private authService: AuthService,
         private planService: PlanService,
         private notifcations: NotificationService) {
+        router.events.subscribe(event => {
+
+            if (event instanceof NavigationEnd) {
+                this.ngOnInit();
+            }
+
+        });
     }
 
     ngOnInit() {
-        this.planService.getCategories()
-            .subscribe(result => {
-                if (result.okResult) {
-                    this.categories = result.returnValue;
-                } else {
-                    this.notifcations.error('Fejl ved hentning af menuen, prøv at genopfriske siden!');
-                }
-            });
+        if (this.isAuthenticated() && this.isHome()) {
+            this.planService.getCategories()
+                .subscribe(result => {
+                    if (result.okResult) {
+                        this.categories = result.returnValue;
+                    } else {
+                        this.notifcations.error('Fejl ved hentning af menuen, prøv at genopfriske siden!');
+                    }
+                });
+        }
     }
 
     sidebarOpen() {
