@@ -1,3 +1,4 @@
+import { SvgComponent } from 'app/shared/svg/svg.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient } from '@angular/common/http';
@@ -27,7 +28,8 @@ describe('PlanComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         PlanComponent,
-        AddComponent
+        AddComponent,
+        SvgComponent
       ],
       providers: [
         JwtHelperService,

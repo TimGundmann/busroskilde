@@ -30,13 +30,6 @@
                         <p class="d-lg-none">Facebook</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="cursor: pointer;" rel="tooltip" [title]="getSignInTitle()"
-                        data-placement="bottom" (click)="signInOrOut()">
-                        <i class="nc-icon nc-key-25"></i>
-                        <p class="d-lg-none">{{getSignInTitle()}}</p>
-                    </a>
-                </li>
                 <li class="nav-item" *ngIf="isAuthenticated() && !isHome()">
                     <a class="nav-link" rel="tooltip" title="Hjem" data-placement="bottom" routerLink="/home">
                         <i class="nc-icon nc-bus-front-12"></i>
@@ -49,7 +42,14 @@
                         <p class="d-lg-none">Profile</p>
                     </a>
                 </li>
-            </ul>
+                <li class="nav-item">
+                        <a class="nav-link" style="cursor: pointer;" rel="tooltip" [title]="getSignInTitle()"
+                            data-placement="bottom" (click)="signInOrOut()">
+                            <i class="nc-icon nc-key-25"></i>
+                            <p class="d-lg-none">{{getSignInTitle()}}</p>
+                        </a>
+                    </li>
+                </ul>
         </div>
     </div>
     <app-notification></app-notification>

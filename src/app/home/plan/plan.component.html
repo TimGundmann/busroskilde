@@ -15,9 +15,11 @@
             </nav>
         </div>
         <div class="col-md-11 mr-auto ml-auto">
-            <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [category]="category" [editPlan]="editPlan"></app-add>
+            <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [category]="category"
+                [editPlan]="editPlan"></app-add>
             <div *ngFor="let plan of plans; let index = index">
-                <div class="card no-transition" style="margin-bottom: 1px; opacity: 0.95;" *ngIf="plan.subCategory && isFirst(index)">
+                <div class="card no-transition" style="margin-bottom: 1px; opacity: 0.95;"
+                    *ngIf="plan.subCategory && isFirst(index)">
                     <div class="card-header">
                         <h6 style="margin-bottom: 0">
                             {{plan.subCategory.name}}
@@ -45,17 +47,16 @@
                             </div>
                             <div>
                                 <a *ngIf="canAlter()" style="cursor: pointer;" (click)="edit(plan)" title="Rediger">
-                                    <img class="edit" src="assets/img/edit.svg">
+                                    <app-svg name="edit" width="16" height="16"></app-svg>
                                 </a>
-                                <a *ngIf="canAlter()" style="cursor: pointer;" (click)="delete(plan)"
-                                    title="Slet">
+                                <a *ngIf="canAlter()" style="cursor: pointer;" (click)="delete(plan)" title="Slet">
                                     <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
                                 </a>
                                 <a style="cursor: pointer;" (click)="dowload(plan)" title="Hent filen">
                                     <i class="nc-icon nc-cloud-download-93" aria-hidden="true"></i>
                                 </a>
                                 <a style="cursor: pointer;" (click)="togglePdf(plan)" title="Vis filen">
-                                    <i *ngIf="!showPdf(plan)" class="nc-icon nc-glasses-2" aria-hidden="true"></i>
+                                    <app-svg *ngIf="!showPdf(plan)" name="eye" width="16" height="16"></app-svg>
                                     <i *ngIf="showPdf(plan)" class="nc-icon nc-simple-remove" aria-hidden="true"></i>
                                 </a>
                             </div>

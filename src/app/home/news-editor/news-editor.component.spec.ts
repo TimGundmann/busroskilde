@@ -12,6 +12,7 @@ import { of } from 'rxjs';
 import { tokenGetter } from 'app/app.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserModule } from '@angular/platform-browser';
+import { SvgComponent } from 'app/shared/svg/svg.component';
 
 describe('NewsEditorComponent', () => {
   let component: NewsEditorComponent;
@@ -28,7 +29,8 @@ describe('NewsEditorComponent', () => {
       declarations: [
         NewsEditorComponent,
         AddNewsComponent,
-        SafeHtmlPipe
+        SafeHtmlPipe,
+        SvgComponent,
       ],
       imports: [
         RouterTestingModule,
