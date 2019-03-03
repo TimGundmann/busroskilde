@@ -20,6 +20,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeDa from '@angular/common/locales/da';
 import { SvgDefsComponent } from './shared/svg-defs/svg-defs.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 registerLocaleData(localeDa, 'da');
 
@@ -40,6 +41,7 @@ export function tokenGetter() {
   imports: [
     NgxSpinnerModule,
     LandingModule,
+    BrowserModule,
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     FormsModule,

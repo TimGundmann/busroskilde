@@ -23,7 +23,6 @@ export class NewsEditorComponent implements OnInit {
     private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-    this.spinner.show();
     this.newsService.get()
       .subscribe(result => {
         if (result.okResult) {
@@ -31,7 +30,6 @@ export class NewsEditorComponent implements OnInit {
         } else {
           this.notificationService.error('Fejl ved hentning af nyheder, prøv at genopfriske siden!');
         }
-        this.spinner.hide();
         this.addEmptyNewsIfNonExists();
       });
   }

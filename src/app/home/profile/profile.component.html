@@ -18,9 +18,28 @@
                 </div>
             </div>
         </div>
-        <div class="bottom">
-            <div class="center">
-                <button type="button" class="btn btn-success btn-lg btn-fill" (click)="confirmDelete()">Slet mig</button>
+        <div class="container">
+            <div class="owner" style="margin-bottom: 50px">
+                <div class="row profile avatar" *ngIf="false">
+                    <h4 class="title">Få notifikationer via mail</h4>
+                    <h6 class="description">Vælg hvilken du ønsker at bliver notificeret om</h6>
+                </div>
+                <div class="row" *ngIf="false">                    
+                    <div class="selectable" *ngFor="let category of categories">
+                        <label>{{category.category.name}}</label>
+                        <bSwitch 
+                            [(ngModel)]="category.selected"
+                            switch-on-text="Til"
+                            switch-off-text="Fra" 
+                            (changeState)="changeState(category.category)"></bSwitch>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="center">
+                    <button type="button" class="btn btn-success btn-lg btn-fill" (click)="confirmDelete()">Slet
+                        mig</button>
+                </div>
             </div>
         </div>
     </div>

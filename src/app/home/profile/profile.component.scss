@@ -1,6 +1,4 @@
 .profile {
-
-    margin-bottom: 50px;
     .title {
         color: #333 !important;
     }
@@ -57,8 +55,7 @@
 }
 
 .bottom {
-    position: absolute;
-    bottom: 10px;
+    margin-bottom: -45px;
     width: 100%;
 }
 
@@ -73,5 +70,18 @@ a {
 
 .profile-content {
     border-radius: 12px;
+}
+
+.selectable {
+    width: 175px;
+    label {
+        width: 100px;
+    }
+}
+
+.row {
+    max-width: 500px;
+    margin: auto;
+    justify-content: space-between;
 }
 

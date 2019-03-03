@@ -7,5 +7,5 @@ export interface User {
     active?: boolean;
     picture?: string;
     roles?: string[];
-
+    notifications?: string[];
 }

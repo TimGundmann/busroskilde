@@ -1,6 +1,6 @@
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent, ConfirmComponent } from './profile/profile.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouteReuseStrategy } from '@angular/router';
 import { HomeRoutingModule } from './home.routing';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NewsEditorComponent } from './news-editor/news-editor.component';
@@ -59,7 +59,8 @@ import { SvgComponent } from 'app/shared/svg/svg.component';
     exports: [
         HomeComponent
     ],
-    providers: [CategoryResover],
-    bootstrap: [HomeComponent]
+    providers: [
+        CategoryResover,
+    ],
 })
 export class HomeModule { }

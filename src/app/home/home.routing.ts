@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryResover } from './category-resover';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home.component';
@@ -21,9 +22,9 @@ const routes: Routes = [
         component: PlanComponent,
         resolve: {
           category: CategoryResover
-        }
+        },
       },
-      { path: 'profile', component: ProfileComponent}
+      { path: 'profile', component: ProfileComponent }
     ]
   },
 ];

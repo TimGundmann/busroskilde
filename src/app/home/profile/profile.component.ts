@@ -1,15 +1,14 @@
+import { Category } from 'app/domain/plan';
 import { AuthService } from './../../services/auth.service';
 import { CropModalComponent } from './crop-modal/crop-modal.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'app/domain/user';
-import { useAnimation } from '@angular/animations';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from 'app/services';
 import { Router } from '@angular/router';
+import { PlanService } from 'app/services/plan.service';
 
 @Component({
     selector: 'app-profile',
@@ -25,22 +24,31 @@ export class ProfileComponent implements OnInit {
 
     editMode = false;
 
+    categories = [];
+
     constructor(
+        private planService: PlanService,
         private userService: UserService,
         private spinner: NgxSpinnerService,
         private notifications: NotificationService,
         private modalService: NgbModal) { }
 
     ngOnInit() {
-        this.spinner.show();
         this.userService.currentUserInfo()
-            .subscribe(result => {
-                if (result.okResult) {
-                    this.user = result.returnValue;
+            .subscribe(userResult => {
+                if (userResult.okResult) {
+                    this.user = userResult.returnValue;
+                    this.planService.getCategories()
+                        .subscribe(result => {
+                            if (result.okResult) {
+                                this.filleSelection(result.returnValue);
+                            } else {
+                                this.notifications.error('Fejl ved henting af kategori information!');
+                            }
+                        });
                 } else {
                     this.notifications.error('Fejl ved henting af bruger information!');
                 }
-                this.spinner.hide();
             });
     }
 
@@ -50,7 +58,6 @@ export class ProfileComponent implements OnInit {
         modalRef.componentInstance.user = this.user;
         modalRef.componentInstance.closeModel.subscribe(_close => {
             this.fileInput.nativeElement.value = '';
-            console.log('close');
         });
     }
 
@@ -64,6 +71,26 @@ export class ProfileComponent implements OnInit {
             return this.user.picture;
         }
         return './assets/img/emptyphoto.jpg';
+    }
+
+    changeState(category: Category) {
+        const index = this.user.notifications.indexOf(category.name);
+        if (index > -1) {
+            this.user.notifications.splice(index, 1);
+        } else {
+            this.user.notifications.push(category.name);
+        }
+
+        this.userService.update(this.user).subscribe(result => {
+            if (result.errorResult) {
+                this.notifications.error('Fejl ved opdatering af bruger informationen!');
+            }
+        });
+    }
+
+    private filleSelection(categories: Category[]): any {
+        categories.forEach(c =>
+            this.categories.push({ category: c, selected: this.user.notifications.indexOf(c.name) > -1 }))
     }
 
 }
@@ -80,7 +107,7 @@ export class ProfileComponent implements OnInit {
                 <button type="button" class="btn btn-neutral btn-lg btn-fill btn-outline-neutral" (click)="cancel()">Nej</button>
             </div>
         </div>`,
-        styleUrls: ['./profile.component.scss']
+    styleUrls: ['./profile.component.scss']
 })
 export class ConfirmComponent {
 

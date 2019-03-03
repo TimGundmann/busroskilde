@@ -22,11 +22,9 @@ export class UsersComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private notifications: NotificationService,
-    private spinner: NgxSpinnerService) { }
+    private notifications: NotificationService) { }
 
   ngOnInit() {
-    this.spinner.show();
     this.userService.getUsers()
       .subscribe(result => {
         if (result.okResult) {
@@ -34,7 +32,6 @@ export class UsersComponent implements OnInit {
         } else {
           this.notifications.error('Fejl ved hentning af bruger, prøv igen senere');
         }
-        this.spinner.hide();
       });
   }
 

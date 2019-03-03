@@ -1,18 +1,19 @@
-import { map } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { fadeInAndOutForPlan } from './../fade-in-animation';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlanService } from '../../services/plan.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { NotificationService } from 'app/services';
 import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
-import { Observable, of } from 'rxjs';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-plan',
   templateUrl: './plan.component.html',
-  styleUrls: ['./plan.component.scss']
+  styleUrls: ['./plan.component.scss'],
+  animations: [
+    fadeInAndOutForPlan
+  ]
 })
 export class PlanComponent implements OnInit {
 
@@ -26,16 +27,22 @@ export class PlanComponent implements OnInit {
   editPlan: Plan;
   addVisible = false;
 
+  state = 'close';
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private planService: PlanService,
-    private spinner: NgxSpinnerService,
+    private rotuer: Router,
     private notifications: NotificationService) {
-    this.activatedRoute.data
+
+      this.activatedRoute.data
       .subscribe(data => {
+        this.state = 'close';
         this.category = data.category;
-        this.refreshPlans();
+        setTimeout(() => {
+          this.refreshPlans();
+        }, 300);
       });
   }
 
@@ -124,7 +131,6 @@ export class PlanComponent implements OnInit {
   }
 
   private refreshPlans() {
-    this.spinner.show();
     this.planService.getActivePlansByCategory(this.category)
       .subscribe(result => {
         this.plans = result.returnValue;
@@ -140,7 +146,7 @@ export class PlanComponent implements OnInit {
           return 0;
         });
         this.plans.forEach(r => this.pdfToggels.set(r, false));
-        this.spinner.hide();
+        this.state = 'open';
       });
   }
 

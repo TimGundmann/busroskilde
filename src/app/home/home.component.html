@@ -2,8 +2,8 @@
     <div class="section section-dark fixed-background">
         <div class="filter"></div>
         <div class="content-center">
-            <div class="container top-container">
-                <router-outlet></router-outlet>
+            <div class="container top-container" [@fadeInAndOutForRoute]="getRouterOutletState(outlet)">
+                <router-outlet #outlet="outlet"></router-outlet>
             </div>
         </div>
     </div>

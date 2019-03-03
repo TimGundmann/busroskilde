@@ -1,8 +1,8 @@
-<div class="container text-center bottom-margin">
+<div class="container text-center bottom-margin" [@fadeInAndOutForPlan]="state">
     <div class="row">
         <div class="col-md-1 mr-auto ml-auto">
             <nav [className]="odd ? 'navbar bg-danger heading' : 'navbar bg-warning heading'">
-                <span class="navbar-brand">{{category.name}}</span>
+                <span class="navbar-brand">{{category?.name}}</span>
                 <div *ngIf="canAlter()">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -22,7 +22,7 @@
                     *ngIf="plan.subCategory && isFirst(index)">
                     <div class="card-header">
                         <h6 style="margin-bottom: 0">
-                            {{plan.subCategory.name}}
+                            {{plan?.subCategory?.name}}
                         </h6>
                     </div>
                 </div>

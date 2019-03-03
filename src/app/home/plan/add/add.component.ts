@@ -109,7 +109,7 @@ export class AddComponent implements OnInit {
   }
 
   dateEnabled(): boolean {
-    return this.category.type === 'FROM_TO';
+    return this.category && this.category.type === 'FROM_TO';
   }
 
   add() {

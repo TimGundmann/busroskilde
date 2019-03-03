@@ -10,3 +10,17 @@
 .top-container {
     margin-top: 40px;
 }
+
+.content-center {
+    display: flex;
+    overflow: hidden;
+    height: 100vh;
+    .top-container {
+      position: relative;
+    }
+    /deep/ router-outlet ~ * {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
