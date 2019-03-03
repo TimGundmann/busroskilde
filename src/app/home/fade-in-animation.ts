@@ -21,7 +21,7 @@ export const fadeInAndOutForRoute =
                     paddingRight: '15px',
                     paddingLeft: '15px'
                 })
-            ]),
+            ], { optional: true }),
             query(':enter', style({ opacity: 0 }), { optional: true }),
             query(':leave', [
                 style({ opacity: 1 }),
