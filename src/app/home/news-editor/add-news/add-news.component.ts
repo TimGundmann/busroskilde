@@ -101,6 +101,7 @@ export class AddNewsComponent {
 
   toggleAdd() {
     this.visisble = !this.visisble;
+    this.addNewsForm.reset();
     this.changeVisibility.emit('' + this.visisble);
   }
 

@@ -25,12 +25,15 @@
                 </div>
                 <div *ngIf="isAdmin()" class="form-group" style="margin-bottom: 0;">
                   <select class="form-control" (change)="changeRole(user, $event)" [selectedIndex]="getSelected(user)">
-                      <option *ngFor="let option of options">{{option.displayName}}</option>
+                    <option *ngFor="let option of options">{{option.displayName}}</option>
                   </select>
                 </div>
                 <div>
                   <bSwitch [switch-disabled]="!isAdmin()" [(ngModel)]="user.active" switch-on-text="Til"
                     switch-off-text="Fra" (changeState)="changeState(user)"></bSwitch>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-danger btn-sm btn-round" (click)="delete()">Slet</button>
                 </div>
               </div>
             </div>

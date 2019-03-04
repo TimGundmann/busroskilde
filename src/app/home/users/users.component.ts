@@ -1,9 +1,11 @@
+import { ConfirmComponent } from './../../shared/confirm/confirm.component';
 import { AuthService } from './../../services/auth.service';
 import { User } from './../../domain/user';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'app/services';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-users',
@@ -20,6 +22,8 @@ export class UsersComponent implements OnInit {
   ];
 
   constructor(
+    private spinner: NgxSpinnerService,
+    private modalService: NgbModal,
     private userService: UserService,
     private authService: AuthService,
     private notifications: NotificationService) { }
@@ -81,4 +85,22 @@ export class UsersComponent implements OnInit {
     }
     return 0;
   }
+
+  delete(user: User) {
+    const modalRef = this.modalService.open(ConfirmComponent);
+    modalRef.componentInstance.title = 'Er du sikker på at du vil slette brugeren?';
+    modalRef.result.then(okResult => {
+      if (okResult) {
+          this.spinner.show();
+          this.userService.delete(user)
+              .subscribe(result => {
+                  if (result.errorResult) {
+                      this.notifications.error('Fejl ved sletning af bruger information!');
+                  }
+                  this.spinner.hide();
+              });
+      }
+  });
+}
+
 }

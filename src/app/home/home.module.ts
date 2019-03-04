@@ -1,5 +1,5 @@
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProfileComponent, ConfirmComponent } from './profile/profile.component';
+import { ProfileComponent } from './profile/profile.component';
 import { RouterModule, RouteReuseStrategy } from '@angular/router';
 import { HomeRoutingModule } from './home.routing';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -23,6 +23,7 @@ import { CategoryResover } from './category-resover';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CropModalComponent } from './profile/crop-modal/crop-modal.component';
 import { SvgComponent } from 'app/shared/svg/svg.component';
+import { ConfirmComponent } from '../shared/confirm/confirm.component';
 
 @NgModule({
     imports: [
