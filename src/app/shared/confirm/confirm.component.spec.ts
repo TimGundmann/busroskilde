@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmComponent } from './confirm.component';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('ConfirmComponent', () => {
   let component: ConfirmComponent;
@@ -8,7 +9,9 @@ describe('ConfirmComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmComponent ]
+      declarations: [ ConfirmComponent ],
+      imports: [ NgbModule ],
+      providers: [ NgbActiveModal ]
     })
     .compileComponents();
   }));
