@@ -16,11 +16,11 @@ export interface Category {
 
     name: string;
 
-    type: string;
+    type?: string;
 
-    subCategories: SubCategory[];
+    subCategories?: SubCategory[];
 
-    alterRoles: string[];
+    alterRoles?: string[];
 
 }
 

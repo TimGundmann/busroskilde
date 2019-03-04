@@ -2,7 +2,7 @@ import { Category, Plan, fileToBlob } from 'app/domain/plan';
 import { Observable, from } from 'rxjs';
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { PlanService } from 'app/services/plan.service';
 import { NotificationService } from 'app/services';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -33,7 +33,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
   ],
 })
-export class AddComponent implements OnInit {
+export class AddComponent implements OnChanges {
 
   private _editPlan: Plan;
 
@@ -68,17 +68,14 @@ export class AddComponent implements OnInit {
     subCatetory: new FormControl()
   });
 
-  constructor(private planService: PlanService, private notifications: NotificationService, private spinner: NgxSpinnerService) {
+  constructor(
+    private planService: PlanService,
+    private notifications: NotificationService,
+    private spinner: NgxSpinnerService) {
   }
 
-  ngOnInit() {
-    if (this.category) {
-      this.subCategory.setValue(this.category.subCategories[0]);
-      if (this.dateEnabled()) {
-        this.addForm.get('from').setValidators([Validators.required]);
-        this.addForm.get('to').setValidators([Validators.required]);
-      }
-    }
+  ngOnChanges() {
+    this.updateValidationOnDates();
   }
 
   get headLine() {
@@ -136,7 +133,6 @@ export class AddComponent implements OnInit {
         }
       ).subscribe(r => {
         if (r.okResult) {
-          this.addForm.reset();
           this.toggleAdd();
         } else {
           this.notifications.error('Der opstod en fejl, prøv igen senere!');
@@ -148,6 +144,7 @@ export class AddComponent implements OnInit {
 
   toggleAdd() {
     this.visisble = !this.visisble;
+    this.addForm.reset();
     this.changeVisibility.emit('' + this.visisble);
   }
 
@@ -158,4 +155,21 @@ export class AddComponent implements OnInit {
   hasDateError(control): boolean {
     return control.invalid && (control.dirty || control.touched) && !control.value;
   }
+
+  private updateValidationOnDates() {
+    if (this.category) {
+      this.subCategory.setValue(this.category.subCategories[0]);
+      if (this.dateEnabled()) {
+        this.from.setValidators([Validators.required]);
+        this.to.setValidators([Validators.required]);
+      } else {
+        this.from.setValidators([]);
+        this.to.setValidators([]);
+      }
+      this.from.updateValueAndValidity();
+      this.to.updateValueAndValidity();
+    }
+  }
+
+
 }

@@ -89,6 +89,7 @@ export class ProfileComponent implements OnInit {
     }
 
     private filleSelection(categories: Category[]): any {
+        this.categories.push({ category: { name: 'Nyheder' }, selected: this.user.notifications.indexOf('Nyheder') > -1});
         categories.forEach(c =>
             this.categories.push({ category: c, selected: this.user.notifications.indexOf(c.name) > -1 }))
     }
