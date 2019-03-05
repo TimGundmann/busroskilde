@@ -50,16 +50,16 @@
                                 </div>
                             </div>
                             <div>
-                                <a *ngIf="canAlter()" style="cursor: pointer;" (click)="edit(plan)" title="Rediger">
+                                <a class="icon svg-icon" *ngIf="canAlter()" (click)="edit(plan)" title="Rediger">
                                     <app-svg name="edit" width="16" height="16"></app-svg>
                                 </a>
-                                <a *ngIf="canAlter()" style="cursor: pointer;" (click)="delete(plan)" title="Slet">
+                                <a class="icon" *ngIf="canAlter()" (click)="delete(plan)" title="Slet">
                                     <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
                                 </a>
-                                <a style="cursor: pointer;" (click)="dowload(plan)" title="Hent filen">
+                                <a class="icon" (click)="dowload(plan)" title="Hent filen">
                                     <i class="nc-icon nc-cloud-download-93" aria-hidden="true"></i>
                                 </a>
-                                <a style="cursor: pointer;" (click)="togglePdf(plan)" title="Vis filen">
+                                <a class="icon svg-icon" (click)="togglePdf(plan)" title="Vis filen">
                                     <app-svg *ngIf="!showPdf(plan)" name="eye" width="16" height="16"></app-svg>
                                     <i *ngIf="showPdf(plan)" class="nc-icon nc-simple-remove" aria-hidden="true"></i>
                                 </a>
