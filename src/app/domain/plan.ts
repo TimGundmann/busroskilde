@@ -9,6 +9,7 @@ export interface Plan {
     fileName: string;
     category: Category;
     subCategory: SubCategory;
+    createdDate?: Date;
 
 }
 

@@ -31,8 +31,12 @@
                         <div class="plan-heading">
                             <span class="text-headline">{{plan.headline}}</span>
                             <div *ngIf="!canAlter() && category.type === 'FROM_TO'">
-                                <span class="text-info">Gyldighedsperiode: </span>
-                                <span>{{plan.from | date}}</span> - <span>{{plan.to | date}}</span>
+                                <span class="text-info marigen">Gyldighedsperiode: </span>
+                                <span>{{plan.from | date}} - {{plan.to | date}}</span>
+                            </div>
+                            <div *ngIf="category.type !== 'FROM_TO'">
+                                <span class="text-info marigen">Oprettet: </span>
+                                <span>{{plan.createdDate | date}}</span>
                             </div>
                             <div *ngIf="canAlter() && category.type === 'FROM_TO'">
                                 <div>
@@ -61,8 +65,8 @@
                                 </a>
                             </div>
                         </div>
-                        <pdf-viewer *ngIf="showPdf(plan)" [src]="plan.file" [render-text]="true" [original-size]="false" [autoresize]="true"
-                            style="display: block;">"></pdf-viewer>
+                        <pdf-viewer *ngIf="showPdf(plan)" [src]="plan.file" [render-text]="true" [original-size]="false"
+                            [autoresize]="true" style="display: block;">"></pdf-viewer>
                     </div>
                 </div>
             </div>
