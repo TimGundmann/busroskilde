@@ -7,9 +7,31 @@
 }
 
 .nav-content {
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
     a {
         font-size: 10px !important;
         padding: 5px !important;
+        margin: 0 !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+
+    .nav-content {
+        height: auto;
+    }
+    
+}
+
+@media (max-width: 767px) {
+
+    .nav-item {
+        height: auto;
+    }
+
+    .nav-content {
+        display: inherit;
+        height: auto; 
     }
 }

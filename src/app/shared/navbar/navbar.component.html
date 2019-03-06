@@ -11,18 +11,21 @@
             </button>
         </div>
         <div class="navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav ml-auto nav-content">
-                <ng-container *ngIf="isAuthenticated() && isHome()">
+            <ng-container *ngIf="isAuthenticated() && isHome()">
+                <ul class="navbar-nav ml-auto nav-content">
                     <li class="nav-item">
                         <a [routerLink]="['./home/news']" class="nav-link no-padding">Nyheder</a>
                     </li>
                     <li class="nav-item" *ngFor="let category of categories">
-                        <a [routerLink]="['./home/plans', category.name]" class="nav-link no-padding">{{category.name}}</a>
+                        <a [routerLink]="['./home/plans', category.name]"
+                            class="nav-link no-padding">{{category.name}}</a>
                     </li>
                     <li class="nav-item">
                         <a [routerLink]="['./home/users']" class="nav-link no-padding">Bruger</a>
                     </li>
-                </ng-container>
+                </ul>
+            </ng-container>
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="Facebook" data-placement="bottom"
                         href="https://www.facebook.com/groups/405605066676558" target="_blank">
@@ -43,13 +46,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link" style="cursor: pointer;" rel="tooltip" [title]="getSignInTitle()"
-                            data-placement="bottom" (click)="signInOrOut()">
-                            <i class="nc-icon nc-key-25"></i>
-                            <p class="d-lg-none">{{getSignInTitle()}}</p>
-                        </a>
-                    </li>
-                </ul>
+                    <a class="nav-link" style="cursor: pointer;" rel="tooltip" [title]="getSignInTitle()"
+                        data-placement="bottom" (click)="signInOrOut()">
+                        <i class="nc-icon nc-key-25"></i>
+                        <p class="d-lg-none">{{getSignInTitle()}}</p>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
     <app-notification></app-notification>
