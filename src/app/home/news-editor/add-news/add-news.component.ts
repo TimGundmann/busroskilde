@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -68,7 +69,10 @@ export class AddNewsComponent {
     translate: 'no'
   };
 
-  constructor(private newsService: NewsService, private notificationService: NotificationService) { }
+  constructor(
+    private newsService: NewsService, 
+    private notificationService: NotificationService,
+    private spinner: NgxSpinnerService) { }
 
   get headline() {
     return <FormControl>this.addNewsForm.get('headline');
@@ -79,6 +83,7 @@ export class AddNewsComponent {
   }
 
   submit() {
+    this.spinner.show();
     if (this._editNews) {
       this._editNews.headline = this.headline.value;
       this._editNews.content = this.editor.value;
@@ -92,6 +97,7 @@ export class AddNewsComponent {
         } else {
           this.notificationService.error('Fejl ved oprettelse af nyheden, prøv igen senere!');
         }
+        this.spinner.hide();
       });
   }
 
