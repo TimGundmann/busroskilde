@@ -17,7 +17,9 @@ export class UsersComponent implements OnInit {
   users: User[];
   roles = [
     { displayName: 'Bruger', role: '' },
-    { displayName: 'Superbruger', role: 'SUPER' },
+    { displayName: 'Dagens vagt', role: 'SUPER' },
+    { displayName: 'Tillidsmand', role: 'TILLI' },
+    { displayName: 'Driftkontor', role: 'DRIFT' },
     { displayName: 'Administrator', role: 'ADMIN' }
   ];
 
