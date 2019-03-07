@@ -6,7 +6,7 @@
     <form class="form-rotation" [formGroup]="addForm" (ngSubmit)="add()">
       <div class="row">
         <div [className]="category?.subCategories.length > 0 ? 'col-md-6' : 'col-md-12'">
-          <div class="form-group" [class.has-danger]="hasError(headLine)">
+          <div *ngIf="!isToCategory()" class="form-group" [class.has-danger]="hasError(headLine)">
             <label>Overskrift</label>
             <input type="text" class="form-control" placeholder="Overskrift" name="headLine" formControlName="headLine"
               autofocus maxlength="200">
@@ -22,8 +22,8 @@
           </select>
         </div>
       </div>
-      <div class="row" *ngIf="dateEnabled()">
-        <div class="col-md-6 form-group" [class.has-danger]="hasError(from)">
+      <div class="row">
+        <div *ngIf="dateEnabled()" class="col-md-6 form-group" [class.has-danger]="hasError(from)">
           <label>Gyldig fra</label>
           <input type="date" class="form-control" placeholder="Fra" name="from" formControlName="from" useValueAsDate>
           <div *ngIf="hasError(from)"
@@ -31,7 +31,11 @@
             Fra datoen skal angives.
           </div>
         </div>
-        <div class="col-md-6 form-group" [class.has-danger]="hasError(to)">
+        <div *ngIf="dateEnabled() || isToCategory()" 
+          class="col-md-6 form-group" 
+          [class.col-md-6]="!isToCategory()" 
+          [class.col-md-12]="isToCategory()" 
+          [class.has-danger]="hasError(to)">
           <label>Gyldig til</label>
           <input type="date" class="form-control" placeholder="Til" formControlName="to" useValueAsDate>
           <div *ngIf="hasError(to)" class="form-control-feedback">

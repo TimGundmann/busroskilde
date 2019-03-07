@@ -37,6 +37,8 @@ export class AddComponent implements OnChanges {
 
   private _editPlan: Plan;
 
+  private days = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'];
+
   @Input() set editPlan(plan: Plan) {
     this._editPlan = plan;
     if (this._editPlan) {
@@ -109,6 +111,10 @@ export class AddComponent implements OnChanges {
     return this.category && this.category.type === 'FROM_TO';
   }
 
+  isToCategory(): boolean {
+    return this.category && this.category.type === 'TO';
+  }
+
   add() {
     this.spinner.show();
     const reader = new FileReader();
@@ -122,7 +128,7 @@ export class AddComponent implements OnChanges {
       this.planService.add(
         {
           id: this.planId,
-          headline: this.headLine.value,
+          headline: this.resolveHeadline(),
           from: this.from.value,
           to: this.to.value,
           category: this.category,
@@ -140,6 +146,13 @@ export class AddComponent implements OnChanges {
         this.spinner.hide();
       });
     });
+  }
+
+  private resolveHeadline(): string {
+    if (this.isToCategory()) {
+      return this.days[new Date(this.to.value).getDay()];
+    }
+    return this.headLine.value;
   }
 
   toggleAdd() {
@@ -162,12 +175,13 @@ export class AddComponent implements OnChanges {
       if (this.dateEnabled()) {
         this.from.setValidators([Validators.required]);
         this.to.setValidators([Validators.required]);
-      } else {
+      } else if (this.isToCategory()) {
         this.from.setValidators([]);
-        this.to.setValidators([]);
+        this.headLine.setValidators([]);
       }
       this.from.updateValueAndValidity();
       this.to.updateValueAndValidity();
+      this.headLine.updateValueAndValidity();
     }
   }
 
