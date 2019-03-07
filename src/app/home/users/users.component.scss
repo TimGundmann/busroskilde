@@ -32,6 +32,11 @@
     }
 }
 
+.rolleSelect {
+    max-width: 160px;
+    display: block;
+}
+
 .user-heading {
     align-items: center;
     display: flex;
@@ -60,6 +65,15 @@
     .user-info {
         justify-content: space-between;
         width: 100%;
+    }
+}
+
+.roles {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    label {
+        margin-right: 5px;
     }
 }
 

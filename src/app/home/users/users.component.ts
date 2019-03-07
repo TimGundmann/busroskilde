@@ -15,11 +15,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class UsersComponent implements OnInit {
 
   users: User[];
-  options = [
+  roles = [
     { displayName: 'Bruger', role: '' },
     { displayName: 'Superbruger', role: 'SUPER' },
     { displayName: 'Administrator', role: 'ADMIN' }
   ];
+
+  private rolesVisisble = [];
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -33,6 +35,7 @@ export class UsersComponent implements OnInit {
       .subscribe(result => {
         if (result.okResult) {
           this.users = result.returnValue;
+          this.users.forEach(_u => this.rolesVisisble.push(false));
         } else {
           this.notifications.error('Fejl ved hentning af bruger, prøv igen senere');
         }
@@ -59,12 +62,31 @@ export class UsersComponent implements OnInit {
     return './assets/img/emptyphoto.jpg';
   }
 
-  changeRole(user: User, event: any) {
-    if (event.target.selectedIndex > 0) {
-      user.roles = [this.options[event.target.selectedIndex].role];
-    } else {
-      user.roles = [];
+  getSelected(user: User): number {
+    if (!user.roles) {
+      return 0;
     }
+    if (user.roles.indexOf(this.roles[1].role) > -1) {
+      return 1
+    }
+    if (user.roles.indexOf(this.roles[2].role) > -1) {
+      return 2
+    }
+    return 0;
+  }
+
+  isRoleActive(user: User, role: string): boolean {
+    return user.roles && user.roles.includes(role);
+  }
+
+  changeRole(user: User, role: any) {
+    const index = user.roles.indexOf(role.role);
+    if (index > -1) {
+      user.roles.splice(index, 1);
+    } else {
+      user.roles.push(role.role);
+    }
+    console.log(role);
     this.userService.update(user)
       .subscribe(result => {
         if (result.errorResult) {
@@ -73,17 +95,12 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  getSelected(user: User): number {
-    if (!user.roles) {
-      return 0;
-    }
-    if (user.roles.indexOf(this.options[1].role) > -1) {
-      return 1
-    }
-    if (user.roles.indexOf(this.options[2].role) > -1) {
-      return 2
-    }
-    return 0;
+  toggleRolesVisible(index: number) {
+    this.rolesVisisble[index] = !this.rolesVisisble[index];
+  }
+
+  isRolesVisisble(index: number): boolean {
+    return this.rolesVisisble[index];
   }
 
   delete(user: User) {
@@ -91,16 +108,16 @@ export class UsersComponent implements OnInit {
     modalRef.componentInstance.title = 'Er du sikker på at du vil slette brugeren?';
     modalRef.result.then(okResult => {
       if (okResult) {
-          this.spinner.show();
-          this.userService.delete(user)
-              .subscribe(result => {
-                  if (result.errorResult) {
-                      this.notifications.error('Fejl ved sletning af bruger information!');
-                  }
-                  this.spinner.hide();
-              });
+        this.spinner.show();
+        this.userService.delete(user)
+          .subscribe(result => {
+            if (result.errorResult) {
+              this.notifications.error('Fejl ved sletning af bruger information!');
+            }
+            this.spinner.hide();
+          });
       }
-  });
-}
+    });
+  }
 
 }
