@@ -1,4 +1,4 @@
-import { ConfirmComponent } from './../../shared/confirm/confirm.component';
+import { confirmDialog } from './../../shared/confirm/confirm.component';
 import { Category } from 'app/domain/plan';
 import { AuthService } from './../../services/auth.service';
 import { CropModalComponent } from './crop-modal/crop-modal.component';
@@ -65,9 +65,7 @@ export class ProfileComponent implements OnInit {
     }
 
     confirmDelete() {
-        const modalRef = this.modalService.open(ConfirmComponent);
-        modalRef.componentInstance.title = 'Er du sikker på at du vil slettes fra BusRoskilde?';
-        modalRef.result.then(okResult => {
+        confirmDialog('Er du sikker på at du vil slettes fra BusRoskilde?').then(okResult => {
             if (okResult) {
                 this.spinner.show();
                 this.userService.delete(this.user)

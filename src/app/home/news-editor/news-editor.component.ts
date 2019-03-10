@@ -1,3 +1,4 @@
+import { confirmDialog } from 'app/shared/confirm/confirm.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -53,19 +54,21 @@ export class NewsEditorComponent implements OnInit {
   }
 
   delete(news: News) {
-    if (confirm('Er du sikker på at du vil slette ' + news.headline + ' ?')) {
-      this.spinner.show();
-      this.newsService.delete(news)
-        .subscribe(result => {
-          if (result.okResult) {
-            this.notificationService.info('Nyheden er slettet!');
-            this.ngOnInit();
-          } else {
-            this.notificationService.error('Fejl ved sletning af nyheden!');
-          }
-          this.spinner.hide();
-        });
-    }
+    confirmDialog('Er du sikker på at du vil slette "' + news.headline + '"?').then(okResult => {
+      if (okResult) {
+        this.spinner.show();
+        this.newsService.delete(news)
+          .subscribe(result => {
+            if (result.okResult) {
+              this.notificationService.info('Nyheden er slettet!');
+              this.ngOnInit();
+            } else {
+              this.notificationService.error('Fejl ved sletning af nyheden!');
+            }
+            this.spinner.hide();
+          });
+      }
+    });
   }
 
   edit(news: News) {
@@ -75,7 +78,7 @@ export class NewsEditorComponent implements OnInit {
 
   private addEmptyNewsIfNonExists() {
     if (!this.news || this.news.length === 0) {
-      this.news = [ { headline: 'Ingen nyheder', content: '' }];
+      this.news = [{ headline: 'Ingen nyheder', content: '' }];
     }
   }
 

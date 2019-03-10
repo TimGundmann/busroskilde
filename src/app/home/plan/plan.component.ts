@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NotificationService } from 'app/services';
 import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
+import { confirmDialog } from 'app/shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-plan',
@@ -36,7 +37,7 @@ export class PlanComponent implements OnInit {
     private rotuer: Router,
     private notifications: NotificationService) {
 
-      this.activatedRoute.data
+    this.activatedRoute.data
       .subscribe(data => {
         this.state = 'close';
         this.category = data.category;
@@ -112,15 +113,17 @@ export class PlanComponent implements OnInit {
   }
 
   delete(plan: Plan) {
-    if (confirm('Er du sikker på at du vil slette ' + plan.headline + ' ?')) {
-      this.planService.delete(plan).subscribe(r => {
-        if (r.okResult) {
-          this.refreshPlans();
-        } else {
-          this.notifications.error('Fejl ved sletning af plan!');
-        }
-      });
-    }
+    confirmDialog('Er du sikker på at du vil slette ' + plan.headline + ' ?').then(okResult => {
+      if (okResult) {
+        this.planService.delete(plan).subscribe(r => {
+          if (r.okResult) {
+            this.refreshPlans();
+          } else {
+            this.notifications.error('Fejl ved sletning af plan!');
+          }
+        });
+      }
+    });
   }
 
   addChangeVisisblity() {

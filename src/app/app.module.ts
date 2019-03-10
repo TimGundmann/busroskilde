@@ -1,10 +1,11 @@
+import { ServiceLocator } from './shared/service-locator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddAuthHeaderInterceptor } from './add-auth-header.interceptor';
 import { NotificationComponent } from './shared/notification/notification.component';
 import { LandingModule } from './landing/landing.module';
 import { environment } from './../environments/environment';
 import { LocationStrategy, HashLocationStrategy, registerLocaleData } from '@angular/common';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, Injector } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
@@ -66,8 +67,13 @@ export function tokenGetter() {
       useClass: AddAuthHeaderInterceptor,
       multi: true,
     },
-    {provide: LOCALE_ID, useValue: 'da' }
+    { provide: LOCALE_ID, useValue: 'da' }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(private injector: Injector) {
+    ServiceLocator.injector = this.injector;
+  }
+}
