@@ -25,6 +25,14 @@ export class UserService {
     return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/delete`, user));
   }
 
+  public resetPassword(email: string): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${email}/password/reset`, null));
+  }
+
+  public newPassword(password: string, token: string): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${token}/password/new`, password));
+  }
+
   public signIn(email: string, password: string): Observable<RequestResult<any>> {
     return this.httpClient.post(`${this.serviceHost}/login`,
       `{ "username": "${email}", "password": "${password}" }`, { observe: 'response' })

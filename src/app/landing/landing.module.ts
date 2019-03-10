@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MessageComponent } from './message/message.component';
 import { ActivateComponent } from './activate/activate.component';
+import { ResetPasswordComponent } from './signin/reset-password/reset-password.component';
+import { NewPasswordComponent } from './new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ActivateComponent } from './activate/activate.component';
     SigninComponent,
     LandingComponent,
     MessageComponent,
-    ActivateComponent
+    ActivateComponent,
+    ResetPasswordComponent,
+    NewPasswordComponent
   ],
   imports: [
     ServicesModule.forRoot(),
@@ -25,7 +29,10 @@ import { ActivateComponent } from './activate/activate.component';
     ReactiveFormsModule
   ],
   exports: [
-    LandingComponent
+    LandingComponent,
+  ],
+  entryComponents: [
+    ResetPasswordComponent
   ]
 })
 export class LandingModule { }

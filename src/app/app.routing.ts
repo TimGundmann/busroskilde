@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LandingComponent } from './landing/landing.component';
 import { SigninComponent } from './landing/signin/signin.component';
+import { NewPasswordComponent } from './landing/new-password/new-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'activate/:token', component: ActivateComponent },
+  { path: 'password/:token', component: NewPasswordComponent },
 ];
 
 @NgModule({
