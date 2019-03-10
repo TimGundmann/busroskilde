@@ -105,7 +105,7 @@ export class UsersComponent implements OnInit {
   }
 
   delete(user: User) {
-    confirmDialog('Er du sikker på at du vil slette "' + user.name + '"?').then(okResult => {
+    confirmDialog('Konfirmering', 'Er du sikker på at du vil slette "' + user.name + '"?').then(okResult => {
       if (okResult) {
         this.spinner.show();
         this.userService.delete(user)

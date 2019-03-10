@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
     }
 
     confirmDelete() {
-        confirmDialog('Er du sikker på at du vil slettes fra BusRoskilde?').then(okResult => {
+        confirmDialog('Konfirmering', 'Er du sikker på at du vil slettes fra BusRoskilde?').then(okResult => {
             if (okResult) {
                 this.spinner.show();
                 this.userService.delete(this.user)

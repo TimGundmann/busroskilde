@@ -54,7 +54,7 @@ export class NewsEditorComponent implements OnInit {
   }
 
   delete(news: News) {
-    confirmDialog('Er du sikker på at du vil slette "' + news.headline + '"?').then(okResult => {
+    confirmDialog('Konfirmering', 'Er du sikker på at du vil slette "' + news.headline + '"?').then(okResult => {
       if (okResult) {
         this.spinner.show();
         this.newsService.delete(news)

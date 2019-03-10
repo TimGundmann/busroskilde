@@ -113,7 +113,7 @@ export class PlanComponent implements OnInit {
   }
 
   delete(plan: Plan) {
-    confirmDialog('Er du sikker på at du vil slette ' + plan.headline + ' ?').then(okResult => {
+    confirmDialog('Konfirmering', 'Er du sikker på at du vil slette ' + plan.headline + ' ?').then(okResult => {
       if (okResult) {
         this.planService.delete(plan).subscribe(r => {
           if (r.okResult) {
