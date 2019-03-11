@@ -1,5 +1,5 @@
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -29,6 +29,7 @@ describe('ProfileComponent', () => {
       ],
       imports: [
         FormsModule,
+        ReactiveFormsModule,
         JwBootstrapSwitchNg2Module,
         RouterTestingModule,
         JwtModule.forRoot({
