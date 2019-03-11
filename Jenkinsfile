@@ -10,6 +10,7 @@ pipeline {
                git "https://github.com/TimGundmann/busroskilde.git"
                sh "npm install"
                sh "npm version 1.0.${currentBuild.number}"
+               currentBuild.displayName = "Version: 1.0.${currentBuild.number}"
             }                
         }
         
