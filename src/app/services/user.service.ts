@@ -38,9 +38,9 @@ export class UserService {
     return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${token}/password/new`, password));
   }
 
-  public signIn(email: string, password: string): Observable<RequestResult<any>> {
+  public signIn(number: string, password: string): Observable<RequestResult<any>> {
     return this.httpClient.post(`${this.serviceHost}/login`,
-      `{ "username": "${email}", "password": "${password}" }`, { observe: 'response' })
+      `{ "username": "${number}", "password": "${password}" }`, { observe: 'response' })
       .pipe(
         map(resp => {
           const token = resp.headers.get(this.authHeaderName);

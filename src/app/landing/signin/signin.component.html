@@ -6,15 +6,15 @@
       <div class="card card-register">
         <h3 class="title">Velkommen</h3>
         <form class="register-form" [formGroup]="signInForm" (ngSubmit)="signIn()">
-          <label>Email</label>
+          <label>Chaufførnummer</label>
           <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus===true}">
             <div class="input-group-prepend">
               <span class="input-group-text">
-                <i class="nc-icon nc-email-85"></i>
+                <i class="nc-icon nc-bus-front-12"></i>
               </span>
             </div>
-            <input type="email" class="form-control" placeholder="Email" (focus)="focus=true" (blur)="focus=false"
-              formControlName="email">
+            <input type="text" class="form-control" placeholder="Chaufførnummer" (focus)="focus=true" (blur)="focus=false"
+              formControlName="number">
           </div>
 
           <label>Password</label>

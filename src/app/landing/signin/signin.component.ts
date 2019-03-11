@@ -17,7 +17,7 @@ export class SigninComponent {
   focus1;
 
   signInForm = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    number: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
@@ -28,8 +28,8 @@ export class SigninComponent {
     private notifications: NotificationService,
     private spinner: NgxSpinnerService) { }
 
-  get email(): string {
-    return this.signInForm.get('email').value;
+  get number(): string {
+    return this.signInForm.get('number').value;
   }
 
   get password(): string {
@@ -38,7 +38,7 @@ export class SigninComponent {
 
   signIn() {
     this.spinner.show();
-    this.userService.signIn(this.email, this.password)
+    this.userService.signIn(this.number, this.password)
       .subscribe(r => {
         if (r.okResult) {
           this.router.navigate(['/home']);
@@ -51,7 +51,6 @@ export class SigninComponent {
 
   confirmReset() {
     const modalRef = this.modalService.open(ResetPasswordComponent, { ariaLabelledBy: 'modal-basic-title' });
-    modalRef.componentInstance.email = this.email;
     modalRef.result.then(email => {
       this.spinner.show();
       if (email) {
