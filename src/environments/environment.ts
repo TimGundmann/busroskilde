@@ -5,5 +5,6 @@ export const environment = {
   serviceHostPlan: 'http://localhost:8081/plans',
   serviceHostNews: 'http://localhost:8082/news',
   authTokenName: 'Authorization',
-  authHeaderName: 'Authorization'
+  authHeaderName: 'Authorization',
+  version: require('../../package.json').version
 };

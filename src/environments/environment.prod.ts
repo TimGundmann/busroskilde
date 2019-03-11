@@ -4,5 +4,6 @@ export const environment = {
   serviceHostPlan: 'https://www.gundmann.dk/plans',
   serviceHostNews: 'https://www.gundmann.dk/news',
   authTokenName: 'Authorization',
-  authHeaderName: 'Authorization'
+  authHeaderName: 'Authorization',
+  version: require('../../package.json').version
 };
