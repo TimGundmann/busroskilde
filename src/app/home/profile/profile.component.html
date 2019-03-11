@@ -24,15 +24,41 @@
                     <h4 class="title">Få notifikationer via mail</h4>
                     <h6 class="description">Vælg hvilken du ønsker at bliver notificeret om</h6>
                 </div>
-                <div class="row">                    
+                <div class="row">
                     <div class="selectable" *ngFor="let category of categories">
                         <label>{{category.category.name}}</label>
-                        <bSwitch 
-                            [(ngModel)]="category.selected"
-                            switch-on-text="Til"
-                            switch-off-text="Fra" 
+                        <bSwitch [(ngModel)]="category.selected" switch-on-text="Til" switch-off-text="Fra"
                             (changeState)="changeState(category.category)"></bSwitch>
                     </div>
+                </div>
+            </div>
+            <div class="container" style="max-width: 350px;">
+                <div class="owner" style="margin-bottom: 50px">
+                    <form [formGroup]="newPasswordForm" (ngSubmit)="changePassword()">
+                        <label>Password</label>
+                        <div class="input-group form-group" [ngClass]="{'input-group-focus':focus===true}">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="nc-icon nc-key-25"></i>
+                                </span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Password" (focus)="focus=true"
+                                (blur)="focus=false" formControlName="password1">
+                        </div>
+
+                        <label>Gentag password</label>
+                        <div class="input-group form-group" [ngClass]="{'input-group-focus':focus1===true}">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="nc-icon nc-key-25"></i>
+                                </span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Gentag password"
+                                (focus)="focus1=true" (blur)="focus1=false" formControlName="password2">
+                        </div>
+                        <button class="btn btn-info btn-block btn-round" [disabled]="!newPasswordForm.valid">Opdater
+                            password</button>
+                    </form>
                 </div>
             </div>
             <div class="bottom">

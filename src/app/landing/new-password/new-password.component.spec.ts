@@ -20,22 +20,23 @@ describe('NewPasswordComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewPasswordComponent ],
-      imports: [ 
-        ReactiveFormsModule, 
-        FormsModule, 
+      declarations: [NewPasswordComponent],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
         RouterTestingModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: tokenGetter,
             whitelistedDomains: ['gundmann.dk'],
           }
-        }), ],
+        }),
+      ],
       providers: [
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

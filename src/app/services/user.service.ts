@@ -21,6 +21,11 @@ export class UserService {
     return this.handleResponce(this.httpClient.get<User>(`${this.serviceHost}/current`));
   }
 
+  updatepassword(email: string, password: string): Observable<RequestResult<User>> {
+    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${email}/updatepassword`, password));
+  }
+
+
   public delete(user: User): Observable<RequestResult<any>> {
     return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/delete`, user));
   }

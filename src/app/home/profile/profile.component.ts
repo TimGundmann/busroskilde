@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { confirmDialog } from './../../shared/confirm/confirm.component';
 import { Category } from 'app/domain/plan';
 import { AuthService } from './../../services/auth.service';
@@ -26,6 +27,14 @@ export class ProfileComponent implements OnInit {
     editMode = false;
 
     categories = [];
+
+    focus;
+    focus1;
+
+    newPasswordForm = new FormGroup({
+        password1: new FormControl('', [Validators.required]),
+        password2: new FormControl('', [Validators.required]),
+    });
 
     constructor(
         private planService: PlanService,
@@ -102,6 +111,33 @@ export class ProfileComponent implements OnInit {
                 this.notifications.error('Fejl ved opdatering af bruger informationen!');
             }
         });
+    }
+
+    get password1(): string {
+        return this.newPasswordForm.get('password1').value;
+    }
+
+    get password2(): string {
+        return this.newPasswordForm.get('password2').value;
+    }
+
+    changePassword() {
+        if (this.passwordsMatch()) {
+            this.userService.updatepassword(this.user.email, this.password1).subscribe(result => {
+                if (result.okResult) {
+                    this.notifications.info('Password er nu opdateret!', true);
+                    this.newPasswordForm.reset();
+                } else {
+                    this.notifications.error('Der sket en fejl ved opdatering af password!');
+                }
+            });
+        } else {
+            this.notifications.warn('De to passwords matcher ikke!');
+        }
+    }
+
+    private passwordsMatch(): boolean {
+        return this.password1 === this.password2;
     }
 
     private filleSelection(categories: Category[]): any {

@@ -15,11 +15,11 @@ export class ResetPasswordComponent {
   constructor(public activeModal: NgbActiveModal) { }
 
   ok() {
-      this.activeModal.close(true);
+      this.activeModal.close(this.email);
   }
 
   cancel() {
-      this.activeModal.close(false);
+      this.activeModal.close(undefined);
   }
 
 }

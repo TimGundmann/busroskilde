@@ -52,9 +52,10 @@ export class SigninComponent {
   confirmReset() {
     const modalRef = this.modalService.open(ResetPasswordComponent, { ariaLabelledBy: 'modal-basic-title' });
     modalRef.componentInstance.email = this.email;
-    modalRef.result.then(okResult => {
-      if (okResult) {
-        this.userService.resetPassword(this.email)
+    modalRef.result.then(email => {
+      this.spinner.show();
+      if (email) {
+        this.userService.resetPassword(email)
           .subscribe(result => {
             if (result.okResult) {
               this.notifications.info('En email er sendt!');
@@ -63,6 +64,7 @@ export class SigninComponent {
             }
           })
       }
+      this.spinner.hide();
     });
   }
 
