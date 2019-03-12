@@ -51,6 +51,7 @@ export class SigninComponent {
 
   confirmReset() {
     const modalRef = this.modalService.open(ResetPasswordComponent, { ariaLabelledBy: 'modal-basic-title' });
+    modalRef.componentInstance.email = this.number.indexOf('@') > 0 ? this.number : '';
     modalRef.result.then(email => {
       this.spinner.show();
       if (email) {
