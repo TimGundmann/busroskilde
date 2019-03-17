@@ -11,7 +11,7 @@ import { confirmDialog } from 'app/shared/confirm/confirm.component';
 @Component({
   selector: 'app-plan',
   templateUrl: './plan.component.html',
-  styleUrls: ['./plan.component.scss'],
+  styleUrls: ['../list.scss'],
   animations: [
     fadeInAndOutForPlan
   ]

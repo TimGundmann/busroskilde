@@ -1,6 +1,6 @@
 import { confirmDialog } from 'app/shared/confirm/confirm.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { News } from 'app/domain/news';
 import { NewsService } from 'app/services/news.service';
@@ -8,10 +8,10 @@ import { NotificationService } from 'app/services';
 
 @Component({
   selector: 'app-news-editor',
-  templateUrl: './news-editor.component.html',
-  styleUrls: ['./news-editor.component.scss']
+  templateUrl: './news.component.html',
+  styleUrls: ['../list.scss']
 })
-export class NewsEditorComponent implements OnInit {
+export class NewsComponent implements OnInit {
 
   news: News[];
   editNews: News;

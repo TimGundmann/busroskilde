@@ -3,7 +3,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RouterModule, RouteReuseStrategy } from '@angular/router';
 import { HomeRoutingModule } from './home.routing';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { NewsEditorComponent } from './news-editor/news-editor.component';
+import { NewsComponent } from './news-editor/news.component';
 import { NouisliderModule } from 'ng2-nouislider';
 import { UsersComponent } from './users/users.component';
 import { NgModule } from '@angular/core';
@@ -50,7 +50,7 @@ import { ConfirmComponent } from '../shared/confirm/confirm.component';
         PlanComponent,
         UsersComponent,
         AddComponent,
-        NewsEditorComponent,
+        NewsComponent,
         AddNewsComponent,
         SafeHtmlPipe,
         ProfileComponent,

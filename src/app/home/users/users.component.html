@@ -9,7 +9,7 @@
       <div *ngFor="let user of users; let index = index">
         <div class="card no-transition" style="margin-bottom: 2px; min-width: 300px; opacity: 0.95;">
           <div class="card-body">
-            <div class="user-heading">
+            <div class="sub-heading">
               <div>
                 <img [src]="getPicture(user)">
                 <span class="text-headline">{{user.name}}</span>
@@ -17,7 +17,7 @@
               <div class="user-info">
                 <div>
                   <span class="text-info">Chaufførnummer: </span>
-                  <span>{{user.number}}</span>
+                  <span class="marigen">{{user.number}}</span>
                 </div>
                 <div>
                   <span class="text-info">Email: </span>

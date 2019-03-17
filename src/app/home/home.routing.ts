@@ -1,11 +1,10 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryResover } from './category-resover';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { NewsEditorComponent } from './news-editor/news-editor.component';
+import { NewsComponent } from './news-editor/news.component';
 import { PlanComponent } from './plan/plan.component';
 import { ProfileComponent } from './profile/profile.component';
 
@@ -15,7 +14,7 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent,
     children: [
-      { path: 'news', component: NewsEditorComponent },
+      { path: 'news', component: NewsComponent },
       { path: 'users', component: UsersComponent },
       {
         path: 'plans/:category',

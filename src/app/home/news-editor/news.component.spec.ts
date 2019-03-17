@@ -5,7 +5,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AddNewsComponent } from './add-news/add-news.component';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
-import { NewsEditorComponent } from './news-editor.component';
+import { NewsComponent } from './news.component';
 import { SafeHtmlPipe } from '../safe-html.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
@@ -15,8 +15,8 @@ import { SvgComponent } from 'app/shared/svg/svg.component';
 import { DebugElement } from '@angular/core';
 
 describe('NewsEditorComponent', () => {
-  let component: NewsEditorComponent;
-  let fixture: ComponentFixture<NewsEditorComponent>;
+  let component: NewsComponent;
+  let fixture: ComponentFixture<NewsComponent>;
   let debugElement: DebugElement;
 
   class MockHttpClient {
@@ -28,7 +28,7 @@ describe('NewsEditorComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        NewsEditorComponent,
+        NewsComponent,
         AddNewsComponent,
         SafeHtmlPipe,
         SvgComponent,
@@ -54,7 +54,7 @@ describe('NewsEditorComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewsEditorComponent);
+    fixture = TestBed.createComponent(NewsComponent);
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
     fixture.detectChanges();

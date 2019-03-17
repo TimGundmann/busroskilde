@@ -24,14 +24,14 @@
                         <small>{{new.timestamp | date}}</small>
                     </div>
                     <div class="card-body">
-                        <div class="news-heading">
+                        <div class="sub-heading">
                             <div class="content" [innerHTML]="new.content | safeHtml"></div>
 
                             <div>
-                                <a *ngIf="canAlter()" style="cursor: pointer;" (click)="edit(new)" title="Rediger">
+                                <a class="icon svg-icon" *ngIf="canAlter()" style="cursor: pointer;" (click)="edit(new)" title="Rediger">
                                     <app-svg name="edit" width="16" height="16"></app-svg>
                                 </a>
-                                <a *ngIf="canAlter()" style="cursor: pointer;" (click)="delete(new)" title="Slet">
+                                <a class="icon" *ngIf="canAlter()" style="cursor: pointer;" (click)="delete(new)" title="Slet">
                                     <i class="nc-icon nc-simple-delete" aria-hidden="true"></i>
                                 </a>
                             </div>

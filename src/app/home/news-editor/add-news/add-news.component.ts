@@ -70,7 +70,7 @@ export class AddNewsComponent {
   };
 
   constructor(
-    private newsService: NewsService, 
+    private newsService: NewsService,
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService) { }
 
