@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Category } from './../../domain/plan';
 import { PlanService } from 'app/services/plan.service';
 import { AuthService } from './../../services/auth.service';
@@ -95,6 +96,11 @@ export class NavbarComponent implements OnInit {
                     this.router.navigate(['/signin']);
                 });
         }
+    }
+
+    scrollToAignUp(elementId: string) {
+        const element = document.getElementById(elementId);
+        element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }
 
     public isAdmin(): boolean {
