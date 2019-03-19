@@ -26,6 +26,12 @@
                 </ul>
             </ng-container>
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item" *ngIf="isAdmin()">
+                    <a class="nav-link" rel="tooltip" title="Konfiguration" data-placement="bottom" routerLink="/configuration">
+                        <i class="nc-icon nc-atom"></i>
+                        <p class="d-lg-none">Konfiguration</p>
+                    </a>
+                </li>
                 <li class="nav-item" *ngIf="!isHome()">
                     <a class="nav-link" rel="tooltip" title="Kontakt" data-placement="bottom"
                         (click)="scrollToAignUp('contact')" style="cursor: pointer;">
@@ -33,7 +39,6 @@
                         <p class="d-lg-none">Kontakt</p>
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="Facebook" data-placement="bottom"
                         href="https://www.facebook.com/groups/405605066676558" target="_blank">

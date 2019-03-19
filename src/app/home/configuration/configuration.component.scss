@@ -1,0 +1,47 @@
+.config-content {
+    border-radius: 12px;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.heading {
+    width: auto;
+    justify-content: center;
+    min-width: 110px;
+    a {
+        margin: 0 !important;
+        border: none;
+        font-weight: 600;    
+        text-transform: uppercase;
+        color: #FFF;
+    }
+}
+
+.seleted {
+    a {
+        margin: 0 !important;
+        border: none;
+        font-weight: 600;    
+        text-transform: uppercase;
+        color: inherit;
+    }
+}
+
+.add {
+    justify-content: center;
+    display: flex;
+    a {
+        cursor: pointer;
+        width: 50px;
+    }   
+}
+    
+
+@media (max-width: 767px) {
+    .heading {
+        height: auto;
+    }
+}
+

@@ -23,6 +23,14 @@ export class PlanService {
     return this.handleResponce(this.httpClient.get<Category>(`${this.serviceHost}/categories/${name}`));
   }
 
+  deleteCategory(name: string): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/categories/${name}/delete`, null));
+  }
+
+  updateCategory(category: Category): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/categories/update`, category));
+  }
+
   getCategories(): Observable<RequestResult<Category[]>> {
     return this.handleResponce(this.httpClient.get<Category[]>(`${this.serviceHost}/categories`));
   }

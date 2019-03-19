@@ -1,3 +1,4 @@
+import { ConfigurationComponent } from './configuration/configuration.component';
 import { CategoryResover } from './category-resover';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
           category: CategoryResover
         },
       },
-      { path: 'profile', component: ProfileComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'configuration', component: ConfigurationComponent },
     ]
   },
 ];

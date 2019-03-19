@@ -24,6 +24,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { CropModalComponent } from './profile/crop-modal/crop-modal.component';
 import { SvgComponent } from 'app/shared/svg/svg.component';
 import { ConfirmComponent } from '../shared/confirm/confirm.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 @NgModule({
     imports: [
@@ -55,7 +56,8 @@ import { ConfirmComponent } from '../shared/confirm/confirm.component';
         SafeHtmlPipe,
         ProfileComponent,
         CropModalComponent,
-        SvgComponent
+        SvgComponent,
+        ConfigurationComponent
     ],
     exports: [
         HomeComponent

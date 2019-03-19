@@ -1,4 +1,4 @@
-<div class="container text-center bottom-margin">
+<div class="container text-center">
     <div class="row">
         <div class="col-md-1 mr-auto ml-auto">
             <nav class="navbar bg-info heading">
@@ -18,7 +18,7 @@
             <app-add-news [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [editNews]="editNews">
             </app-add-news>
             <div *ngFor="let new of news">
-                <div class="card no-transition" style="margin-bottom: 2px; opacity: 0.95;">
+                <div class="card no-transition list-card">
                     <div class="card-heading">
                         <h6 style="margin-bottom: 0; margin-top: 10px;">{{new.headline}}</h6>
                         <small>{{new.timestamp | date}}</small>

@@ -9,3 +9,11 @@ export interface User {
     roles?: string[];
     notifications?: string[];
 }
+
+export const roles = [
+    { displayName: 'Bruger', role: '' },
+    { displayName: 'Dagens vagt', role: 'SUPER' },
+    { displayName: 'Tillidsmand', role: 'TILLI' },
+    { displayName: 'Driftkontor', role: 'DRIFT' },
+    { displayName: 'Administrator', role: 'ADMIN' }
+  ];

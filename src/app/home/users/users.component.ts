@@ -1,6 +1,6 @@
 import { ConfirmComponent, confirmDialog } from './../../shared/confirm/confirm.component';
 import { AuthService } from './../../services/auth.service';
-import { User } from './../../domain/user';
+import { User, roles } from './../../domain/user';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'app/services';
@@ -15,15 +15,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class UsersComponent implements OnInit {
 
   users: User[];
-  roles = [
-    { displayName: 'Bruger', role: '' },
-    { displayName: 'Dagens vagt', role: 'SUPER' },
-    { displayName: 'Tillidsmand', role: 'TILLI' },
-    { displayName: 'Driftkontor', role: 'DRIFT' },
-    { displayName: 'Administrator', role: 'ADMIN' }
-  ];
 
   private rolesVisisble = [];
+
+  get roles() {
+    return roles;
+  }
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -67,10 +64,10 @@ export class UsersComponent implements OnInit {
     if (!user.roles) {
       return 0;
     }
-    if (user.roles.indexOf(this.roles[1].role) > -1) {
+    if (user.roles.indexOf(roles[1].role) > -1) {
       return 1
     }
-    if (user.roles.indexOf(this.roles[2].role) > -1) {
+    if (user.roles.indexOf(roles[2].role) > -1) {
       return 2
     }
     return 0;
@@ -87,7 +84,6 @@ export class UsersComponent implements OnInit {
     } else {
       user.roles.push(role.role);
     }
-    console.log(role);
     this.userService.update(user)
       .subscribe(result => {
         if (result.errorResult) {
@@ -96,12 +92,12 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  toggleRolesVisible(index: number) {
-    this.rolesVisisble[index] = !this.rolesVisisble[index];
-  }
-
   isRolesVisisble(index: number): boolean {
     return this.rolesVisisble[index];
+  }
+
+  toggleRolesVisible(index: number) {
+    this.rolesVisisble[index] = !this.rolesVisisble[index];
   }
 
   delete(user: User) {
