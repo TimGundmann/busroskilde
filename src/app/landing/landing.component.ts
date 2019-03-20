@@ -1,8 +1,5 @@
-import { AuthService } from './../services/auth.service';
-import { UserService } from './../services/user.service';
-import { Component, OnInit } from '@angular/core';
-import { NotificationService } from 'app/services';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { fadeInAndOutForRoute } from 'app/shared/fade-in-animation';
 
 @Component({
   selector: 'app-landing',
@@ -10,22 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing.component.scss']
 })
 
-export class LandingComponent implements OnInit {
-
-  constructor(private rotuer: Router, private authService: AuthService) { }
-
-  ngOnInit() { }
-
-  scrollToAignUp(element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-  }
-
-  signin() {
-    let route = 'signin'
-    if (this.authService.isAuthenticated()) {
-      route = 'home';
-    }
-    this.rotuer.navigate([route]);
-  }
+export class LandingComponent {
 
 }

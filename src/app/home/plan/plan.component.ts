@@ -1,4 +1,4 @@
-import { fadeInAndOutForPlan } from './../fade-in-animation';
+import { fadeInAndOut } from '../../shared/fade-in-animation';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlanService } from '../../services/plan.service';
 import { AuthService } from './../../services/auth.service';
@@ -13,7 +13,7 @@ import { confirmDialog } from 'app/shared/confirm/confirm.component';
   templateUrl: './plan.component.html',
   styleUrls: ['../list.scss'],
   animations: [
-    fadeInAndOutForPlan
+    fadeInAndOut
   ]
 })
 export class PlanComponent implements OnInit {

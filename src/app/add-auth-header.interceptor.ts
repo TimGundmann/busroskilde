@@ -27,7 +27,7 @@ export class AddAuthHeaderInterceptor implements HttpInterceptor {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401 || err.status === 403) {
             this.authService.signOut();
-            this.router.navigate(['/signin']);
+            this.router.navigate(['landing', 'signin']);
           }
       }
     }));

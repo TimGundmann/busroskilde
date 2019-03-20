@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { Category } from './../../domain/plan';
 import { PlanService } from 'app/services/plan.service';
 import { AuthService } from './../../services/auth.service';
@@ -27,11 +26,9 @@ export class NavbarComponent implements OnInit {
         private planService: PlanService,
         private notifcations: NotificationService) {
         router.events.subscribe(event => {
-
             if (event instanceof NavigationEnd) {
                 this.ngOnInit();
             }
-
         });
     }
 
@@ -90,15 +87,15 @@ export class NavbarComponent implements OnInit {
             this.authService.signOut();
             this.router.navigate(['/landing']);
         } else {
-            this.router.navigate(['/signin'])
+            this.router.navigate(['/landing/signin'])
                 .catch(e => {
                     console.log(e);
-                    this.router.navigate(['/signin']);
+                    this.router.navigate(['/landing/signin']);
                 });
         }
     }
 
-    scrollToAignUp(elementId: string) {
+    scrollToSignUp(elementId: string) {
         const element = document.getElementById(elementId);
         element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }

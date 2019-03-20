@@ -1,7 +1,7 @@
 import { PlanService } from './../services/plan.service';
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'app/domain/plan';
-import { fadeInAndOutForRoute } from 'app/home/fade-in-animation';
+import { fadeInAndOutForRoute } from 'app/shared/fade-in-animation';
 import { Router } from '@angular/router';
 
 @Component({

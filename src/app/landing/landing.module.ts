@@ -10,6 +10,8 @@ import { MessageComponent } from './message/message.component';
 import { ActivateComponent } from './activate/activate.component';
 import { ResetPasswordComponent } from './signin/reset-password/reset-password.component';
 import { NewPasswordComponent } from './new-password/new-password.component';
+import { LandingRoutingModule } from './landing.routing';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +21,16 @@ import { NewPasswordComponent } from './new-password/new-password.component';
     MessageComponent,
     ActivateComponent,
     ResetPasswordComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    HomeComponent
   ],
   imports: [
     ServicesModule.forRoot(),
     CommonModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LandingRoutingModule
   ],
   exports: [
     LandingComponent,

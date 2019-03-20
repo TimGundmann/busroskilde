@@ -47,7 +47,7 @@ export class NewPasswordComponent implements OnInit {
       this.userService.newPassword(this.password1, this.token).subscribe(result => {
         if (result.okResult) {
           this.notifications.info('Password er nu opdateret!', true);
-          this.rotuer.navigate(['/signin']);
+          this.rotuer.navigate(['/landing/signin']);
         } else {
           this.notifications.error('Der sket en fejl ved opdatering af password!');
         }

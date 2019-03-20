@@ -1,6 +1,6 @@
 import { trigger, transition, style, animateChild, group, animate, query, state, stagger } from '@angular/animations';
 
-export const fadeInAndOutForPlan =
+export const fadeInAndOut =
     trigger('fadeInAndOutForPlan', [
         state('open', style({ opacity: 1 })),
         state('close', style({ opacity: 0 })),

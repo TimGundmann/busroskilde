@@ -3,7 +3,7 @@
         <div class="navbar-translate">
             <a class="navbar-brand" routerLink="/">Bus Roskilde</a>
             <button #navbarToggler class="navbar-toggler navbar-burger" type="button" data-toggle="collapse"
-                data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                data-target="#navbarToggler" aria-expanded="false"
                 aria-label="Toggle navigation" (click)="sidebarToggle()">
                 <span class="navbar-toggler-bar"></span>
                 <span class="navbar-toggler-bar"></span>
@@ -34,7 +34,7 @@
                 </li>
                 <li class="nav-item" *ngIf="!isHome()">
                     <a class="nav-link" rel="tooltip" title="Kontakt" data-placement="bottom"
-                        (click)="scrollToAignUp('contact')" style="cursor: pointer;">
+                        (click)="scrollToSignUp('contact')" style="cursor: pointer;">
                         <i class="fa fa-envelope-square"></i>
                         <p class="d-lg-none">Kontakt</p>
                     </a>
