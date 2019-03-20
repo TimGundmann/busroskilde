@@ -11,7 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'news', pathMatch: 'full' },
+  { path: '', redirectTo: 'home/news', pathMatch: 'full' },
   {
     path: '', component: HomeComponent,
     children: [

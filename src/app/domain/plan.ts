@@ -8,7 +8,7 @@ export interface Plan {
     fileType: string;
     fileName: string;
     category: Category;
-    subCategory: SubCategory;
+    subCategory: string;
     createdDate?: Date;
 
 }
@@ -19,15 +19,9 @@ export interface Category {
 
     type?: string;
 
-    subCategories?: SubCategory[];
+    subCategories?: string[];
 
     alterRoles?: string[];
-
-}
-
-export interface SubCategory {
-
-    name: string;
 
 }
 

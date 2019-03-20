@@ -18,7 +18,7 @@
         <div class="col-md-6 form-group" *ngIf="category?.subCategories.length > 0">
           <label>Dag</label>
           <select class="form-control" placeholder="Dag" formControlName="subCatetory">
-            <option *ngFor="let sub of category?.subCategories" [ngValue]="sub">{{sub?.name}}</option>
+            <option *ngFor="let sub of category?.subCategories" [ngValue]="sub">{{sub}}</option>
           </select>
         </div>
       </div>

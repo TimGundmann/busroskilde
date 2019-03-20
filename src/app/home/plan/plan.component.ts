@@ -73,7 +73,7 @@ export class PlanComponent implements OnInit {
   isFirst(index: number): boolean {
     if (this.plans && this.plans.length > 0) {
       const currentSub = this.plans[index].subCategory;
-      const firstIndex = this.plans.findIndex(p => p.subCategory.name === currentSub.name);
+      const firstIndex = this.plans.findIndex(p => p.subCategory === currentSub);
       return firstIndex === index;
     }
     return false;
@@ -139,10 +139,10 @@ export class PlanComponent implements OnInit {
         this.plans = result.returnValue;
         this.plans.sort((p1, p2) => {
           if (p1.subCategory && p1.subCategory) {
-            if (p1.subCategory.name > p2.subCategory.name) {
+            if (p1.subCategory > p2.subCategory) {
               return 1;
             }
-            if (p1.subCategory.name < p2.subCategory.name) {
+            if (p1.subCategory < p2.subCategory) {
               return -1;
             }
           }

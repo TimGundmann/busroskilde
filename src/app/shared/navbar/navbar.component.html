@@ -27,7 +27,7 @@
             </ng-container>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" *ngIf="isAdmin()">
-                    <a class="nav-link" rel="tooltip" title="Konfiguration" data-placement="bottom" routerLink="/configuration">
+                    <a class="nav-link" rel="tooltip" title="Konfiguration" data-placement="bottom" routerLink="/home/configuration">
                         <i class="nc-icon nc-atom"></i>
                         <p class="d-lg-none">Konfiguration</p>
                     </a>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="isAuthenticated()">
-                    <a class="nav-link" rel="tooltip" title="Profile" data-placement="bottom" routerLink="/profile">
+                    <a class="nav-link" rel="tooltip" title="Profile" data-placement="bottom" routerLink="/home/profile">
                         <i class="nc-icon nc-single-02"></i>
                         <p class="d-lg-none">Profile</p>
                     </a>

@@ -1,4 +1,4 @@
-import { SubCategory, deepCopy } from './../../domain/plan';
+import { deepCopy } from './../../domain/plan';
 import { Category } from 'app/domain/plan';
 import { PlanService } from 'app/services/plan.service';
 import { Component, OnInit } from '@angular/core';
@@ -21,6 +21,8 @@ export class ConfigurationComponent implements OnInit {
 
   nameNewMode = false;
 
+  selectedIndex = 0;
+
   types = [
     { displayName: 'Enkelt uden datoer', value: 'SIMPLE' },
     { displayName: 'Med til dato', value: 'TO' },
@@ -39,7 +41,10 @@ export class ConfigurationComponent implements OnInit {
         if (result.okResult) {
           this.nameNewMode = false;
           this.categories = result.returnValue;
-          if (this.categories.length > 0) {
+          if (this.categories.length > this.selectedIndex) {
+            this.selected = this.categories[this.selectedIndex];
+            this.selectedIndex = 0;
+          } else if (this.categories.length > 0) {
             this.selected = this.categories[0];
           }
         }
@@ -71,7 +76,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   addSubcategory() {
-    this.selected.subCategories.push({ name: this.newSubCategory });
+    this.selected.subCategories.push(this.newSubCategory);
     this.newSubCategory = '';
   }
 
@@ -100,6 +105,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   updateCategory() {
+    this.selectedIndex = this.categories.findIndex(c => c.name === this.selected.name);
     this.planService.updateCategory(this.selected)
       .subscribe(result => {
         if (result.okResult) {
