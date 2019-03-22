@@ -78,18 +78,20 @@ export class UsersComponent implements OnInit {
   }
 
   changeRole(user: User, role: any) {
-    const index = user.roles.indexOf(role.role);
-    if (index > -1) {
-      user.roles.splice(index, 1);
-    } else {
-      user.roles.push(role.role);
+    if (role) {
+      const index = user.roles.indexOf(role.role);
+      if (index > -1) {
+        user.roles.splice(index, 1);
+      } else {
+        user.roles.push(role.role);
+      }
+      this.userService.update(user)
+        .subscribe(result => {
+          if (result.errorResult) {
+            this.notifications.error('Fejl ved opdatering af brugerns roller, prøv igen senere');
+          }
+        });
     }
-    this.userService.update(user)
-      .subscribe(result => {
-        if (result.errorResult) {
-          this.notifications.error('Fejl ved opdatering af brugerns roller, prøv igen senere');
-        }
-      });
   }
 
   isRolesVisisble(index: number): boolean {

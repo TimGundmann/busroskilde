@@ -11,7 +11,7 @@ export interface User {
 }
 
 export const roles = [
-    { displayName: 'Bruger', role: '' },
+    { displayName: 'Bruger', role: 'USER' },
     { displayName: 'Dagens vagt', role: 'SUPER' },
     { displayName: 'Tillidsmand', role: 'TILLI' },
     { displayName: 'Driftkontor', role: 'DRIFT' },
