@@ -107,6 +107,11 @@
     }
 }
 
+.noflex {
+    display: block !important;
+    width: 100%;
+}
+
 .roles {
     display: flex;
     justify-content: space-between;

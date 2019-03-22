@@ -25,7 +25,7 @@
                     </div>
                     <div class="card-body">
                         <div class="sub-heading">
-                            <div class="content" [innerHTML]="new.content | safeHtml"></div>
+                            <div class="content noflex" [innerHTML]="new.content | safeHtml"></div>
 
                             <div>
                                 <a class="icon svg-icon" *ngIf="canAlter()" style="cursor: pointer;" (click)="edit(new)" title="Rediger">
