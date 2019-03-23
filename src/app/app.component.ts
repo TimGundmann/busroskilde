@@ -36,14 +36,11 @@ export class AppComponent implements OnInit {
         });
         this.renderer.listenGlobal('window', 'scroll', (event) => {
             const number = window.scrollY;
-            console.log(number + ' ' + window.pageYOffset);
             if (number > 20 || window.pageYOffset > 20) {
                 // add logic
-                console.log('add');
                 navbar.classList.remove('navbar-transparent');
             } else {
                 // remove logic
-                console.log('remove');
                 navbar.classList.add('navbar-transparent');
             }
         });
