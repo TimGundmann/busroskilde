@@ -1,5 +1,5 @@
-import { fadeInAndOut } from '../../shared/fade-in-animation';
-import { ActivatedRoute, Router } from '@angular/router';
+import { fadeInAndOut, scrollInAndOut } from '../../shared/fade-in-animation';
+import { ActivatedRoute } from '@angular/router';
 import { PlanService } from '../../services/plan.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -7,13 +7,15 @@ import { NotificationService } from 'app/services';
 import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
 import { confirmDialog } from 'app/shared/confirm/confirm.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-plan',
   templateUrl: './plan.component.html',
   styleUrls: ['../list.scss'],
   animations: [
-    fadeInAndOut
+    fadeInAndOut,
+    scrollInAndOut
   ]
 })
 export class PlanComponent implements OnInit {
@@ -22,7 +24,7 @@ export class PlanComponent implements OnInit {
 
   @Input() odd: boolean;
 
-  private pdfToggels: Map<Plan, boolean> = new Map();
+  private pdfToggels: Map<Plan, string> = new Map();
 
   plans: Plan[] = [];
   editPlan: Plan;
@@ -30,12 +32,14 @@ export class PlanComponent implements OnInit {
 
   state = 'close';
 
+  loading = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private planService: PlanService,
-    private rotuer: Router,
-    private notifications: NotificationService) {
+    private notifications: NotificationService,
+    private spinner: NgxSpinnerService) {
 
     this.activatedRoute.data
       .subscribe(data => {
@@ -92,12 +96,27 @@ export class PlanComponent implements OnInit {
 
   togglePdf(plan: Plan) {
     const toggle = this.pdfToggels.get(plan);
-    this.pdfToggels.set(plan, !toggle);
+    if (toggle === 'open') {
+      this.pdfToggels.set(plan, 'close');
+    } else {
+      this.loading = true;
+      this.spinner.show();
+      this.pdfToggels.set(plan, 'open');
+    }
+
   }
 
   showPdf(plan: Plan): boolean {
+    return this.pdfToggels.get(plan) === 'open';
+  }
+
+  showPdfState(plan: Plan): string {
+    if (this.loading) {
+      return 'close';
+    }
     return this.pdfToggels.get(plan);
   }
+
 
   getEditPlan(): Plan {
     return this.editPlan;
@@ -133,6 +152,11 @@ export class PlanComponent implements OnInit {
     }
   }
 
+  endLoad() {
+    this.loading = false;
+    this.spinner.hide();
+  }
+
   private refreshPlans() {
     this.planService.getActivePlansByCategory(this.category)
       .subscribe(result => {
@@ -148,7 +172,7 @@ export class PlanComponent implements OnInit {
           }
           return 0;
         });
-        this.plans.forEach(r => this.pdfToggels.set(r, false));
+        this.plans.forEach(r => this.pdfToggels.set(r, 'close'));
         this.state = 'open';
       });
   }

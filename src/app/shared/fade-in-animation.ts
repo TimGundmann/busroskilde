@@ -8,6 +8,14 @@ export const fadeInAndOut =
         transition('close => open', animate('.5s', style({ opacity: 1 }))),
     ]);
 
+export const scrollInAndOut =
+    trigger('scrollInAndOut', [
+        state('open', style({ height: '*', opacity: 1 })),
+        state('close', style({ height: '0', opacity: 0 })),
+        transition('open => close', animate('.5s ease-in-out')),
+        transition('close => open', animate('.5s ease-in-out')),
+    ]);
+
 export const fadeInAndOutForRoute =
     trigger('fadeInAndOutForRoute', [
         transition('* => *', [

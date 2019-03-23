@@ -66,8 +66,10 @@
                                 </a>
                             </div>
                         </div>
-                        <pdf-viewer *ngIf="showPdf(plan)" [src]="plan.file" [render-text]="true" [original-size]="false"
-                            [autoresize]="true" style="display: block;">"></pdf-viewer>
+                        <div [@scrollInAndOut]="showPdfState(plan)">
+                            <pdf-viewer *ngIf="showPdf(plan)" [src]="plan.file" [render-text]="true" [original-size]="false"
+                                [autoresize]="true" style="display: block;" (text-layer-rendered)="endLoad()"></pdf-viewer>
+                        </div>
                     </div>
                 </div>
             </div>
