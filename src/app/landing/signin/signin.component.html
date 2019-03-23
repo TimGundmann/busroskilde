@@ -27,8 +27,8 @@
             <input type="password" class="form-control" placeholder="Password" (focus)="focus1=true"
               (blur)="focus1=false" formControlName="password">
           </div>
-          <button class="btn btn-danger btn-block btn-round" [disabled]="!signInForm.valid">Logind</button>
-          <a class="btn btn-outline-danger btn-block btn-round btn-sm" (click)="confirmReset()">Glemt password</a>
+          <button class="btn btn-danger btn-block" [disabled]="!signInForm.valid">Logind</button>
+          <a class="btn btn-outline-danger btn-block btn-sm" (click)="confirmReset()">Glemt password</a>
         </form>
       </div>
     </div>

@@ -1,5 +1,7 @@
+@import "../../../assets/sass/paper-kit/variables";
+
 .config-content {
-    border-radius: 12px;
+    border-radius: $border-radius-extreme;
 }
 
 .nav-link {

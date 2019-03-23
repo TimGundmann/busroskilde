@@ -18,7 +18,7 @@
             <app-add [visisble]="addVisible" (changeVisibility)="addChangeVisisblity()" [category]="category"
                 [editPlan]="editPlan"></app-add>
             <div *ngFor="let plan of plans; let index = index">
-                <div class="card no-transition" style="margin-bottom: 1px; opacity: 0.95;"
+                <div class="card no-transition" style="margin-bottom: 1px; opacity: 0.95; min-width: 300px;"
                     *ngIf="plan.subCategory && isFirst(index)">
                     <div class="card-header">
                         <h6 style="margin-bottom: 0">
@@ -41,12 +41,13 @@
                             <div *ngIf="canAlter() && category.type === 'FROM_TO'">
                                 <div>
                                     <label class="text-info">Gyldig fra:</label>
-                                    <input type="date" [value]="plan.from"
+                                    <input class="form-control" type="date" [value]="plan.from"
                                         (input)="updateFrom(plan, $event.target.value)">
                                 </div>
                                 <div>
                                     <label class="text-info">Gyldig til:</label>
-                                    <input type="date" [value]="plan.to" (input)="updateTo(plan, $event.target.value)">
+                                    <input class="form-control" type="date" [value]="plan.to"
+                                        (input)="updateTo(plan, $event.target.value)">
                                 </div>
                             </div>
                             <div>

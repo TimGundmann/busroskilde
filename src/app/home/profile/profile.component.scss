@@ -1,3 +1,5 @@
+@import "../../../assets/sass/paper-kit/variables";
+
 .profile {
     .title {
         color: #333 !important;
@@ -68,8 +70,9 @@ a {
     cursor: pointer;
 }
 
+
 .profile-content {
-    border-radius: 12px;
+    border-radius: $border-radius-extreme;
 }
 
 .selectable {
