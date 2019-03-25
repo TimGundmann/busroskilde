@@ -32,8 +32,8 @@ pipeline {
             }
         }
         stage("Deploy") {
-            def color = 'green';
             steps{                
+                def color = 'green';
                 sh "docker-compose stop ${color}"
                 sh "docker-compose build ${color}"
                 sh "docker-compose up -d ${color}"
