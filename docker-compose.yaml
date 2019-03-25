@@ -1,10 +1,18 @@
 version: '2'
 services:
-  web:
+  green:
     restart: "always"
     build: .
     ports:
      - "9898:80"
+    image: busroskilde
+    environment:
+      TZ: "Europe/Amsterdam"
+  blue:
+    restart: "always"
+    build: .
+    ports:
+     - "9899:80"
     image: busroskilde
     environment:
       TZ: "Europe/Amsterdam"

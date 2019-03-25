@@ -33,9 +33,9 @@ pipeline {
         }
         stage("Deploy") {
             steps{
-                sh "docker-compose stop"
-                sh "docker-compose build"
-                sh "docker-compose up -d"
+                sh "docker-compose stop blue"
+                sh "docker-compose build blue"
+                sh "docker-compose up -d blue"
             }
         }
     }
