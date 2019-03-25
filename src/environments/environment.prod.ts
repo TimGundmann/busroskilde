@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  serviceHostUser: 'https://www.busroskilde.dk/users',
-  serviceHostPlan: 'https://www.busroskilde.dk/plans',
-  serviceHostNews: 'https://www.busroskilde.dk/news',
+  serviceHostUser: 'https://www.gundmann.dk/users',
+  serviceHostPlan: 'https://www.gundmann.dk/plans',
+  serviceHostNews: 'https://www.gundmann.dk/news',
   authTokenName: 'Authorization',
   authHeaderName: 'Authorization',
   version: require('../../package.json').version
