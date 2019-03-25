@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    color = 'green'
 
     tools {
         nodejs "node 11"
@@ -33,7 +34,6 @@ pipeline {
         }
         stage("Deploy") {
             steps{                
-                color = 'green';
                 sh "docker-compose stop ${color}"
                 sh "docker-compose build ${color}"
                 sh "docker-compose up -d ${color}"
