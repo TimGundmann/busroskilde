@@ -48,8 +48,7 @@ export class AddComponent implements OnChanges {
       this.file.setValue([fileToBlob(this._editPlan)]);
       this.action = 'Rediger';
     } else {
-      this.addForm.reset();
-      this.file.setValue([]);
+      this.reset();
       this.action = 'Tilføj';
     }
   };
@@ -157,7 +156,7 @@ export class AddComponent implements OnChanges {
 
   toggleAdd() {
     this.visisble = !this.visisble;
-    this.addForm.reset();
+    this.reset();
     this.changeVisibility.emit('' + this.visisble);
   }
 
@@ -185,5 +184,8 @@ export class AddComponent implements OnChanges {
     }
   }
 
-
+  private reset() {
+    this.addForm.reset();
+    this.file.setValue([]);
+  }
 }

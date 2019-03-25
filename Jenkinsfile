@@ -32,10 +32,11 @@ pipeline {
             }
         }
         stage("Deploy") {
-            steps{
-                sh "docker-compose stop blue"
-                sh "docker-compose build blue"
-                sh "docker-compose up -d blue"
+            def color = 'green';
+            steps{                
+                sh "docker-compose stop ${color}"
+                sh "docker-compose build ${color}"
+                sh "docker-compose up -d ${color}"
             }
         }
     }
