@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    color = 'green'
+    color 'green'
 
     tools {
         nodejs "node 11"
