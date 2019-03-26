@@ -68,8 +68,8 @@ pipeline {
                     $class: "Mailer", 
                     notifyEveryUnstableBuild: true, 
                     recipients: emailextrecipients([
-                        [$class: "CulpritsRecipientProvider"], 
-                        [$class: "RequesterRecipientProvider"]
+                            [$class: "CulpritsRecipientProvider"], 
+                            [$class: "RequesterRecipientProvider"]
                         ])
                     ]
             )      
