@@ -14,7 +14,7 @@ pipeline {
    //            sh "npm install"
                sh "npm version 1.0.${currentBuild.number}"
                script {
-                    if (sh(script: "curl -o /dev/null -s -w '%{http_code}\\n' 'https://busroskilde.dk/blue/index.html'", returnStdout: true).trim() == '200') {
+                    if (verifyUrl("https://busroskilde.dk/blue/index.html") {
                         string = "green"
                         old = "blue"
                     }
@@ -48,16 +48,7 @@ pipeline {
         stage("Verify") {
             steps{       
                 script {
-                    def dockerFile = readYaml file: 'docker-compose.yaml'
-                    def port = dockerFile.services.green.ports[0]
-                    if (string == 'blue') {
-                        port = dockerFile.services.blue.ports[0]
-                    }
-                    port = port.substring(0, port.indexOf(':'))
-                    echo "The verification port is: ${port}"
-                    def verify = sh(script: "curl -o /dev/null -s -w '%{http_code}\\n' 'http://localhost:${port}'", returnStdout: true)
-                    echo "result ${verify}"
-                    if (verify.trim() == '200') {
+                    if (verifyUrl("http://localhost:${findCurrentPort()}")) {
                         echo "Success full deploy to ${string}"
                     }
                 }         
@@ -70,4 +61,20 @@ pipeline {
 //             step([$class: "Mailer", notifyEveryUnstableBuild: true, recipients: emailextrecipients([[$class: "CulpritsRecipientProvider"], [$class: "RequesterRecipientProvider"]])])      
 //         }
 //   }    
+}
+
+boolean verifyUrl(String url) {
+    return sh(
+            script: "curl -o /dev/null -s -w '%{http_code}\\n' ${url}'", 
+            returnStdout: true
+        ).trim()  == '200';
+}
+
+String findCurrentPort() {
+    def dockerFile = readYaml file: 'docker-compose.yaml'
+    def port = dockerFile.services.green.ports[0]
+    if (string == 'blue') {
+        port = dockerFile.services.blue.ports[0]
+    }
+    return port.substring(0, port.indexOf(':'))
 }
