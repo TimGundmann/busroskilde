@@ -56,6 +56,7 @@ pipeline {
                     port = port.substring(0, port.indexOf(':'))
                     echo "The verification port is: ${port}"
                     def verify = sh(script: "curl -o /dev/null -s -w '%{http_code}\\n' 'http://localhost:${port}'", returnStdout: true)
+                    echo "result ${verify}"
                     if (verify == '200') {
                         echo "Success full deploy to ${string}"
                     }
