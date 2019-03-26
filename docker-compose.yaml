@@ -2,7 +2,10 @@ version: '2'
 services:
   green:
     restart: "always"
-    build: .
+    build: 
+      context: .
+      args:
+        string: green
     ports:
      - "9898:80"
     image: busroskilde
@@ -10,7 +13,10 @@ services:
       TZ: "Europe/Amsterdam"
   blue:
     restart: "always"
-    build: .
+    build:
+      context: .
+      args:
+        string: blue
     ports:
      - "9899:80"
     image: busroskilde

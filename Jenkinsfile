@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        COLOR = "green"
+        STRING = "blue"
     }
 
     tools {
@@ -37,9 +37,9 @@ pipeline {
         }
         stage("Deploy") {
             steps{                
-                sh "docker-compose stop ${COLOR}"
-                sh "docker-compose build ${COLOR}"
-                sh "docker-compose up -d ${COLOR}"
+                sh "docker-compose stop ${STRING}"
+                sh "docker-compose build ${STRING}"
+                sh "docker-compose up -d ${STRING}"
             }
         }
     }
