@@ -1,9 +1,8 @@
+def string = "blue"
+def old = "green"
+
 pipeline {
     agent any
-
-    environment {
-        STRING = "blue"
-    }
 
     tools {
         nodejs "node 11"
@@ -15,7 +14,11 @@ pipeline {
                sh "npm install"
                sh "npm version 1.0.${currentBuild.number}"
                script {
-                    currentBuild.displayName = "Version: 1.0.${currentBuild.number}"
+                    if (sh(script: "curl -o /dev/null -s -w '%{http_code}\n' 'https://busroskilde.dk/blue/index.html'", returnStdout: true) == 200) {
+                        string = "green"
+                        old = "blue"
+                    }
+                    currentBuild.displayName = "Version: 1.0.${currentBuild.number} String: ${string}"
                }
             }                
         }
@@ -37,9 +40,22 @@ pipeline {
         }
         stage("Deploy") {
             steps{                
-                sh "docker-compose stop ${STRING}"
-                sh "docker-compose build ${STRING}"
-                sh "docker-compose up -d ${STRING}"
+                sh "docker-compose stop ${string}"
+                sh "docker-compose build ${string}"
+                sh "docker-compose up -d ${string}"
+            }
+        }
+        stage("Verify") {
+            steps{       
+                script {
+                    def dockerFile = readYaml file: 'docker-composer.yml'
+                    def port = dockerFile.services.$string.ports[0]
+                    port = port.subString(0, port.indexOf(':') - 1)
+                    echo "The verification port is: ${port}"
+                    if (sh(script: "curl -o /dev/null -s -w '%{http_code}\n' 'http://localhost:${port}'", returnStdout: true) == 200) {
+                        echo "Success full deploy to ${string}"
+                    }
+                }         
             }
         }
     }
