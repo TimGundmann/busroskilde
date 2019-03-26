@@ -18,7 +18,7 @@ pipeline {
                         string = "green"
                         old = "blue"
                     }
-                    currentBuild.displayName = "Version: 1.0.${currentBuild.number} String: ${string}"
+                    currentBuild.displayName = "Version: 1.0.${currentBuild.number} Delpoy to: ${string}"
                }
             }                
         }
@@ -33,23 +33,26 @@ pipeline {
         //     }                
         // }
 
-        stage("Build") {
-            steps{   
-                sh "ng build --prod"
-            }
-        }
-        stage("Deploy") {
-            steps{                
-                sh "docker-compose stop ${string}"
-                sh "docker-compose build ${string}"
-                sh "docker-compose up -d ${string}"
-            }
-        }
+        // stage("Build") {
+        //     steps{   
+        //         sh "ng build --prod"
+        //     }
+        // }
+        // stage("Deploy") {
+        //     steps{                
+        //         sh "docker-compose stop ${string}"
+        //         sh "docker-compose build ${string}"
+        //         sh "docker-compose up -d ${string}"
+        //     }
+        // }
         stage("Verify") {
             steps{       
                 script {
                     def dockerFile = readYaml file: 'docker-compose.yaml'
-                    def port = dockerFile.services.$string.ports[0]
+                    def port = dockerFile.services.green.ports[0]
+                    if (string == 'blue') {
+                        port = dockerFile.services.blue.ports[0]
+                    }
                     port = port.subString(0, port.indexOf(':') - 1)
                     echo "The verification port is: ${port}"
                     if (sh(script: "curl -o /dev/null -s -w '%{http_code}\n' 'http://localhost:${port}'", returnStdout: true) == 200) {
