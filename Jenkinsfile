@@ -14,7 +14,7 @@ pipeline {
    //            sh "npm install"
                sh "npm version 1.0.${currentBuild.number}"
                script {
-                    if (sh(script: "curl -o /dev/null -s -w '%{http_code}\\n' 'https://busroskilde.dk/blue/index.html'", returnStdout: true) == '200') {
+                    if (sh(script: "curl -o /dev/null -s -w '%{http_code}\\n' 'https://busroskilde.dk/blue/index.html'", returnStdout: true).trim() == '200') {
                         string = "green"
                         old = "blue"
                     }
@@ -57,7 +57,7 @@ pipeline {
                     echo "The verification port is: ${port}"
                     def verify = sh(script: "curl -o /dev/null -s -w '%{http_code}\\n' 'http://localhost:${port}'", returnStdout: true)
                     echo "result ${verify}"
-                    if (verify == '200') {
+                    if (verify.trim() == '200') {
                         echo "Success full deploy to ${string}"
                     }
                 }         
