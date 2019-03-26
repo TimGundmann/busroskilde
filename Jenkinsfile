@@ -85,6 +85,10 @@ void updateConfig(String port) {
     sh 'rm -rf config'
     dir('config') {
         withCredentials([usernamePassword(credentialsId: 'bfb902c7-52ec-4261-b92f-978123c97189', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+            sh 'git config --global user.email "tim@gundmann.dk"'
+            sh 'git config --global user.name "Tim Gundmann"'
+            sh 'git config --global push.default simple'
+
             sh 'git clone https://github.com/TimGundmann/gundmann-config.git .'
 
             def zuul = 'zuul-prod.yaml'
@@ -93,9 +97,9 @@ void updateConfig(String port) {
             sh "rm ${zuul}"
             writeYaml file: zuul, data: data     
 
+
             sh "git add ${zuul}"
             sh "git commit -m 'Busroskilde change port to ${port}'"
-            echo "${GIT_USERNAME}"
             sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/TimGundmann/gundmann-config.git')
         }        
     }
