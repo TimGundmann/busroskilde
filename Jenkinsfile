@@ -82,7 +82,6 @@ String findCurrentPort(String string) {
 }
 
 void updateConfig(String port) {
-    makeEmptyDirs 'config'
     dir('config') {
         git "https://github.com/TimGundmann/gundmann-config.git"
 
