@@ -11,7 +11,7 @@ pipeline {
         stage("Prepare") {
             steps{
                git "https://github.com/TimGundmann/busroskilde.git"
-   //            sh "npm install"
+               sh "npm install"
                sh "npm version 1.0.${currentBuild.number}"
                script {
                     if (verifyUrl("https://busroskilde.dk/blue/index.html")) {
@@ -23,46 +23,49 @@ pipeline {
             }                
         }
         
-        // stage("Test") {
-        //     steps{
-        //         wrap([$class: "Xvfb", displayName: 1]) {
-        //             sh "ps -aux | grep Xvfb"
-        //             sh "export DISPLAY=:1"
-        //             sh "ng test --watch false"
-        //         }
-        //     }                
-        // }
+        stage("Test") {
+            steps{
+                wrap([$class: "Xvfb", displayName: 1]) {
+                    sh "ps -aux | grep Xvfb"
+                    sh "export DISPLAY=:1"
+                    sh "ng test --watch false"
+                }
+            }                
+        }
 
-        // stage("Build") {
-        //     steps{   
-        //         sh "ng build --prod"
-        //     }
-        // }
-        // stage("Deploy") {
-        //     steps{                
-        //         sh "docker-compose stop ${string}"
-        //         sh "docker-compose build ${string}"
-        //         sh "docker-compose up -d ${string}"
-        //     }
-        // }
+        stage("Build") {
+            steps{   
+                sh "ng build --prod"
+            }
+        }
+        stage("Deploy") {
+            steps{                
+                sh "docker-compose stop ${string}"
+                sh "docker-compose build ${string}"
+                sh "docker-compose up -d ${string}"
+                echo "Container up on string ${string}"
+            }
+        }
         stage("Verify") {
             steps{       
                 script {
                     def port = findCurrentPort(string);
                     if (verifyUrl("http://localhost:${findCurrentPort(port)}")) {
                         updateConfig(port);
-                        echo "Success full deploy to ${string}"
+                        sh "curle http://192.168.1.100:8764/actuator/refresh -d '{}'"
+                        sh "docker-compose stop ${old}"
+                        echo "Success full deploy and change to ${string}"
                     }
                 }         
             }
         }
     }
 
-//   post {
-//       failure {
-//             step([$class: "Mailer", notifyEveryUnstableBuild: true, recipients: emailextrecipients([[$class: "CulpritsRecipientProvider"], [$class: "RequesterRecipientProvider"]])])      
-//         }
-//   }    
+  post {
+      failure {
+            step([$class: "Mailer", notifyEveryUnstableBuild: true, recipients: emailextrecipients([[$class: "CulpritsRecipientProvider"], [$class: "RequesterRecipientProvider"]])])      
+        }
+  }    
 }
 
 boolean verifyUrl(String url) {
