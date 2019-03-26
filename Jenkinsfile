@@ -82,6 +82,7 @@ String findCurrentPort(String string) {
 }
 
 void updateConfig(String port) {
+    sh 'rm -rf config'
     dir('config') {
         withCredentials([usernamePassword(credentialsId: 'bfb902c7-52ec-4261-b92f-978123c97189', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git clone https://github.com/TimGundmann/gundmann-config.git .'
