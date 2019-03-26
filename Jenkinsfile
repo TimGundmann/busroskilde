@@ -86,12 +86,12 @@ void updateConfig(String port) {
         git "https://github.com/TimGundmann/gundmann-config.git"
 
         def zuul = 'zuul-prod.yaml'
-        def data = readYaml file: filename
+        def data = readYaml file: zuul
         data.zuul.routes.bus.url = "http://localhost: ${port}"
-        sh "rm $zuul"
+        sh "rm ${zuul}"
         writeYaml file: zuul, data: data     
 
-        sh "git commit -m 'Busroskilde change port to ${prot}'"
+        sh "git commit -m 'Busroskilde change port to ${port}'"
         sh "git push"   
     }
 }
