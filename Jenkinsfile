@@ -95,8 +95,8 @@ void updateConfig(String port) {
 
             sh "git add ${zuul}"
             sh "git commit -m 'Busroskilde change port to ${port}'"
-
-            sh('git push')
+            echo "${GIT_USERNAME}"
+            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/TimGundmann/gundmann-config.git')
         }        
     }
 }
