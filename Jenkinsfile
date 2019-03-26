@@ -52,7 +52,7 @@ pipeline {
                     def port = findCurrentPort(string);
                     if (verifyUrl("http://localhost:${findCurrentPort(port)}")) {
                         updateConfig(port);
-                        sh "curle http://192.168.1.100:8764/actuator/refresh -d '{}'"
+                        sh "curl -X POST http://192.168.1.100:8764/actuator/refresh"
                         sh "docker-compose stop ${old}"
                         echo "Success full deploy and change to ${string}"
                     }
@@ -63,7 +63,16 @@ pipeline {
 
   post {
       failure {
-            step([$class: "Mailer", notifyEveryUnstableBuild: true, recipients: emailextrecipients([[$class: "CulpritsRecipientProvider"], [$class: "RequesterRecipientProvider"]])])      
+            step(
+                [
+                    $class: "Mailer", 
+                    notifyEveryUnstableBuild: true, 
+                    recipients: emailextrecipients([
+                        [$class: "CulpritsRecipientProvider"], 
+                        [$class: "RequesterRecipientProvider"]
+                        ])
+                    ]
+            )      
         }
   }    
 }
@@ -96,14 +105,16 @@ void updateConfig(String port) {
 
             def zuul = 'zuul-prod.yaml'
             def data = readYaml file: zuul
-            data.zuul.routes.bus.url = "http://localhost:${port}"
-            sh "rm ${zuul}"
-            writeYaml file: zuul, data: data     
+            def newUrl = "http://localhost:${port}"
+            if (data.zuul.routes.bus.url != newUrl) {
+                data.zuul.routes.bus.url = newUrl
+                sh "rm ${zuul}"
+                writeYaml file: zuul, data: data     
 
-
-            sh "git add ${zuul}"
-            sh "git commit -m 'Busroskilde change port to ${port}'"
-            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/TimGundmann/gundmann-config.git')
+                sh "git add ${zuul}"
+                sh "git commit -m 'Busroskilde change port to ${port}'"
+                sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/TimGundmann/gundmann-config.git')
+            }
         }        
     }
 }
