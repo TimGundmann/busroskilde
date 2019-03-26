@@ -93,6 +93,6 @@ void updateConfig(String port) {
 
         sh "git add ${zuul}"
         sh "git commit -m 'Busroskilde change port to ${port}'"
-        sh "git push"   
+        sh "git push origin master"   
     }
 }
