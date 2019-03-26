@@ -14,7 +14,7 @@ pipeline {
    //            sh "npm install"
                sh "npm version 1.0.${currentBuild.number}"
                script {
-                    if (verifyUrl("https://busroskilde.dk/blue/index.html") {
+                    if (verifyUrl("https://busroskilde.dk/blue/index.html")) {
                         string = "green"
                         old = "blue"
                     }
