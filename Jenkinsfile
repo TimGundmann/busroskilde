@@ -95,7 +95,7 @@ void updateConfig(String port) {
         sh "git commit -m 'Busroskilde change port to ${port}'"
 
         withCredentials([usernamePassword(credentialsId: 'bfb902c7-52ec-4261-b92f-978123c97189', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-            sh('git push origin')
+            sh('git push origin master')
         }        
     }
 }
