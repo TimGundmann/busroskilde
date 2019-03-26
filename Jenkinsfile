@@ -96,7 +96,7 @@ void updateConfig(String port) {
 
             def zuul = 'zuul-prod.yaml'
             def data = readYaml file: zuul
-            data.zuul.routes.bus.url = "http://localhost: ${port}"
+            data.zuul.routes.bus.url = "http://localhost:${port}"
             sh "rm ${zuul}"
             writeYaml file: zuul, data: data     
 
