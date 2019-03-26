@@ -53,9 +53,9 @@ pipeline {
                     if (string == 'blue') {
                         port = dockerFile.services.blue.ports[0]
                     }
-                    port = port.subString(0, port.indexOf(':') - 1)
+//                    port = port.subString(0, port.indexOf(':') - 1)
                     echo "The verification port is: ${port}"
-                    if (sh(script: "curl -o /dev/null -s -w '%{http_code}\n' 'http://localhost:${port}'", returnStdout: true) == 200) {
+                    if (sh(script: "curl -o /dev/null -s -w '%{http_code}\n' 'http://localhost:${port[0]}'", returnStdout: true) == 200) {
                         echo "Success full deploy to ${string}"
                     }
                 }         
