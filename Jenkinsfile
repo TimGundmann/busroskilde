@@ -83,19 +83,19 @@ String findCurrentPort(String string) {
 
 void updateConfig(String port) {
     dir('config') {
-        git "https://github.com/TimGundmann/gundmann-config.git"
-
-        def zuul = 'zuul-prod.yaml'
-        def data = readYaml file: zuul
-        data.zuul.routes.bus.url = "http://localhost: ${port}"
-        sh "rm ${zuul}"
-        writeYaml file: zuul, data: data     
-
-        sh "git add ${zuul}"
-        sh "git commit -m 'Busroskilde change port to ${port}'"
-
         withCredentials([usernamePassword(credentialsId: 'bfb902c7-52ec-4261-b92f-978123c97189', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-            sh('git push origin master')
+            sh 'git clone https://github.com/TimGundmann/gundmann-config.git .'
+
+            def zuul = 'zuul-prod.yaml'
+            def data = readYaml file: zuul
+            data.zuul.routes.bus.url = "http://localhost: ${port}"
+            sh "rm ${zuul}"
+            writeYaml file: zuul, data: data     
+
+            sh "git add ${zuul}"
+            sh "git commit -m 'Busroskilde change port to ${port}'"
+
+            sh('git push')
         }        
     }
 }
