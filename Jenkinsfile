@@ -65,7 +65,7 @@ pipeline {
 
 boolean verifyUrl(String url) {
     return sh(
-            script: "curl -o /dev/null -s -w '%{http_code}\\n' ${url}'", 
+            script: "curl -o /dev/null -s -w '%{http_code}\\n' '${url}'", 
             returnStdout: true
         ).trim()  == '200';
 }
@@ -76,5 +76,5 @@ String findCurrentPort() {
     if (string == 'blue') {
         port = dockerFile.services.blue.ports[0]
     }
-    return port.substring(0, port.indexOf(':'))
+    return port.substring(0, port.indexOf(':'));
 }
