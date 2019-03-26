@@ -93,6 +93,9 @@ void updateConfig(String port) {
 
         sh "git add ${zuul}"
         sh "git commit -m 'Busroskilde change port to ${port}'"
-        sh "git push origin master"   
+
+        withCredentials([usernamePassword(credentialsId: 'git-pass-credentials-ID', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@https://github.com/TimGundmann/gundmann-config.git')
+        }        
     }
 }
