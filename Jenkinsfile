@@ -91,6 +91,7 @@ void updateConfig(String port) {
         sh "rm ${zuul}"
         writeYaml file: zuul, data: data     
 
+        sh "git add ${zuul}"
         sh "git commit -m 'Busroskilde change port to ${port}'"
         sh "git push"   
     }
