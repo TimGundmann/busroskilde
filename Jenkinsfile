@@ -48,7 +48,7 @@ pipeline {
         stage("Verify") {
             steps{       
                 script {
-                    if (verifyUrl("http://localhost:${findCurrentPort()}")) {
+                    if (verifyUrl("http://localhost:${findCurrentPort(string)}")) {
                         echo "Success full deploy to ${string}"
                     }
                 }         
@@ -70,7 +70,7 @@ boolean verifyUrl(String url) {
         ).trim()  == '200';
 }
 
-String findCurrentPort() {
+String findCurrentPort(String string) {
     def dockerFile = readYaml file: 'docker-compose.yaml'
     def port = dockerFile.services.green.ports[0]
     if (string == 'blue') {
