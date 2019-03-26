@@ -48,7 +48,9 @@ pipeline {
         stage("Verify") {
             steps{       
                 script {
-                    if (verifyUrl("http://localhost:${findCurrentPort(string)}")) {
+                    def port = findCurrentPort(string);
+                    if (verifyUrl("http://localhost:${findCurrentPort(port)}")) {
+                        updateConfig(port);
                         echo "Success full deploy to ${string}"
                     }
                 }         
@@ -77,4 +79,20 @@ String findCurrentPort(String string) {
         port = dockerFile.services.blue.ports[0]
     }
     return port.substring(0, port.indexOf(':'));
+}
+
+void updateConfig(String port) {
+    makeEmptyDirs 'config'
+    dir('config') {
+        git "https://github.com/TimGundmann/gundmann-config.git"
+
+        def zuul = 'zuul-prod.yaml'
+        def data = readYaml file: filename
+        data.zuul.routes.bus.url = "http://localhost: ${port}"
+        sh "rm $zuul"
+        writeYaml file: zuul, data: data     
+
+        sh "git commit -m 'Busroskilde change port to ${prot}'"
+        sh "git push"   
+    }
 }
