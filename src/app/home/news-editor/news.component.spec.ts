@@ -1,3 +1,7 @@
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationService } from 'app/services';
+import { AuthService } from './../../services/auth.service';
+import { NewsService } from './../../services/news.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
@@ -47,6 +51,10 @@ describe('NewsEditorComponent', () => {
       ],
       providers: [
         JwtHelperService,
+        NewsService,
+        AuthService,
+        NotificationService,
+        NgxSpinnerService,
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })
