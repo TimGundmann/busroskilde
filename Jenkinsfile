@@ -46,15 +46,24 @@ pipeline {
                 echo "Container up on string ${string}"
             }
         }
+
+        stage("E2E-test") {
+            steps{
+                wrap([$class: "Xvfb", displayName: 1]) {
+                    sh "ps -aux | grep Xvfb"
+                    sh "export DISPLAY=:1"
+                    sh "ng e2e --base-url http://localhost:${findCurrentPort(port)}"
+                }
+            }                
+        }
+
         stage("Verify") {
             steps{       
                 script {
-                    def port = findCurrentPort(string);
-                    if (verifyUrl("http://localhost:${findCurrentPort(port)}")) {
-                        updateConfig(port);
-                        sh "curl -X POST http://192.168.1.100:8764/actuator/refresh"
-                        sh "docker-compose stop ${old}"
-                        echo "Success full deploy and change to ${string}"
+                    updateConfig(findCurrentPort(string));
+                    sh "curl -X POST http://192.168.1.100:8764/actuator/refresh"
+                    sh "docker-compose stop ${old}"
+                    echo "Success full deploy and change to ${string}"
                     }
                 }         
             }

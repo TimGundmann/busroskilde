@@ -13,13 +13,13 @@ exports.config = {
     chromeOptions: {
       args: [
         "--headless", 
-        "--window-size=800,600",
+        '--window-size=1200,1000',
         '--disable-gpu'
       ],
     },
   },
   directConnect: true,
-  baseUrl: 'http://192.168.1.100:9899',
+  baseUrl: 'http://192.168.1.100:989',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
