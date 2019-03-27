@@ -1,3 +1,4 @@
+import { UserService } from 'app/services';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -33,6 +34,7 @@ describe('NewPasswordComponent', () => {
         }),
       ],
       providers: [
+        UserService,
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })

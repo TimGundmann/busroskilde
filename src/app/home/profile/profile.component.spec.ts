@@ -1,3 +1,4 @@
+import { UserService } from 'app/services';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -25,6 +26,7 @@ describe('ProfileComponent', () => {
         ProfileComponent
       ],
       providers: [
+        UserService,
         { provide: HttpClient, useClass: MockHttpClient },
       ],
       imports: [

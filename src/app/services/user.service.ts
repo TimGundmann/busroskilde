@@ -70,7 +70,7 @@ export class UserService {
     return this.handleResponce(this.httpClient.post(`${this.serviceHost}/bussignup`, user));
   }
 
-  public activat(token: string): Observable<RequestResult<any>> {
+  public activate(token: string): Observable<RequestResult<any>> {
     return this.handleResponce(this.httpClient.post(`${this.serviceHost}/activate`, token));
   }
 

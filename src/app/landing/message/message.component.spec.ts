@@ -9,7 +9,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { tokenGetter } from 'app/app.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 describe('MessageComponent', () => {

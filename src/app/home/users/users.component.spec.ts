@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
@@ -35,6 +36,7 @@ describe('UsersComponent', () => {
         }),
       ],
       providers: [
+        UserService,
         { provide: HttpClient, useClass: MockHttpClient },
       ],
     })

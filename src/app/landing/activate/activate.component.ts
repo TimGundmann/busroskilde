@@ -19,7 +19,7 @@ export class ActivateComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .subscribe(params => {
-        this.userService.activat(params['token'])
+        this.userService.activate(params['token'])
           .subscribe(r => {
             if (r.okResult) {
               this.notifications.success('Brugeren er aktiveret!', true);

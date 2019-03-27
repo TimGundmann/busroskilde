@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -41,6 +42,7 @@ describe('HomeComponent', () => {
         }),
       ],
       providers: [
+        UserService,
         { provide: HttpClient, useClass: MockHttpClient },
       ],
     })

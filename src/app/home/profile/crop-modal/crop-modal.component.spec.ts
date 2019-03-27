@@ -8,6 +8,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
 import { tokenGetter } from 'app/app.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { UserService } from 'app/services';
 
 describe('CropModalComponent', () => {
   let component: CropModalComponent;
@@ -37,6 +38,7 @@ describe('CropModalComponent', () => {
       ],
       providers: [
         NgbActiveModal,
+        UserService,
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })

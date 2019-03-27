@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { tokenGetter } from 'app/app.module';
+import { UserService } from 'app/services';
 
 describe('SigninComponent', () => {
   let component: SigninComponent;
@@ -32,6 +33,7 @@ describe('SigninComponent', () => {
         }),
       ],
       providers: [
+        UserService,
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })
