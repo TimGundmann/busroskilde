@@ -52,7 +52,7 @@ pipeline {
                 wrap([$class: "Xvfb", displayName: 1]) {
                     sh "ps -aux | grep Xvfb"
                     sh "export DISPLAY=:1"
-                    sh "ng e2e --base-url http://localhost:${findCurrentPort(port)}"
+                    sh "ng e2e --base-url http://localhost:${findCurrentPort(string)}"
                 }
             }                
         }
