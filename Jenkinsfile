@@ -60,11 +60,10 @@ pipeline {
         stage("Verify") {
             steps{       
                 script {
-                    updateConfig(findCurrentPort(string));
+                    updateConfig(findCurrentPort(string))
                     sh "curl -X POST http://192.168.1.100:8764/actuator/refresh"
                     sh "docker-compose stop ${old}"
                     echo "Success full deploy and change to ${string}"
-                    }
                 }         
             }
         }
