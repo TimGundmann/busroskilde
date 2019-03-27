@@ -37,12 +37,12 @@ export class ProfileComponent implements OnInit {
     });
 
     constructor(
+        private rotuer: Router,
         private planService: PlanService,
         private userService: UserService,
         private spinner: NgxSpinnerService,
         private notifications: NotificationService,
         private modalService: NgbModal,
-        private rotuer: Router,
         private authService: AuthService) { }
 
     ngOnInit() {

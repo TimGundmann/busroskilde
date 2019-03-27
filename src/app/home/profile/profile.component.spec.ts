@@ -1,3 +1,5 @@
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './../../services/auth.service';
 import { PlanService } from './../../services/plan.service';
 import { UserService, NotificationService } from 'app/services';
@@ -28,6 +30,8 @@ describe('ProfileComponent', () => {
         ProfileComponent
       ],
       providers: [
+        NgxSpinnerService,
+        NgbModal,
         UserService,
         PlanService,
         NotificationService,
