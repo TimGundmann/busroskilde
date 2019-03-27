@@ -11,10 +11,10 @@ import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'news', pathMatch: 'full' },
   {
-    path: '', component: HomeComponent,
+    path: 'home', component: HomeComponent,
     children: [
+      { path: '', redirectTo: 'home/news', pathMatch: 'full' },
       { path: 'news', component: NewsComponent },
       { path: 'users', component: UsersComponent },
       {
