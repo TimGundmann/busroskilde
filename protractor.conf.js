@@ -18,12 +18,12 @@ exports.config = {
       ],
     },
   },
-//  directConnect: true,
-  baseUrl: 'http://192.168.1.100:989',
+  directConnect: true,
+  baseUrl: 'http://192.168.1.100:9899',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 90000,
     print: function () { }
   },
   onPrepare() {
