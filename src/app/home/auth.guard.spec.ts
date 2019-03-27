@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TestBed, inject } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -12,6 +13,7 @@ describe('AuthGuard', () => {
     TestBed.configureTestingModule({
       providers: [
         AuthGuard,
+        AuthService,
         { provide: JwtHelperService, useClass: JwtHelperServiceMock }
       ],
       imports: [ RouterTestingModule ]

@@ -1,3 +1,4 @@
+import { PlanService } from './../services/plan.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -31,10 +32,7 @@ describe('HomeComponent', () => {
       ],
       providers: [
         { provide: HttpClient, useClass: MockHttpClient },
-        UserService,
-        NgxSpinnerService,
-        NotificationService,
-        NgbModal
+        PlanService
       ]
 
     })

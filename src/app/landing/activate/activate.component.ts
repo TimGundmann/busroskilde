@@ -11,9 +11,9 @@ import { NotificationService } from 'app/services';
 export class ActivateComponent implements OnInit {
 
   constructor(
-    private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
+    private userService: UserService,
     private notifications: NotificationService) { }
 
   ngOnInit() {

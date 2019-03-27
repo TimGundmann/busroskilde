@@ -36,6 +36,7 @@ describe('ProfileComponent', () => {
         PlanService,
         NotificationService,
         AuthService,
+        PlanService,
         { provide: HttpClient, useClass: MockHttpClient },
       ],
       imports: [

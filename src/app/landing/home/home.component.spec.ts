@@ -43,7 +43,6 @@ describe('HomeComponent', () => {
         }),
       ],
       providers: [
-        UserService,
         AuthService,
         { provide: HttpClient, useClass: MockHttpClient },
       ],

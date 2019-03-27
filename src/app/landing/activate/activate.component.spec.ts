@@ -1,3 +1,4 @@
+import { NotificationService } from 'app/services';
 import { UserService } from './../../services/user.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -14,7 +15,10 @@ describe('ActivateComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ActivateComponent ],
-      providers: [ { provide: UserService, useClass: UserServiceMock } ],
+      providers: [
+        UserService,
+        NotificationService,
+        { provide: UserService, useClass: UserServiceMock } ],
       imports: [ RouterTestingModule ]
     })
     .compileComponents();

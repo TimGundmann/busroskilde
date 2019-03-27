@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -8,7 +9,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
 import { tokenGetter } from 'app/app.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UserService } from 'app/services';
+import { UserService, NotificationService } from 'app/services';
 
 describe('CropModalComponent', () => {
   let component: CropModalComponent;
@@ -39,6 +40,9 @@ describe('CropModalComponent', () => {
       providers: [
         NgbActiveModal,
         UserService,
+        NgbActiveModal,
+        NotificationService,
+        NgxSpinnerService,
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })

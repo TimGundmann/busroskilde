@@ -1,3 +1,5 @@
+import { NotificationService } from 'app/services';
+import { PlanService } from './../../services/plan.service';
 import { HttpClient } from '@angular/common/http';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { FormsModule } from '@angular/forms';
@@ -28,6 +30,8 @@ describe('ConfigurationComponent', () => {
         RouterTestingModule
       ],
       providers: [
+        PlanService,
+        NotificationService,
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })

@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from './../../services/notification.service';
@@ -38,6 +39,7 @@ describe('MessageComponent', () => {
       providers: [
         UserService,
         NotificationService,
+        NgxSpinnerService,
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })

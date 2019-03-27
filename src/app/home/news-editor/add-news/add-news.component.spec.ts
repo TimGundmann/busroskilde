@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -32,7 +33,8 @@ describe('AddNewsComponent', () => {
       providers: [
         { provide: HttpClient, useClass: MockHttpClient },
         NewsService,
-        NotificationService
+        NotificationService,
+        NgxSpinnerService
       ]
     })
       .compileComponents();

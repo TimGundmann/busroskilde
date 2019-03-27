@@ -1,3 +1,7 @@
+import { AuthService } from './../../services/auth.service';
+import { PlanService } from './../../services/plan.service';
+import { NotificationService } from 'app/services';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { SvgComponent } from 'app/shared/svg/svg.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,6 +37,10 @@ describe('PlanComponent', () => {
       ],
       providers: [
         JwtHelperService,
+        AuthService,
+        PlanService,
+        NotificationService,
+        NgxSpinnerService,
         { provide: HttpClient, useClass: MockHttpClient },
       ],
       imports: [

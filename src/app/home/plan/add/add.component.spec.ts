@@ -1,3 +1,6 @@
+import { NotificationService } from './../../../services/notification.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { PlanService } from 'app/services/plan.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,6 +33,9 @@ describe('AddComponent', () => {
         NoopAnimationsModule
       ],
       providers: [
+        PlanService,
+        NotificationService,
+        NgxSpinnerService,
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })
@@ -39,7 +45,7 @@ describe('AddComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddComponent);
     component = fixture.componentInstance;
-    component.category = { name: 'test', type: 'test', subCategories: [], alterRoles: []  }
+    component.category = { name: 'test', type: 'test', subCategories: [], alterRoles: [] }
     fixture.detectChanges();
   });
 
