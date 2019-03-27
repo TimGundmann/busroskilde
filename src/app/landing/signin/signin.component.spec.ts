@@ -1,3 +1,5 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -7,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { tokenGetter } from 'app/app.module';
-import { UserService } from 'app/services';
+import { UserService, NotificationService } from 'app/services';
 
 describe('SigninComponent', () => {
   let component: SigninComponent;
@@ -34,6 +36,9 @@ describe('SigninComponent', () => {
       ],
       providers: [
         UserService,
+        NotificationService,
+        NgxSpinnerService,
+        NgbModal,
         { provide: HttpClient, useClass: MockHttpClient },
       ]
     })

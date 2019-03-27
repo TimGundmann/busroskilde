@@ -1,8 +1,7 @@
-import { ErrorDetails } from '../../domain/error-details';
 import { UserService } from './../../services/user.service';
 import { User } from './../../domain/user';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NotificationService } from 'app/services';
 import { NgxSpinnerService } from 'ngx-spinner';
 

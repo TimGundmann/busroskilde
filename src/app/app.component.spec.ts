@@ -1,3 +1,4 @@
+import { UserService } from 'app/services';
 import { HttpClient } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SvgDefsComponent } from './shared/svg-defs/svg-defs.component';
@@ -41,7 +42,10 @@ describe('AppComponent', () => {
           }
         }),
       ],
-      providers: [{ provide: HttpClient, useClass: MockHttpClient }]
+      providers: [
+        UserService,
+        { provide: HttpClient, useClass: MockHttpClient }
+      ]
     }).compileComponents();
   }));
 

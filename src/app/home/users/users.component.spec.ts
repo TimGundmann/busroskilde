@@ -1,3 +1,6 @@
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationService } from './../../services/notification.service';
+import { AuthService } from './../../services/auth.service';
 import { UserService } from './../../services/user.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
@@ -37,6 +40,9 @@ describe('UsersComponent', () => {
       ],
       providers: [
         UserService,
+        AuthService,
+        NotificationService,
+        NgxSpinnerService,
         { provide: HttpClient, useClass: MockHttpClient },
       ],
     })

@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ActivateComponent } from './activate.component';
 
 describe('ActivateComponent', () => {
-  
+
   let component: ActivateComponent;
   let fixture: ComponentFixture<ActivateComponent>;
 
