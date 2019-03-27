@@ -1,0 +1,6 @@
+[0327/095644.238:ERROR:process_reader_win.cc(123)] NtOpenThread: {Adgang nægtet} En proces har anmodet om adgang til et objekt, men har ikke fået disse rettigheder. (0xc0000022)
+[0327/095644.240:ERROR:exception_snapshot_win.cc(98)] thread ID 22756 not found in process
+[0327/095644.386:ERROR:process_reader_win.cc(123)] NtOpenThread: {Adgang nægtet} En proces har anmodet om adgang til et objekt, men har ikke fået disse rettigheder. (0xc0000022)
+[0327/095644.386:ERROR:exception_snapshot_win.cc(98)] thread ID 23036 not found in process
+[0327/095644.552:ERROR:process_reader_win.cc(123)] NtOpenThread: {Adgang nægtet} En proces har anmodet om adgang til et objekt, men har ikke fået disse rettigheder. (0xc0000022)
+[0327/095644.552:ERROR:exception_snapshot_win.cc(98)] thread ID 28852 not found in process

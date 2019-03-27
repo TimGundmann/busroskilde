@@ -15,13 +15,15 @@
                 <span class="text-headline">{{user.name}}</span>
               </div>
               <div class="user-info">
-                <div>
-                  <span class="text-info">Chaufførnummer: </span>
-                  <span class="marigen">{{user.number}}</span>
+                <div >
+                  <span class="text-info mr-1">Chaufførnummer: </span>
+                  <span *ngIf="!isAdmin()">{{user.number}}</span>
+                  <input *ngIf="isAdmin()" class="form-control" type="test" [value]="user.number" (input)="updateNumber(user, $event.target.value)">
                 </div>
-                <div>
-                  <span class="text-info">Email: </span>
-                  <span>{{user.email}}</span>
+                <div class="ml-1">
+                  <span class="text-info mr-1">Email: </span>
+                  <span *ngIf="!isAdmin()">{{user.email}}</span>
+                  <input *ngIf="isAdmin()" class="form-control" type="email" [value]="user.email" (input)="updateEmail(user, $event.target.value)">
                 </div>
                 <div *ngIf="isAdmin()" class="form-group" style="margin-bottom: 0;">
                 </div>
@@ -39,10 +41,7 @@
             <div *ngIf="isRolesVisisble(index)" class="roles">
               <div *ngFor="let role of roles">
                 <label>{{role.displayName}}</label>
-                <bSwitch 
-                  switch-on-text="Til" 
-                  switch-off-text="Fra" 
-                  [ngModel]="isRoleActive(user, role.role)"
+                <bSwitch switch-on-text="Til" switch-off-text="Fra" [ngModel]="isRoleActive(user, role.role)"
                   (changeState)="changeRole(user, role)"></bSwitch>
               </div>
             </div>

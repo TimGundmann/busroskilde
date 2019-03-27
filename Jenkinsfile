@@ -18,7 +18,7 @@ pipeline {
                         string = "green"
                         old = "blue"
                     }
-                    currentBuild.displayName = "Version: 1.0.${currentBuild.number} Delpoy to: ${string}"
+                    currentBuild.displayName = "Version: 1.0.${currentBuild.number} Delpoy to string ${string}"
                }
             }                
         }

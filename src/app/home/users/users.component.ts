@@ -5,7 +5,6 @@ import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'app/services';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-users',
@@ -36,6 +35,25 @@ export class UsersComponent implements OnInit {
           this.users.forEach(_u => this.rolesVisisble.push(false));
         } else {
           this.notifications.error('Fejl ved hentning af bruger, prøv igen senere');
+        }
+      });
+  }
+
+  updateNumber(user: User, value: string) {
+    user.number = value
+    this.updateUser(user);
+  }
+
+  updateEmail(user: User, value: string) {
+    user.email = value
+    this.updateUser(user);
+  }
+
+  updateUser(user: User) {
+    this.userService.update(user)
+      .subscribe(r => {
+        if (!r.okResult) {
+          this.notifications.error('Fejl ved opdatering af brugeren, prøv igen senere!');
         }
       });
   }

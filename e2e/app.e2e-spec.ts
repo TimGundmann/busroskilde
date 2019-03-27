@@ -1,14 +1,22 @@
-import { Pk2AngularCliFreePage } from './app.po';
+import { LandingPage } from './app.po';
 
-describe('pk2-angular-cli-free App', () => {
-  let page: Pk2AngularCliFreePage;
+describe('Landing', () => {
+  let page: LandingPage;
 
   beforeEach(() => {
-    page = new Pk2AngularCliFreePage();
+    page = new LandingPage();
   });
 
-  it('should display welcome message', () => {
+  it('should move to message', () => {
+    // given
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+
+    // when
+    page.pressMessageButton();
+
+    // then
+    page.messageAreaVisible().then(result => {
+      expect(result).toBeTruthy();
+    });
   });
 });
