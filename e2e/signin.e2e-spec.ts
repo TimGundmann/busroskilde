@@ -1,6 +1,6 @@
 import { SignInPage } from './signin.po';
 
-fdescribe('Sing in page', () => {
+describe('Sing in page', () => {
   let page: SignInPage;
 
   beforeEach(() => {

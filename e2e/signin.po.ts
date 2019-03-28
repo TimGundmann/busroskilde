@@ -1,4 +1,5 @@
 import { browser, by, element, promise } from 'protractor';
+const auth = require('../signin.auth.json');
 
 export class SignInPage {
   navigateToRoot() {
@@ -11,8 +12,8 @@ export class SignInPage {
   }
 
   setEmailAndPassword() {
-    element(by.css('[selenium-id="email"]')).sendKeys(browser.params.signin.email);
-    element(by.css('[selenium-id="password"]')).sendKeys(browser.params.singin.password);
+    element(by.css('[selenium-id="email"]')).sendKeys(auth.email);
+    element(by.css('[selenium-id="password"]')).sendKeys(auth.password);
   }
 
   signIn(): any {
