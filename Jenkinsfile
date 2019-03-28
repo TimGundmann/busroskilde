@@ -55,7 +55,7 @@ pipeline {
                     withCredentials(
                         [usernamePassword(credentialsId: 'busroskilde-test', 
                         passwordVariable: 'TEST_PASSWORD', usernameVariable: 'TEST_EMAIL')]) {                    
-                        sh 'echo { "email": ${TEST_EMAIL}, "password": "${TEST_PASSWORD}" } > signin.auth.json'    
+                        sh 'echo { "email": "${TEST_EMAIL}"", "password": "${TEST_PASSWORD}" } > signin.auth.json'    
                     }   
                     sh "ng e2e --base-url http://localhost:${findCurrentPort(string)}"
                 }
