@@ -12,12 +12,25 @@ describe('Sing in page', () => {
     page.navigateToRoot();
 
     // when
-    page.pressSignIn();
+    page.gotoSignInOut();
     page.setEmailAndPassword();
     page.signIn();
 
     // then
     expect(page.isSigendIn()).toBeTruthy();
+  });
+
+  it('should be possible to change password', () => {
+    // given
+    page.navigateToRoot();
+    page.gotoSignInOut();
+
+    // when
+    page.gotoSignInOut();
+    page.pressForgottenPassword();
+
+    // then
+    expect(page.forgottenPasswordDialogIsVisible()).toBeTruthy();
   });
 
 });

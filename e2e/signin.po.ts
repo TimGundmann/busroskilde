@@ -7,7 +7,7 @@ export class SignInPage {
     return browser.get('/');
   }
 
-  pressSignIn() {
+  gotoSignInOut() {
     element(by.css('[selenium-id="signin"]')).click();
   }
 
@@ -23,6 +23,14 @@ export class SignInPage {
 
   isSigendIn(): promise.Promise<boolean> {
     return browser.getCurrentUrl().then(url => url.includes('home'));
+  }
+
+  pressForgottenPassword() {
+    element(by.css('[selenium-id="signin-forgotten"]')).click();
+  }
+
+  forgottenPasswordDialogIsVisible(): promise.Promise<boolean> {
+    return element(by.css('[selenium-id="forgotten"]')).isDisplayed();
   }
 
 }

@@ -43,7 +43,10 @@
             selenium-id="signin-button" 
             class="btn btn-danger btn-block" 
             [disabled]="!signInForm.valid">Logind</button>
-          <a class="btn btn-outline-danger btn-block btn-sm" (click)="confirmReset()">Glemt password</a>
+          <a
+            selenium-id="signin-forgotten"
+            class="btn btn-outline-danger btn-block btn-sm" 
+            (click)="confirmReset()">Glemt password</a>
         </form>
       </div>
     </div>
