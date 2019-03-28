@@ -29,10 +29,4 @@ exports.config = {
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
   },
-  params: {
-    signin: {
-      email: 'test',
-      password: 'test'
-    }
-  },
 };
