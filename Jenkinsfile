@@ -56,7 +56,7 @@ pipeline {
                         [usernamePassword(credentialsId: 'busroskilde-test', 
                         passwordVariable: 'TEST_PASSWORD', usernameVariable: 'TEST_EMAIL')]) {                    
                         sh "ng e2e --base-url http://localhost:${findCurrentPort(string)} " +
-                            "--parameters.sigin.password=${TEST_PASSWORD} --parameters.sigin.email=${TEST_EMAIL}"
+                            "--params.sigin.password=${TEST_PASSWORD} --params.sigin.email=${TEST_EMAIL}"
                     }   
                 }
             }                
