@@ -56,7 +56,7 @@ pipeline {
                         [usernamePassword(credentialsId: 'busroskilde-test', 
                         passwordVariable: 'TEST_PASSWORD', usernameVariable: 'TEST_EMAIL')]) {                    
                         script{
-                            def json = "{ \"email\": \"${TEST_EMAIL}\", \"password\": \"${TEST_PASSWORD}\" }"
+                            def json = '"{ "email": "'${TEST_EMAIL}''", "password": "'${TEST_PASSWORD}'" }"'
                             echo json
                             sh "echo ${json} > signin.auth.json"
                         }
