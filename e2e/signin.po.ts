@@ -12,6 +12,7 @@ export class SignInPage {
   }
 
   setEmailAndPassword() {
+    console.log(auth.email + ' ' + auth.password);
     element(by.css('[selenium-id="email"]')).sendKeys(auth.email);
     element(by.css('[selenium-id="password"]')).sendKeys(auth.password);
   }
