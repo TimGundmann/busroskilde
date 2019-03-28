@@ -3,8 +3,7 @@ import { browser, by, element, promise } from 'protractor';
 export class HomePage {
 
   navigateToHome() {
-    browser.sleep(500);
-    return browser.get('/home');
+    return browser.get('/#/home');
   }
 
   pressProfile() {
@@ -12,6 +11,8 @@ export class HomePage {
   }
 
   profileVisible(): promise.Promise<boolean> {
+    // wait for annimation
+    browser.sleep(1000);
     return element(by.css('[selenium-id="profile"]')).isDisplayed();
   }
 

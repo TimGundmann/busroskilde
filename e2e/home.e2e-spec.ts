@@ -1,7 +1,7 @@
 import { HomePage } from './home.po';
 import { SignInPage } from './signin.po';
 
-describe('Landing page', () => {
+fdescribe('Landing page', () => {
   let page: HomePage;
 
   beforeEach(() => {
@@ -11,10 +11,7 @@ describe('Landing page', () => {
   });
 
   it('should be possible to se my profile', () => {
-    // given
-    page.navigateToHome();
-
-    // when
+    // given when
     page.pressProfile();
 
     // then
