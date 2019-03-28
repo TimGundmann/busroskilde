@@ -8,7 +8,7 @@
           <h3>Sidens indhold vedkommer kun disse og derfor er det kun ansatte
               på dette anlæg som kan få adgang til sidens indhold.</h3>
           <br />
-          <button type="button" (click)="scrollToAignUp(signup)" class="btn btn-outline-neutral btn-round">Ny bruger</button>
+          <button type="button" (click)="scrollToAignUp(signup)" class="btn btn-outline-neutral btn-round" selenium-id="newUser">Ny bruger</button>
           <button type="button" class="btn btn-outline-neutral btn-round" (click)="signin()">Log ind</button>
       </div>
   </div>
@@ -18,7 +18,7 @@
       <app-message></app-message>
   </div>
 
-  <div class="section section-dark text-center section-image section-login" style="background-image: url('./assets/img/stationen.jpg');" #signup>
+  <div id="signup" class="section section-dark text-center section-image section-login" style="background-image: url('./assets/img/stationen.jpg');" #signup>
       <app-signup></app-signup>
   </div>
 </div>

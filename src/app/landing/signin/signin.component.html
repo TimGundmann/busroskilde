@@ -13,8 +13,14 @@
                 <i class="nc-icon nc-bus-front-12"></i>
               </span>
             </div>
-            <input type="text" class="form-control" placeholder="Chaufførnummer" (focus)="focus=true" (blur)="focus=false"
-              formControlName="number">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Chaufførnummer" 
+              (focus)="focus=true" 
+              (blur)="focus=false"
+              formControlName="number"
+              selenium-id="email">
           </div>
 
           <label>Password</label>
@@ -24,10 +30,19 @@
                 <i class="nc-icon nc-key-25"></i>
               </span>
             </div>
-            <input type="password" class="form-control" placeholder="Password" (focus)="focus1=true"
-              (blur)="focus1=false" formControlName="password">
+            <input 
+              type="password" 
+              class="form-control" 
+              placeholder="Password" 
+              (focus)="focus1=true"
+              (blur)="focus1=false" 
+              formControlName="password"
+              selenium-id="password">
           </div>
-          <button class="btn btn-danger btn-block" [disabled]="!signInForm.valid">Logind</button>
+          <button 
+            selenium-id="signin-button" 
+            class="btn btn-danger btn-block" 
+            [disabled]="!signInForm.valid">Logind</button>
           <a class="btn btn-outline-danger btn-block btn-sm" (click)="confirmReset()">Glemt password</a>
         </form>
       </div>

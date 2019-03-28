@@ -52,7 +52,12 @@ pipeline {
                 wrap([$class: "Xvfb", displayName: 1]) {
                     sh "ps -aux | grep Xvfb"
                     sh "export DISPLAY=:1"
-                    sh "ng e2e --base-url http://localhost:${findCurrentPort(string)}"
+                    withCredentials(
+                        [usernamePassword(credentialsId: 'busroskilde-test', 
+                        passwordVariable: 'TEST_PASSWORD', usernameVariable: 'TEST_EMAIL')]) {                    
+                        sh "ng e2e --base-url http://localhost:${findCurrentPort(string)} " +
+                            "--parameters.sigin.password=${TEST_PASSWORD} --parameters.sigin.email=${TEST_EMAIL}"
+                    }   
                 }
             }                
         }
