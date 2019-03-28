@@ -12,9 +12,9 @@ describe('Sing in page', () => {
     page.navigateToRoot();
 
     // when
-    page.gotoSignInOut();
+    page.gotoSignIn();
     page.setEmailAndPassword();
-    page.signIn();
+    page.pressSignIn();
 
     // then
     expect(page.isSigendIn()).toBeTruthy();
@@ -23,10 +23,10 @@ describe('Sing in page', () => {
   it('should be possible to change password', () => {
     // given
     page.navigateToRoot();
-    page.gotoSignInOut();
+    page.gotoSignIn();
 
     // when
-    page.gotoSignInOut();
+    page.gotoSignIn();
     page.pressForgottenPassword();
 
     // then
