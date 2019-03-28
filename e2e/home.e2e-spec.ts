@@ -1,7 +1,7 @@
 import { HomePage } from './home.po';
 import { SignInPage } from './signin.po';
 
-fdescribe('Landing page', () => {
+describe('Landing page', () => {
   let page: HomePage;
 
   beforeEach(() => {
@@ -10,7 +10,12 @@ fdescribe('Landing page', () => {
     signin.signIn();
   });
 
-  it('should be possible to se my profile', () => {
+  it('should land on news', () => {
+    // given when then
+    expect(page.newsVisible()).toBeTruthy();
+  });
+
+  it('should be possible to see my profile', () => {
     // given when
     page.pressProfile();
 
@@ -18,5 +23,28 @@ fdescribe('Landing page', () => {
     expect(page.profileVisible()).toBeTruthy();
   });
 
+  it('should be possible to see news', () => {
+    // given when
+    page.pressNews();
+
+    // then
+    expect(page.newsVisible()).toBeTruthy();
+  });
+
+  it('should be possible to see users', () => {
+    // given when
+    page.pressUsers();
+
+    // then
+    expect(page.usersVisible()).toBeTruthy();
+  });
+
+  it('should be possible to see plans', () => {
+    // given when
+    page.pressPlans();
+
+    // then
+    expect(page.plansVisible()).toBeTruthy();
+  });
 
 });

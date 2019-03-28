@@ -14,14 +14,14 @@
             <ng-container *ngIf="isAuthenticated() && isHome()">
                 <ul class="navbar-nav ml-auto nav-content">
                     <li class="nav-item">
-                        <a routerLink="/home/news" class="nav-link no-padding">Nyheder</a>
+                        <a selenium-id="news-button" routerLink="/home/news" class="nav-link no-padding">Nyheder</a>
                     </li>
                     <li class="nav-item" *ngFor="let category of categories">
                         <a [routerLink]="['./home/plans', category.name]"
                             class="nav-link no-padding">{{category.name}}</a>
                     </li>
                     <li class="nav-item">
-                        <a [routerLink]="['home/users']" class="nav-link no-padding">Bruger</a>
+                        <a selenium-id="users-button" [routerLink]="['home/users']" class="nav-link no-padding">Bruger</a>
                     </li>
                 </ul>
             </ng-container>
