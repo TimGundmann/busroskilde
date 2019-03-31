@@ -22,7 +22,7 @@ export class UserService {
   }
 
   updatepassword(email: string, password: string): Observable<RequestResult<User>> {
-    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${email}/updatepassword`, password));
+    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${email}/updatepassword`, btoa(password)));
   }
 
 
@@ -34,13 +34,13 @@ export class UserService {
     return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${email}/password/reset`, null));
   }
 
-  public newPassword(password: string, token: string): Observable<RequestResult<any>> {
-    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${token}/password/new`, password));
+  public newPassword(token: string, password: string): Observable<RequestResult<any>> {
+    return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${token}/password/new`, btoa(password)));
   }
 
   public signIn(number: string, password: string): Observable<RequestResult<any>> {
     return this.httpClient.post(`${this.serviceHost}/login`,
-      `{ "username": "${number}", "password": "${password}" }`, { observe: 'response' })
+      `{ "username": "${number}", "password": "${btoa(password)}" }`, { observe: 'response' })
       .pipe(
         map(resp => {
           const token = resp.headers.get(this.authHeaderName);

@@ -44,7 +44,7 @@ export class NewPasswordComponent implements OnInit {
 
   changePassword() {
     if (this.passwordsMatch()) {
-      this.userService.newPassword(this.password1, this.token).subscribe(result => {
+      this.userService.newPassword(this.token, this.password1).subscribe(result => {
         if (result.okResult) {
           this.notifications.info('Password er nu opdateret!', true);
           this.rotuer.navigate(['/landing/signin']);
