@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Category } from './../../domain/plan';
 import { PlanService } from 'app/services/plan.service';
 import { AuthService } from './../../services/auth.service';
@@ -14,10 +15,15 @@ import { NotificationService } from 'app/services';
 export class NavbarComponent implements OnInit {
 
     @ViewChild('navbarToggler') toggleButton: ElementRef;
+    @ViewChild('news') set newsLink(link: ElementRef) {
+        this.selected = link.nativeElement;
+    }
 
     categories: Category[];
 
     private sidebarVisible = false;
+
+    private selected: any;
 
     constructor(
         public location: Location,
@@ -26,7 +32,7 @@ export class NavbarComponent implements OnInit {
         private planService: PlanService,
         private notifcations: NotificationService) {
         router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
+            if (event instanceof NavigationEnd && (!this.categories || this.categories.length === 0)) {
                 this.ngOnInit();
             }
         });
@@ -71,8 +77,16 @@ export class NavbarComponent implements OnInit {
         }
     };
 
-    isHome() {
-        return this.location.path(false).indexOf('home') > 0;
+    isHome(): boolean {
+        return this.hasSegment('home');
+    }
+
+    menuBarVisible(): boolean {
+        return this.isHome() && !this.hasSegment('profile') && !this.hasSegment('config');
+    }
+
+    private hasSegment(segment: string): boolean {
+        return this.location.path(false).indexOf(segment) > 0;
     }
 
     getSignInTitle(): string {
@@ -98,6 +112,14 @@ export class NavbarComponent implements OnInit {
     scrollToSignUp(elementId: string) {
         const element = document.getElementById(elementId);
         element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    }
+
+    select(element) {
+        if (this.selected) {
+            this.selected.classList.remove('text-muted');
+        }
+        this.selected = element;
+        this.selected.classList.add('text-muted');
     }
 
     public isAdmin(): boolean {
