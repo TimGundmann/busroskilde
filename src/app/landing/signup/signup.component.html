@@ -16,14 +16,16 @@
             <form class="register-form" [formGroup]="signUpForm" (ngSubmit)="register()">
                 <div class="form-group" [class.has-danger]="hasError(number)">
                     <label>Chaufførnummer</label>
-                    <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus===true}"
+                    <div class="input-group form-group-no-border" 
+                        [ngClass]="{'input-group-focus':focus===true}"
                         [class.has-danger]="hasError(number)">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
                                 <i class="nc-icon nc-bus-front-12"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Chaufførnummer" (focus)="focus=true"
+                        <input type="text" class="form-control" 
+                            placeholder="Chaufførnummer" (focus)="focus=true"
                             (blur)="focus=false" formControlName="number">
                         <div *ngIf="hasError(number)" class="form-control-feedback">
                             Nummeret mangler.

@@ -13,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SigninComponent {
 
-  focus;
+  focus = true;
   focus1;
 
   signInForm = new FormGroup({
