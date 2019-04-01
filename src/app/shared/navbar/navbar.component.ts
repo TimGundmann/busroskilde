@@ -16,7 +16,9 @@ export class NavbarComponent implements OnInit {
 
     @ViewChild('navbarToggler') toggleButton: ElementRef;
     @ViewChild('news') set newsLink(link: ElementRef) {
-        this.selected = link.nativeElement;
+        if (link) {
+            this.selected = link.nativeElement;
+        }
     }
 
     categories: Category[];
