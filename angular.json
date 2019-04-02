@@ -24,7 +24,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/sass/paper-kit.scss",
               "src/assets/css/nucleo-icons.css",
-              "src/assets/fonts/montserrat.css"
+              "src/assets/css/montserrat.css"
             ],
             "scripts": []
           },
@@ -88,7 +88,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/sass/paper-kit.scss",
               "src/assets/css/nucleo-icons.css",
-              "src/assets/fonts/montserrat.css"
+              "src/assets/css/montserrat.css"
             ],
             "assets": [
               "src/assets",
