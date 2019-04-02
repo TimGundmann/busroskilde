@@ -8,6 +8,8 @@ import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
 import { confirmDialog } from 'app/shared/confirm/confirm.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { isNgTemplate } from '@angular/compiler';
+import { isProceduralRenderer } from '@angular/core/src/render3/interfaces/renderer';
 
 @Component({
   selector: 'app-plan',
@@ -160,18 +162,22 @@ export class PlanComponent implements OnInit {
   private refreshPlans() {
     this.planService.getActivePlansByCategory(this.category)
       .subscribe(result => {
-        this.plans = result.returnValue;
-        this.plans.sort((p1, p2) => {
-          if (p1.subCategory && p1.subCategory) {
-            if (p1.subCategory > p2.subCategory) {
-              return 1;
-            }
-            if (p1.subCategory < p2.subCategory) {
-              return -1;
-            }
-          }
-          return 0;
-        });
+        this.plans = [];
+        let plans = result.returnValue;
+        if (this.category.subCategories) {
+          this.category.subCategories.forEach(key => {
+            let found = false;
+            plans = plans.filter(plan => {
+              if (!found && plan.subCategory === key) {
+                this.plans.push(plan);
+                found = true;
+                return false;
+              } else {
+                return true;
+              }
+            });
+          })
+        }
         this.plans.forEach(r => this.pdfToggels.set(r, 'close'));
         this.state = 'open';
       });
