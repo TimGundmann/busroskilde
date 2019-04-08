@@ -67,6 +67,7 @@ export class UserService {
   }
 
   public signUp(user: User): Observable<RequestResult<any>> {
+    user.password = btoa(user.password);
     return this.handleResponce(this.httpClient.post(`${this.serviceHost}/bussignup`, user));
   }
 

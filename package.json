@@ -10,7 +10,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start-test": "ng serve --configuration=test",
+    "start-test": "ng serve --configuration=test-local",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
