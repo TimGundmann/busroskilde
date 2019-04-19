@@ -8,7 +8,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient } from '@angular/common/http';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AddComponent } from './add/add.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -17,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { tokenGetter } from 'app/app.module';
 import { of } from 'rxjs';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { SimplePdfViewerModule } from 'simple-pdf-viewer';
 
 describe('PlanComponent', () => {
   let component: PlanComponent;
@@ -33,7 +34,8 @@ describe('PlanComponent', () => {
       declarations: [
         PlanComponent,
         AddComponent,
-        SvgComponent
+        SvgComponent,
+        PaginatorComponent
       ],
       providers: [
         JwtHelperService,
@@ -44,9 +46,9 @@ describe('PlanComponent', () => {
         { provide: HttpClient, useClass: MockHttpClient },
       ],
       imports: [
+        SimplePdfViewerModule,
         ImageCropperModule,
         NoopAnimationsModule,
-        PdfViewerModule,
         ReactiveFormsModule,
         FileUploadModule,
         RouterTestingModule,

@@ -8,8 +8,6 @@ import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
 import { confirmDialog } from 'app/shared/confirm/confirm.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { isNgTemplate } from '@angular/compiler';
-import { isProceduralRenderer } from '@angular/core/src/render3/interfaces/renderer';
 
 @Component({
   selector: 'app-plan',
