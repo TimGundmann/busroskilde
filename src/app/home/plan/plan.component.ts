@@ -1,13 +1,16 @@
 import { fadeInAndOut, scrollInAndOut } from '../../shared/fade-in-animation';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { PlanService } from '../../services/plan.service';
 import { AuthService } from './../../services/auth.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ViewChild } from '@angular/core';
 import { NotificationService } from 'app/services';
 import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
 import { confirmDialog } from 'app/shared/confirm/confirm.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CanDeactivate } from '@angular/router/src/utils/preactivation';
+import { NavigationEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-view-model';
+import { SimplePdfViewerComponent } from 'simple-pdf-viewer';
 
 @Component({
   selector: 'app-plan',
@@ -18,11 +21,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
     scrollInAndOut
   ]
 })
-export class PlanComponent implements OnInit {
+export class PlanComponent {
 
   category: Category;
 
   @Input() odd: boolean;
+  @ViewChild('pdfViewer') private pdfViewer: SimplePdfViewerComponent;
 
   private pdfToggels: Map<Plan, string> = new Map();
 
@@ -32,14 +36,13 @@ export class PlanComponent implements OnInit {
 
   state = 'close';
 
-  loading = false;
-
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private planService: PlanService,
     private notifications: NotificationService,
-    public spinner: NgxSpinnerService) {
+    private spinner: NgxSpinnerService) {
 
     this.activatedRoute.data
       .subscribe(data => {
@@ -49,9 +52,16 @@ export class PlanComponent implements OnInit {
           this.refreshPlans();
         }, 300);
       });
-  }
 
-  ngOnInit() {
+    router.events.subscribe(event => {
+      if (event instanceof NavigationStart && this.pdfViewer) {
+          this.spinner.show();
+          this.pdfToggels.clear();
+      }
+      if (event instanceof NavigationEnd) {
+        this.spinner.hide();
+      }
+    });
   }
 
   updateFrom(plan: Plan, value: Date) {
@@ -99,8 +109,6 @@ export class PlanComponent implements OnInit {
     if (toggle === 'open') {
       this.pdfToggels.set(plan, 'close');
     } else {
-      this.loading = true;
-      this.spinner.show();
       this.pdfToggels.set(plan, 'open');
     }
 
@@ -109,14 +117,6 @@ export class PlanComponent implements OnInit {
   showPdf(plan: Plan): boolean {
     return this.pdfToggels.get(plan) === 'open';
   }
-
-  showPdfState(plan: Plan): string {
-    if (this.loading) {
-      return 'close';
-    }
-    return this.pdfToggels.get(plan);
-  }
-
 
   getEditPlan(): Plan {
     return this.editPlan;
@@ -153,8 +153,7 @@ export class PlanComponent implements OnInit {
   }
 
   endLoad() {
-    this.loading = false;
-    this.spinner.hide();
+    //    this.spinner.hide();
   }
 
   private refreshPlans() {
