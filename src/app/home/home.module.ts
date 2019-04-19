@@ -1,6 +1,6 @@
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from './profile/profile.component';
-import { RouterModule, RouteReuseStrategy } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { HomeRoutingModule } from './home.routing';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NewsComponent } from './news-editor/news.component';
@@ -14,7 +14,6 @@ import { HomeComponent } from './home.component';
 
 import { PlanComponent } from './plan/plan.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AddComponent } from './plan/add/add.component';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { AddNewsComponent } from './news-editor/add-news/add-news.component';
@@ -34,7 +33,6 @@ import { PaginatorComponent } from './plan/paginator/paginator.component';
         FormsModule,
         ReactiveFormsModule,
         FileUploadModule,
-        PdfViewerModule,
         NouisliderModule,
         JwBootstrapSwitchNg2Module,
         AngularEditorModule,
