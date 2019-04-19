@@ -8,8 +8,6 @@ import { Plan, Category, fileToBlob } from 'app/domain/plan';
 import saveAs from 'file-saver';
 import { confirmDialog } from 'app/shared/confirm/confirm.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CanDeactivate } from '@angular/router/src/utils/preactivation';
-import { NavigationEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-view-model';
 import { SimplePdfViewerComponent } from 'simple-pdf-viewer';
 
 @Component({
@@ -161,7 +159,7 @@ export class PlanComponent {
       .subscribe(result => {
         this.plans = [];
         let plans = result.returnValue;
-        if (this.category.subCategories) {
+        if (this.category.subCategories && this.category.subCategories.length > 0) {
           this.category.subCategories.forEach(key => {
             let found = false;
             plans = plans.filter(plan => {
@@ -174,6 +172,8 @@ export class PlanComponent {
               }
             });
           })
+        } else {
+          this.plans = plans;
         }
         this.plans.forEach(r => this.pdfToggels.set(r, 'close'));
         this.state = 'open';

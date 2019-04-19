@@ -1,8 +1,8 @@
 import { Category, Plan, fileToBlob } from 'app/domain/plan';
-import { Observable, from } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { PlanService } from 'app/services/plan.service';
 import { NotificationService } from 'app/services';
 import { NgxSpinnerService } from 'ngx-spinner';
