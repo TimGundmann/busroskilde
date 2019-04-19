@@ -41,7 +41,7 @@ export class PlanComponent implements OnInit {
     private authService: AuthService,
     private planService: PlanService,
     private notifications: NotificationService,
-    private spinner: NgxSpinnerService) {
+    public spinner: NgxSpinnerService) {
 
     this.activatedRoute.data
       .subscribe(data => {

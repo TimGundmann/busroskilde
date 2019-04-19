@@ -25,6 +25,8 @@ import { CropModalComponent } from './profile/crop-modal/crop-modal.component';
 import { SvgComponent } from 'app/shared/svg/svg.component';
 import { ConfirmComponent } from '../shared/confirm/confirm.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
+import { SimplePdfViewerModule } from 'simple-pdf-viewer';
+import { PaginatorComponent } from './plan/paginator/paginator.component';
 
 @NgModule({
     imports: [
@@ -40,6 +42,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
         RouterModule,
         NgbModule,
         ImageCropperModule,
+        SimplePdfViewerModule
     ],
     entryComponents: [
         CropModalComponent,
@@ -57,7 +60,8 @@ import { ConfigurationComponent } from './configuration/configuration.component'
         ProfileComponent,
         CropModalComponent,
         SvgComponent,
-        ConfigurationComponent
+        ConfigurationComponent,
+        PaginatorComponent
     ],
     exports: [
         HomeComponent

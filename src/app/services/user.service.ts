@@ -25,7 +25,6 @@ export class UserService {
     return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/${email}/updatepassword`, btoa(password)));
   }
 
-
   public delete(user: User): Observable<RequestResult<any>> {
     return this.handleResponce(this.httpClient.post<any>(`${this.serviceHost}/delete`, user));
   }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pk2-angular": {
+    "busroskilde-angular": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -46,7 +46,7 @@
                 }
               ]
             },
-            "test": {
+            "testlocal": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -59,21 +59,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pk2-angular:build"
+            "browserTarget": "busroskilde-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "pk2-angular:build:production"
+              "browserTarget": "busroskilde-angular:build:production"
+            },
+            "testlocal": {
+              "browserTarget": "busroskilde-angular:build:testlocal"
             },
             "test": {
-              "browserTarget": "pk2-angular:build:test"
+              "browserTarget": "busroskilde-angular:build:test"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pk2-angular:build"
+            "browserTarget": "busroskilde-angular:build"
           }
         },
         "test": {
@@ -108,7 +111,7 @@
         }
       }
     },
-    "pk2-angular-e2e": {
+    "busroskilde-angular-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -131,7 +134,7 @@
       }
     }
   },
-  "defaultProject": "pk2-angular",
+  "defaultProject": "busroskilde-angular",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
