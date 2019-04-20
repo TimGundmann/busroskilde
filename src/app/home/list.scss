@@ -117,8 +117,10 @@
     }
 }
 
-.pdf-viewer {
-    padding-top: 10px;
+embed {
+    padding-top: 5px;
+    width: 900px;
+    height: 700px;
 }
 
 .edit {
@@ -127,13 +129,24 @@
     vertical-align: initial;   
 }
 
+@media screen and (max-width: 1199px){
+    embed {
+        width: 750px;
+    }
+}
 @media screen and (max-width: 991px){
     .margien-small {
         margin-left: 10px;
     }
+    embed {
+        width: 550px;
+    }    
 }
 
 @media (max-width: 767px) {
+    embed {
+        width: 350px;
+    }    
     .heading {
         min-width: 300px;
         height: auto;
@@ -200,3 +213,10 @@
     }
 
 }
+
+@media (max-width: 460px) {
+    embed {
+        width: 250px;
+    }    
+}
+

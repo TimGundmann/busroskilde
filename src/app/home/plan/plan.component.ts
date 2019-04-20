@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { fadeInAndOut, scrollInAndOut } from '../../shared/fade-in-animation';
 import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { PlanService } from '../../services/plan.service';
@@ -35,6 +36,7 @@ export class PlanComponent {
   state = 'close';
 
   constructor(
+    private sanitizer: DomSanitizer,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
@@ -127,6 +129,10 @@ export class PlanComponent {
   edit(plan: Plan) {
     this.toggleAdd();
     this.editPlan = plan;
+  }
+
+  getSecureData(plan: Plan): any {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(plan.file);
   }
 
   delete(plan: Plan) {
