@@ -17,7 +17,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { tokenGetter } from 'app/app.module';
 import { of } from 'rxjs';
 import { PaginatorComponent } from './paginator/paginator.component';
-import { SimplePdfViewerModule } from 'simple-pdf-viewer';
 
 describe('PlanComponent', () => {
   let component: PlanComponent;
@@ -46,7 +45,6 @@ describe('PlanComponent', () => {
         { provide: HttpClient, useClass: MockHttpClient },
       ],
       imports: [
-        SimplePdfViewerModule,
         ImageCropperModule,
         NoopAnimationsModule,
         ReactiveFormsModule,

@@ -1,31 +1,28 @@
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProfileComponent } from './profile/profile.component';
-import { RouterModule } from '@angular/router';
-import { HomeRoutingModule } from './home.routing';
-import { AngularEditorModule } from '@kolkov/angular-editor';
-import { NewsComponent } from './news-editor/news.component';
-import { NouisliderModule } from 'ng2-nouislider';
-import { UsersComponent } from './users/users.component';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { HomeComponent } from './home.component';
-
-import { PlanComponent } from './plan/plan.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
-import { AddComponent } from './plan/add/add.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from 'app/shared/shared.module';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
-import { AddNewsComponent } from './news-editor/add-news/add-news.component';
-import { SafeHtmlPipe } from './safe-html.pipe';
-import { CategoryResover } from './category-resover';
+import { NouisliderModule } from 'ng2-nouislider';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { CropModalComponent } from './profile/crop-modal/crop-modal.component';
-import { SvgComponent } from 'app/shared/svg/svg.component';
-import { ConfirmComponent } from '../shared/confirm/confirm.component';
-import { ConfigurationComponent } from './configuration/configuration.component';
-import { SimplePdfViewerModule } from 'simple-pdf-viewer';
+import { CategoryResover } from './category-resover';
+import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './home.routing';
+import { AddNewsComponent } from './news-editor/add-news/add-news.component';
+import { NewsComponent } from './news-editor/news.component';
+import { AddComponent } from './plan/add/add.component';
 import { PaginatorComponent } from './plan/paginator/paginator.component';
+import { PlanComponent } from './plan/plan.component';
+import { CropModalComponent } from './profile/crop-modal/crop-modal.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SafeHtmlPipe } from './safe-html.pipe';
+import { UsersComponent } from './users/users.component';
+import { RouterModule } from '@angular/router';
+
+
 
 @NgModule({
     imports: [
@@ -37,17 +34,15 @@ import { PaginatorComponent } from './plan/paginator/paginator.component';
         JwBootstrapSwitchNg2Module,
         AngularEditorModule,
         HomeRoutingModule,
-        RouterModule,
         NgbModule,
         ImageCropperModule,
-        SimplePdfViewerModule
+        SharedModule,
+        RouterModule
     ],
     entryComponents: [
         CropModalComponent,
-        ConfirmComponent
     ],
     declarations: [
-        ConfirmComponent,
         HomeComponent,
         PlanComponent,
         UsersComponent,
@@ -57,8 +52,6 @@ import { PaginatorComponent } from './plan/paginator/paginator.component';
         SafeHtmlPipe,
         ProfileComponent,
         CropModalComponent,
-        SvgComponent,
-        ConfigurationComponent,
         PaginatorComponent
     ],
     exports: [

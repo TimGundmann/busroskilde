@@ -1,27 +1,21 @@
-import { ServiceLocator } from './shared/service-locator';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AddAuthHeaderInterceptor } from './add-auth-header.interceptor';
-import { NotificationComponent } from './shared/notification/notification.component';
-import { LandingModule } from './landing/landing.module';
-import { environment } from './../environments/environment';
-import { LocationStrategy, HashLocationStrategy, registerLocaleData } from '@angular/common';
-import { NgModule, LOCALE_ID, Injector } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app.routing';
-
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
-
-import { HomeModule } from './home/home.module';
-import { JwtModule } from '@auth0/angular-jwt';
+import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeDa from '@angular/common/locales/da';
-import { SvgDefsComponent } from './shared/svg-defs/svg-defs.component';
+import { Injector, LOCALE_ID, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { environment } from './../environments/environment';
+import { AddAuthHeaderInterceptor } from './add-auth-header.interceptor';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app.routing';
+import { ServiceLocator } from './shared/service-locator';
+import { SharedModule } from './shared/shared.module';
+
+
 
 registerLocaleData(localeDa, 'da');
 
@@ -34,21 +28,15 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    NotificationComponent,
-    SvgDefsComponent,
   ],
   imports: [
+    SharedModule,
     NgxSpinnerModule,
-    LandingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    NgbModule.forRoot(),
     FormsModule,
     RouterModule,
     AppRoutingModule,
-    HomeModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

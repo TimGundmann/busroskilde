@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from './signin/reset-password/reset-password.c
 import { NewPasswordComponent } from './new-password/new-password.component';
 import { LandingRoutingModule } from './landing.routing';
 import { HomeComponent } from './home/home.component';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { HomeComponent } from './home/home.component';
     ActivateComponent,
     ResetPasswordComponent,
     NewPasswordComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     ServicesModule.forRoot(),
@@ -30,7 +31,8 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    LandingRoutingModule
+    LandingRoutingModule,
+    SharedModule
   ],
   exports: [
     LandingComponent,

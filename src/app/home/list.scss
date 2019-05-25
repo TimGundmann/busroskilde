@@ -127,6 +127,11 @@
     vertical-align: initial;   
 }
 
+embed {
+    height: 750px;
+    width: 100%;
+}
+
 @media screen and (max-width: 991px){
     .margien-small {
         margin-left: 10px;
@@ -200,3 +205,4 @@
     }
 
 }
+

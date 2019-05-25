@@ -1,15 +1,14 @@
+import { Component, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { fadeInAndOut, scrollInAndOut } from '../../shared/fade-in-animation';
-import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
-import { PlanService } from '../../services/plan.service';
-import { AuthService } from './../../services/auth.service';
-import { Component, OnInit, Input, HostListener, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { Category, fileToBlob, Plan } from 'app/domain/plan';
 import { NotificationService } from 'app/services';
-import { Plan, Category, fileToBlob } from 'app/domain/plan';
-import saveAs from 'file-saver';
 import { confirmDialog } from 'app/shared/confirm/confirm.component';
+import saveAs from 'file-saver';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SimplePdfViewerComponent } from 'simple-pdf-viewer';
+import { PlanService } from '../../services/plan.service';
+import { fadeInAndOut, scrollInAndOut } from '../../shared/fade-in-animation';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-plan',
@@ -25,7 +24,6 @@ export class PlanComponent {
   category: Category;
 
   @Input() odd: boolean;
-  @ViewChild('pdfViewer') private pdfViewer: SimplePdfViewerComponent;
 
   private pdfToggels: Map<Plan, string> = new Map();
 
@@ -36,13 +34,12 @@ export class PlanComponent {
   state = 'close';
 
   constructor(
+    router: Router,
     private sanitizer: DomSanitizer,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private planService: PlanService,
-    private notifications: NotificationService,
-    private spinner: NgxSpinnerService) {
+    private notifications: NotificationService) {
 
     this.activatedRoute.data
       .subscribe(data => {
@@ -54,12 +51,8 @@ export class PlanComponent {
       });
 
     router.events.subscribe(event => {
-      if (event instanceof NavigationStart && this.pdfViewer) {
-          this.spinner.show();
+      if (event instanceof NavigationStart) {
           this.pdfToggels.clear();
-      }
-      if (event instanceof NavigationEnd) {
-        this.spinner.hide();
       }
     });
   }
@@ -154,10 +147,6 @@ export class PlanComponent {
     if (!this.addVisible) {
       this.refreshPlans();
     }
-  }
-
-  endLoad() {
-    //    this.spinner.hide();
   }
 
   private refreshPlans() {

@@ -1,6 +1,6 @@
-import { ServiceLocator } from './../service-locator';
-import { Component, Input, Injector } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ServiceLocator } from './../service-locator';
 
 export function confirmDialog(title: string, text: string): Promise<any> {
   const modalService = ServiceLocator.injector.get(NgbModal);
