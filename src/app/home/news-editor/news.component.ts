@@ -27,7 +27,11 @@ export class NewsComponent implements OnInit {
     this.newsService.get()
       .subscribe(result => {
         if (result.okResult) {
-          this.news = result.returnValue;
+          this.news = result.returnValue.sort((n1, n2) => {
+            const d1 = new Date(n1.timestamp).getTime();
+            const d2 = new Date(n2.timestamp).getTime();
+            return d1 > d2 ? -1 : d1 < d2 ? 1 : 0;
+          });
         } else {
           this.notificationService.error('Fejl ved hentning af nyheder, prøv at genopfriske siden!');
         }
