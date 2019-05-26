@@ -78,6 +78,16 @@ pipeline {
     }
 
   post {
+      always {
+        publishHTML (target: [
+            allowMissing: true,
+            alwaysLinkToLastBuild: true,
+            keepAll: true,
+            reportDir: 'coverage',
+            reportFiles: 'REPORTS/e2e/index.html',
+            reportName: "E2E Report"
+            ]) 
+      }
       failure {
             step(
                 [
