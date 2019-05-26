@@ -32,6 +32,7 @@ export class SignInPage {
 
   pressSignIn() {
     element(by.css('[selenium-id="signin-button"]')).click();
+    browser.sleep(2000);
   }
 
   isSigendIn(): promise.Promise<boolean> {

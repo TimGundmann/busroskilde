@@ -35,9 +35,8 @@ export class HomePage {
   }
 
   private clickElement(seleniumId: string) {
-    browser.sleep(2000);
+    browser.sleep(1000);
     element(by.css('[selenium-id="' + seleniumId + '"]')).click();
-    browser.sleep(2000);
   }
 
   private listVisisble(seleniumId: string): promise.Promise<boolean> {
