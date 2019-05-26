@@ -83,8 +83,8 @@ pipeline {
             allowMissing: true,
             alwaysLinkToLastBuild: true,
             keepAll: true,
-            reportDir: 'coverage',
-            reportFiles: 'REPORTS/e2e/index.html',
+            reportDir: 'REPORTS/e2e',
+            reportFiles: 'index.html',
             reportName: "E2E Report"
             ]) 
       }
