@@ -35,7 +35,7 @@
     "core-js": "2.6.5",
     "file-saver": "^2.0.0",
     "jasmin": "0.0.2",
-    "jquery": "3.2.1",
+    "jquery": "3.4.1",
     "jw-bootstrap-switch-ng2": "2.0.5",
     "jwt-decode": "^2.2.0",
     "ng2-nouislider": "1.7.13",
